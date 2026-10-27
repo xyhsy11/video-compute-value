@@ -84,6 +84,13 @@ def main():
             unstable_budgets = [r["budget"] for r in video_conditions if not r["timing_stability_target_passed"]]
             stability += f"Budgets exceeding the proposed median relative timing range of 20%: {unstable_budgets or 'none'}. "
             stability += "Individual timing cells above 50% remain flagged in `summary.json`; completed trials were never selectively replaced.\n"
+            reference = next(r for r in video_conditions if r["budget"] == config["reference_budget"])
+            gib = 1024 ** 3
+            stability += (f"\nUniform-64 observed PyTorch peaks: {reference['peak_allocated_bytes'] / gib:.2f} GiB allocated, "
+                          f"{reference['peak_reserved_bytes'] / gib:.2f} GiB reserved. ")
+            if reference["sampled_device_gpu_peak_bytes"] is not None:
+                stability += f"Sampled device usage reached {reference['sampled_device_gpu_peak_bytes'] / gib:.2f} GiB. "
+            stability += "Reserved memory is allocator accounting; device sampling is a separate observation. These measurements do not identify the cause of the timing or answer disagreements.\n"
             assessment = (stability + "\n## Descriptive task-quality assessment\n\n" + usable + "\n\n" + comparison +
                 " These are descriptive comparisons on 24 questions clustered in eight videos. Repetitions do not increase sample size. "
                 "Useful visual reasoning, adaptive sampling, and statistical generalization are not established.\n\n" +
