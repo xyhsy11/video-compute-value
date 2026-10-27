@@ -47,6 +47,22 @@ def spatial_size(height, width, max_pixels=65536, factor=32):
     return h, w
 
 
+def spatial_layout(height, width, max_pixels=65536):
+    h, w = spatial_size(height, width, max_pixels)
+    scale = min(h / height, w / width)
+    content_h, content_w = max(1, round(height * scale)), max(1, round(width * scale))
+    return {"target_height": h, "target_width": w, "content_height": content_h, "content_width": content_w,
+            "pad_top": (h - content_h) // 2, "pad_left": (w - content_w) // 2,
+            "spatial_preprocessing": "aspect-preserving-bicubic-centered-black-letterbox-v1"}
+
+
+def letterbox(image, layout):
+    resized = image.resize((layout["content_width"], layout["content_height"]), Image.Resampling.BICUBIC)
+    canvas = Image.new("RGB", (layout["target_width"], layout["target_height"]), (0, 0, 0))
+    canvas.paste(resized, (layout["pad_left"], layout["pad_top"]))
+    return np.asarray(canvas)
+
+
 def inspect_video(path, budgets, max_pixels):
     import av
     path = Path(path).resolve()
@@ -80,14 +96,14 @@ def inspect_video(path, budgets, max_pixels):
             raise ValueError("Stream duration disagrees with decoded full timeline")
         fps = 1 / step
     h, w = dimensions.pop()
-    target_h, target_w = spatial_size(h, w, max_pixels)
+    layout = spatial_layout(h, w, max_pixels)
     selections = {}
     for budget in budgets:
         indices = uniform_indices(times, duration, budget)
         selections[str(budget)] = {"indices": indices, "timestamps": [str(times[i]) for i in indices]}
     return {"path": str(path), "sha256": file_hash(path), "file_size": path.stat().st_size,
             "duration": str(duration), "fps": str(fps), "height": h, "width": w,
-            "target_height": target_h, "target_width": target_w, "frame_count": len(times),
+            **layout, "frame_count": len(times),
             "timestamps": [str(t) for t in times], "timestamps_hash": digest([str(t) for t in times]),
             "time_base": str(timebase), "colors": colors, "selections": selections,
             "decoder": {"name": "PyAV", "version": av.__version__,
@@ -120,8 +136,7 @@ def decode_selected(video, budget):
                 raise Blocked("INPUT_INTEGRITY_FAILED", "Dimensions changed")
             if index in wanted:
                 image = Image.fromarray(frame.to_ndarray(format="rgb24"))
-                image = image.resize((video["target_width"], video["target_height"]), Image.Resampling.BICUBIC)
-                selected.append(np.asarray(image))
+                selected.append(letterbox(image, video))
     if count != video["frame_count"] or len(selected) != budget:
         raise Blocked("INPUT_INTEGRITY_FAILED", "Actual decoded/selected frame counts disagree")
     array = np.stack(selected)

@@ -1,4 +1,4 @@
-param([string]$RunDir = 'results/e000_20261027_collection_v1')
+param([string]$RunDir = 'results/e000_20261027_collection_v2')
 $ErrorActionPreference = 'Stop'
 Set-Location -LiteralPath (Split-Path -Parent $PSScriptRoot)
 $taskWatch = [Diagnostics.Stopwatch]::StartNew()

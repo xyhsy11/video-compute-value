@@ -22,7 +22,7 @@ No environment activation is required.
 Set-Location -LiteralPath 'C:\video-compute-value'
 .\scripts\bootstrap.ps1 -Model
 .\scripts\validate.ps1
-$run = 'results/e000_20261027_collection_v1'
+$run = 'results/e000_20261027_collection_v2'
 $python = '.\.venv\Scripts\python.exe'
 & $python -m video_compute_value.e000 preflight --config configs/e000.yaml --run-dir $run
 ```
@@ -83,8 +83,9 @@ cohort freeze. These are explicit pilot limitations.
 Uniform-B divides the full timeline into B intervals and chooses the nearest source
 PTS to each center; exact ties choose the earlier PTS. Sequential full-clip decoding
 retains only selected resized frames. RGB conversion is PyAV `rgb24`; Pillow bicubic
-resizing uses an aspect-preserving scale followed by rounding down to the 32-pixel
-patch/merge grid (small grid-rounding aspect differences are recorded). The fixed
+resizing preserves the content's aspect ratio (up to integer pixel rounding), then
+centers it with fixed black RGB padding on a 32-pixel patch/merge canvas. Content
+dimensions and padding are frozen per video; grid rounding never stretches content. The fixed
 per-video dimensions stay identical across budgets and within 65,536 pixels/frame.
 The native video processor has second sampling/resizing explicitly disabled.
 Native temporal pairs use source-index/source-FPS timestamps and one-decimal text

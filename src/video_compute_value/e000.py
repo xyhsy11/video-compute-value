@@ -54,7 +54,7 @@ def prepare(args, config, run, root, ledger):
             raise Blocked("INPUT_INTEGRITY_FAILED", "Local annotations require --annotation-revision with immutable source SHA")
         annotation_path = Path(args.annotations).resolve()
         metadata = {"repo": config["annotation_repo"], "revision": args.annotation_revision,
-                    "acquisition_source": "User-provided local official annotations", "archives": []}
+                    "acquisition_source": "Existing local official annotations", "archives": []}
         if args.acquire:
             raise Blocked("BLOCKED_INPUT", "Use --acquire without --annotations to inspect the official archive index")
     else:

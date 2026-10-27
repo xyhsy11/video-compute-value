@@ -81,7 +81,7 @@ def resolve_model(config, root, ledger):
                 "processor_source_hashes": adapter_source_hashes(),
                 "chat_template_hash": digest(processor.chat_template),
                 "spatial": {"factor": 32, "pixel_cap": config["max_pixels_per_frame"],
-                            "resize": "Pillow RGB BICUBIC before native video processor; rounding down to grid",
+                            "resize": "Pillow RGB BICUBIC preserves content aspect; centered RGB(0,0,0) padding to fixed 32-pixel grid canvas",
                             "do_resize": False, "do_sample_frames": False,
                             "image_mean": [0.5] * 3, "image_std": [0.5] * 3, "rescale_factor": 1 / 255},
                 "temporal": "CFR only, source-index/source-fps, pair mean rounded to 0.1 seconds by native processor",

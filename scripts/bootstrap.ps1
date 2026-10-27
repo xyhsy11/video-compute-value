@@ -1,6 +1,6 @@
 param(
     [string]$Python = '',
-    [string]$RunDir = 'results/e000_20261027_collection_v1',
+    [string]$RunDir = 'results/e000_20261027_collection_v2',
     [switch]$Model
 )
 $ErrorActionPreference = 'Stop'

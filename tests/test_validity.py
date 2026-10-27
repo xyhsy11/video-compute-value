@@ -12,7 +12,7 @@ from video_compute_value.dataset import load_annotations, ranked_sources
 from video_compute_value.measurement import timed_request
 from video_compute_value.protocol import make_order, make_prompt, parse_answer, question_input, trial_identity, video_input
 from video_compute_value.resources import Ledger
-from video_compute_value.video import decode_selected, inspect_video, spatial_size, uniform_indices
+from video_compute_value.video import decode_selected, inspect_video, letterbox, spatial_layout, spatial_size, uniform_indices
 
 
 @pytest.mark.parametrize("text,expected", [("A", "A"), (" Answer: b.\n", "B"), ("D!", "D"),
@@ -29,7 +29,8 @@ def test_prompt_cannot_leak_label():
     assert "private" not in make_prompt(question)
     assert parse_answer("A or B") is None  # Letters in the prompt cannot rescue an invalid generated answer.
     video = {key: None for key in ("path", "file_size", "selections", "timestamps", "duration", "frame_count",
-                                   "height", "width", "target_height", "target_width", "fps")}
+                                   "height", "width", "target_height", "target_width", "fps",
+                                   "content_height", "content_width", "pad_top", "pad_left")}
     video.update(questions=[labelled], label_hash="secret")
     assert "questions" not in video_input(video) and "label_hash" not in video_input(video)
 
@@ -73,6 +74,21 @@ def test_official_rows_keep_question_option_order_and_outcome_independent_rank(t
     assert ranked_sources(load_annotations(file), 20261027) == rank
     assert first["source-a"][1]["question"] == "Original 1"
     assert first["source-a"][1]["options"] == rows[1]["options"]
+
+
+def test_letterboxing_preserves_16_by_9_content_and_fixed_black_padding():
+    from PIL import Image, ImageDraw
+    layout = spatial_layout(720, 1280)
+    assert layout["content_width"] / layout["content_height"] == 16 / 9
+    assert (layout["target_height"], layout["target_width"]) == (192, 320)
+    image = Image.new("RGB", (1280, 720), "white")
+    drawing = ImageDraw.Draw(image)
+    drawing.ellipse((460, 180, 820, 540), fill="red")
+    output = letterbox(image, layout)
+    assert np.all(output[:6] == 0) and np.all(output[-6:] == 0)
+    red = (output[:, :, 0] > 200) & (output[:, :, 1] < 50) & (output[:, :, 2] < 50)
+    yy, xx = np.where(red)
+    assert abs((xx.max() - xx.min()) - (yy.max() - yy.min())) <= 1
 
 
 def test_sequential_decode_actual_frame_counts_and_reproducible_pixels(tmp_path):

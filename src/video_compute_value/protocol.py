@@ -29,7 +29,7 @@ def question_input(record):
 def video_input(record):
     """Whitelist decoder metadata; full cohort entries also contain private labels."""
     allowed = ("path", "file_size", "selections", "timestamps", "duration", "frame_count", "height", "width",
-               "target_height", "target_width", "fps")
+               "target_height", "target_width", "fps", "content_height", "content_width", "pad_top", "pad_left")
     return {key: record[key] for key in allowed}
 
 
