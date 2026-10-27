@@ -6,6 +6,7 @@ import argparse
 from contextlib import nullcontext
 import gc
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -95,6 +96,17 @@ def nested_tensors(value):
     return []
 
 
+def json_safe(value):
+    """Preserve masked scores and invalid numeric observations without inventing zeros."""
+    if isinstance(value, float) and not math.isfinite(value):
+        return "NaN" if math.isnan(value) else "+Infinity" if value > 0 else "-Infinity"
+    if isinstance(value, dict):
+        return {k: json_safe(v) for k, v in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [json_safe(v) for v in value]
+    return value
+
+
 def forensic_worker(root, run, config, arm):
     parent = root / config["parent_run"]
     plan = read_json(run / "forensic_plan.json")
@@ -150,7 +162,7 @@ def forensic_worker(root, run, config, arm):
                     before = adapter.model.model.rope_deltas
                     before = None if before is None else before.detach().cpu().tolist()
                     capture.clear()
-                    call_id = f"forensic_{arm}_{index}_{repetition}_{kind}"
+                    call_id = f"forensic_{plan['script_sha256'][:10]}_{arm}_{index}_{repetition}_{kind}"
                     path = run / "private" / "forensic" / f"{call_id}.json"
                     if path.exists():
                         raise Blocked("INPUT_INTEGRITY_FAILED", "Forensic call already exists; preserve it and use a new arm/version")
@@ -179,6 +191,9 @@ def forensic_worker(root, run, config, arm):
                         "option_scores": {letter: float(scores[adapter.processor.tokenizer.encode(letter, add_special_tokens=False)[0]])
                                           for letter in "ABCD"},
                         "top_margin": float(values[0] - values[1]), "feature_hashes": fingerprints,
+                        "nan_score_count": int(torch.isnan(scores).sum()),
+                        "negative_infinite_score_count": int(torch.isneginf(scores).sum()),
+                        "positive_infinite_score_count": int(torch.isposinf(scores).sum()),
                         "rope_before": before, "rope_after": adapter.model.model.rope_deltas.cpu().tolist(),
                         "cache_position_first": capture["cache_position_first"],
                         "prefill_cache_length": capture["prefill_cache_length"],
@@ -187,7 +202,7 @@ def forensic_worker(root, run, config, arm):
                         "allocated_bytes": torch.cuda.memory_allocated(), "reserved_bytes": torch.cuda.memory_reserved()}
                     if kind != "prefix" and tensor_hashes(gpu) != gpu_initial_hashes:
                         raise Blocked("INPUT_INTEGRITY_FAILED", "Generation mutated diagnostic GPU inputs")
-                    write_json(path, record)
+                    write_json(path, json_safe(record))
                     append_json(run / "private" / "call_events.jsonl", {"call_id": call_id, "event": "completed",
                                 "kind": kind, "arm": arm, "model_invoked": True, "at": utc_now()})
                     del output, scores, features
@@ -215,7 +230,8 @@ def forensic_summary(run):
                 "score_variants": len({r["first_scores_hash"] for r in group}),
                 "vision_variants": len({digest({k:v for k,v in r["feature_hashes"].items() if k!="positions"}) for r in group}),
                 "position_variants": len({r["feature_hashes"]["positions"] for r in group}),
-                "minimum_top_margin": min(r["top_margin"] for r in group),
+                "minimum_finite_top_margin": min((r["top_margin"] for r in group if isinstance(r["top_margin"], (int, float))), default=None),
+                "calls_with_nan_scores": sum(r["nan_score_count"] > 0 for r in group),
                 "prefill_cache_lengths": sorted({r["prefill_cache_length"] for r in group if r["prefill_cache_length"] is not None})})
         result.append({"arm": arm, "cases": cases, "answer_unstable_cases": sum(c["answer_variants"] > 1 for c in cases),
                        "feature_unstable_cases": sum(c["vision_variants"] > 1 for c in cases)})
@@ -225,7 +241,7 @@ def forensic_summary(run):
 
 
 def launch(root, run, config_path, config, ledger, arm):
-    log = run / "private" / f"forensic_{arm}.log"
+    log = run / "private" / f"forensic_{arm}_{time.time_ns()}.log"
     log.parent.mkdir(parents=True, exist_ok=True)
     remaining = config["cumulative_execution_limit_hours"] * 3600 - ledger.consumed_seconds() - config["reserve_final_validation_seconds"]
     ledger.check(projected_seconds=min(900, remaining))
