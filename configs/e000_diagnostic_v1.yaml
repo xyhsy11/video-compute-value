@@ -9,4 +9,5 @@ forensic_repetitions: 3
 forensic_arms: [native, reset_rope, deterministic_math]
 forensic_worker_timeout_seconds: 900
 timing_worker_timeout_seconds: 1200
+timing_budgets: [8, 64]
 reserve_final_validation_seconds: 240
