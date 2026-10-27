@@ -1,0 +1,12 @@
+experiment_id: e000_frozen_videoqa_diagnostic_v1
+parent_run: results/e000_20261027_collection_v2
+run_id: e000_20261027_diagnostic_v1
+seed: 20261027
+cumulative_execution_limit_hours: 4
+additional_disk_limit_gib: 20
+video_acquisition_limit_gib: 1
+forensic_repetitions: 3
+forensic_arms: [native, reset_rope, deterministic_math]
+forensic_worker_timeout_seconds: 900
+timing_worker_timeout_seconds: 1200
+reserve_final_validation_seconds: 240
