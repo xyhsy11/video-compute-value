@@ -135,6 +135,8 @@ def environment(root):
     for path in (Path(root, ".cache", "huggingface"), Path.home() / ".cache" / "huggingface"):
         if path.exists():
             record["reusable_caches"].append({"path": str(path), "bytes": tree_bytes(path)})
+    gpu_rows = record["nvidia_smi"].get("stdout", "").splitlines()
+    record["nvidia_driver_version"] = gpu_rows[1].split(",")[3].strip() if len(gpu_rows) > 1 else None
     if packages["torch"]:
         import torch
         record["cuda"] = {"available": torch.cuda.is_available(), "runtime": torch.version.cuda,
@@ -149,6 +151,7 @@ def environment(root):
 def environment_fingerprint(record):
     return {"os": record["os"], "python": record["python"], "packages": record["packages"],
             "packages_all": record.get("packages_all"),
+            "nvidia_driver_version": record.get("nvidia_driver_version"),
             "gpu": None if not record["cuda"] else {k: record["cuda"].get(k) for k in
                                                      ("available", "runtime", "name", "total_bytes")},
             "thread_environment": record["thread_environment"]}

@@ -182,6 +182,18 @@ def coordinate(command, config, run, root, ledger, config_path):
     from .e000 import status
     if command == "smoke":
         frozen = validate_frozen(config, run, root) if (run / "resolved_config.yaml").exists() else freeze(config, run, root, ledger)
+        from .video import decode_selected
+        cpu_probes = {}
+        for video in read_json(run / "cohort_manifest.json")["videos"]:
+            ledger.check()
+            started = time.perf_counter()
+            frames, details = decode_selected(video_input(video), config["reference_budget"])
+            elapsed = time.perf_counter() - started
+            cpu_probes[video["source_id"]] = {"elapsed_seconds": elapsed,
+                "frames_decoded": details["frames_decoded"], "frames_selected": len(frames)}
+            del frames
+        write_json(run / "cpu_decode_probes.json", {"config_hash": frozen["config_hash"],
+                   "kind": "CPU-only preparation, not model calls or primary request measurements", "videos": cpu_probes})
         probes = []
         for budget in config["frame_budgets"]:
             ledger.check()
@@ -196,13 +208,17 @@ def coordinate(command, config, run, root, ledger, config_path):
         # Entire process wall time minus its five timed requests includes imports,
         # cohort validation, model loading, warmups' overhead, hashing and serialization.
         worst_startup = max(max(0, p["worker_wall_seconds"] - p["timed_calls_seconds"]) for p in probes)
-        worst_request = max(p["latency_seconds"] for p in probes)
+        # Account for clips with more expensive decoding than the prespecified model probe.
+        decode_adjustment = max(0, max(v["elapsed_seconds"] for v in cpu_probes.values()) -
+                                cpu_probes[frozen["profile_question"][0]]["elapsed_seconds"])
+        worst_request = max(p["latency_seconds"] for p in probes) + decode_adjustment
         # Text-only conservatively receives the worst video request cost.
         raw_estimate = 16 * worst_startup + (384 + 32) * worst_request + 120
         projection = raw_estimate * 1.5
         ledger.check(projected_seconds=projection)
         write_json(run / "collection_ready.json", {"config_hash": frozen["config_hash"],
                     "projection_seconds": projection, "safety_factor": 1.5,
+                    "additional_decode_seconds_per_request": decode_adjustment,
                     "formula": "1.5 * (16 * worst_worker_startup_and_overhead + (384 + 32) * worst_request + 120 verification seconds)",
                     "ready_at": utc_now()})
         status(run, "PARTIAL", "All five fit, integrity and component probes passed; collection approved by resource projection")

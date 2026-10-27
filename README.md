@@ -107,6 +107,8 @@ order. Each of five fresh probe workers runs two warmups, two integrity/fit requ
 and one separate component profile (25 additional model calls). Uniform-64 must fit.
 The remaining-run projection includes all 16 collection workers, two warmups each,
 384 measured requests, final verification and a 1.5 safety factor. Collection starts
+only after CPU-only Uniform-64 preparation probes on all eight clips account for
+decoding cost differences from the prespecified model-probe clip. It starts
 only if projected cost fits the remaining cumulative budget. Probe outputs are not
 used to select a model, precision, resolution, cohort or prompt.
 

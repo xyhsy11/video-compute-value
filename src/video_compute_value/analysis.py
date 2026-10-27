@@ -122,7 +122,10 @@ def setup_costs(run):
     worker_reports = [read_json(p) for p in run.glob("worker_*.json") if p.name != "worker_failure.json"]
     completed = [e for e in read_jsonl(run / "worker_calls.jsonl") if e.get("event") == "completed"]
     ledger = read_json(run / "resource_ledger.json") if (run / "resource_ledger.json").exists() else {}
+    cpu_probes = read_json(run / "cpu_decode_probes.json") if (run / "cpu_decode_probes.json").exists() else {"videos": {}}
     return {
+        "cpu_decode_probe_seconds": sum(v["elapsed_seconds"] for v in cpu_probes["videos"].values()),
+        "prior_run_model_invocations": sum(r.get("completed_model_calls", 0) for r in ledger.get("prior_runs", [])),
         "worker_model_load_seconds": sum(r.get("load_seconds", 0) for r in worker_reports),
         "worker_model_load_count": len(worker_reports),
         "warmup_elapsed_seconds": sum(e["elapsed_seconds"] for e in completed if e.get("kind") == "warmup"),
@@ -271,6 +274,8 @@ def verify(config, run, root=None):
     lookup = {(v["source_id"], q["question_id"]): (v, q) for v in cohort["videos"] for q in v["questions"]} if cohort else {}
     expected_trials = set()
     provenance_verified = False
+    processor = None
+    frozen = {}
     if rows:
         try:
             from .runner import validate_frozen
@@ -279,6 +284,8 @@ def verify(config, run, root=None):
             expected_trials = {trial_identity(run.name, frozen["config_hash"], pair[0], pair[1], block["budget"],
                                               block["repetition"])["trial_id"] for block in order for pair in block["questions"]}
             provenance_verified = True
+            from transformers import AutoProcessor
+            processor = AutoProcessor.from_pretrained(frozen["model_path"], local_files_only=True, trust_remote_code=False, use_fast=True)
         except (RuntimeError, OSError, ValueError) as exc:
             errors.append(f"Frozen provenance verification failed: {exc}")
     for row in rows:
@@ -291,11 +298,22 @@ def verify(config, run, root=None):
             errors.append(f"Parser mismatch: {row['trial_id']}")
         if row["output_tokens"] != len(row["generated_token_ids"]):
             errors.append(f"Generated-token mismatch: {row['trial_id']}")
+        if processor:
+            decoded = processor.tokenizer.decode(row["generated_token_ids"], skip_special_tokens=True,
+                                                 clean_up_tokenization_spaces=False)
+            if decoded != row["decoded_output"]:
+                errors.append(f"Saved token IDs do not decode to saved output: {row['trial_id']}")
+        if row["output_tokens"] > config["max_new_tokens"]:
+            errors.append(f"Generation limit exceeded: {row['trial_id']}")
+        if row["tensor_shapes"].get("input_ids") != [1, row["input_tokens"]]:
+            errors.append(f"Input-token count mismatch: {row['trial_id']}")
         if row["latency_seconds"] <= 0 or not math.isfinite(row["latency_seconds"]):
             errors.append(f"Invalid latency: {row['trial_id']}")
         for metric in ("allocated", "reserved"):
             if row[f"peak_{metric}_bytes"] < row[f"baseline_{metric}_bytes"]:
                 errors.append(f"Invalid memory peak: {row['trial_id']}")
+            if row[f"incremental_peak_{metric}_bytes"] != row[f"peak_{metric}_bytes"] - row[f"baseline_{metric}_bytes"]:
+                errors.append(f"Incremental memory mismatch: {row['trial_id']}")
         if (row["source_id"], row["question_id"]) not in lookup:
             errors.append(f"Unknown question: {row['trial_id']}")
             continue
@@ -310,6 +328,18 @@ def verify(config, run, root=None):
                 expected = video["selections"][str(row["budget"])]
                 if row["source_indices"] != expected["indices"] or row["actual_timestamps"] != expected["timestamps"]:
                     raise ValueError("Temporal correspondence mismatch")
+                if row["frames_decoded"] != video["frame_count"] or row["temporal_padding"] != 0:
+                    raise ValueError("Full decoding or temporal padding mismatch")
+                if processor:
+                    from fractions import Fraction
+                    times = processor._calculate_timestamps(expected["indices"].copy(), float(Fraction(video["fps"])), 2)
+                    if row["model_timestamp_text"] != [f"{t:.1f}" for t in times]:
+                        raise ValueError("Native timestamp text mismatch")
+                    if len(row["model_timestamps"]) != len(times) or any(abs(a - b) > 1e-8 for a, b in zip(row["model_timestamps"], times)):
+                        raise ValueError("Native temporal grouping mismatch")
+                metadata = {k: row[k] for k in ("tensor_shapes", "source_indices", "actual_timestamps", "model_timestamps", "video_grid_thw")}
+                if digest(metadata) != row["input_metadata_hash"]:
+                    raise ValueError("Saved input metadata hash mismatch")
             except (ValueError, RuntimeError) as exc:
                 errors.append(f"{row['trial_id']}: {exc}")
     events = read_jsonl(run / "worker_calls.jsonl")
@@ -325,6 +355,16 @@ def verify(config, run, root=None):
     ended = {e["call_id"] for e in events if e.get("event") == "completed"}
     ended |= {f["call_id"] for f in failures if "call_id" in f}
     orphaned = sorted(started - ended)
+    if ended - started:
+        errors.append("Terminal call events have no matching start event")
+    completed_calls = {e["call_id"]: e for e in events if e.get("event") == "completed"}
+    start_calls = {e["call_id"]: e for e in events if e.get("event") == "started"}
+    if sum(e.get("event") == "started" for e in events) != len(started):
+        errors.append("Duplicate started call IDs")
+    for row in rows:
+        call, beginning = completed_calls.get(row["call_id"], {}), start_calls.get(row["call_id"], {})
+        if not call.get("model_invoked") or call.get("kind") != "trial" or beginning.get("trial_id") != row["trial_id"]:
+            errors.append(f"Trial lacks a matching completed model invocation: {row['trial_id']}")
     conditions = reconstructed["conditions"]
     video_conditions = [r for r in conditions if r["budget"]]
     complete = reconstructed["all_collection_complete"]
@@ -335,6 +375,13 @@ def verify(config, run, root=None):
              "parsed_answer_repeatability": complete and all(r["parsed_answer_agreement"] for r in video_conditions),
              "timing_stability": complete and all(r["timing_stability_target_passed"] for r in video_conditions),
              "no_live_memory_growth_flags": complete and not any(r["live_memory_growth_flag"] for r in conditions)}
+    if rows:
+        probe_file = run / "probes.json"
+        probe_data = read_json(probe_file) if probe_file.exists() else {}
+        gates["fit_and_input_integrity_probes"] = probe_data.get("config_hash") == frozen.get("config_hash") and bool(frozen) and {
+            p["budget"] for p in probe_data.get("probes", []) if p.get("integrity_passed")} == set(config["frame_budgets"])
+    else:
+        gates["fit_and_input_integrity_probes"] = False
     value = {**gates, "errors": errors, "unclosed_call_ids": orphaned,
              "verified_records": len(rows), "real_inference_verified": bool(rows), "verified_at": utc_now()}
     write_json(run / "verification.json", value)

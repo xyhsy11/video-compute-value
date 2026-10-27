@@ -8,7 +8,7 @@ from video_compute_value.resources import environment_fingerprint
 from video_compute_value.runner import source_hash, validate_frozen
 
 
-@pytest.mark.parametrize("change", ["configuration", "source", "environment", "cohort", "order", "weights"])
+@pytest.mark.parametrize("change", ["configuration", "source", "environment", "driver", "cohort", "order", "weights"])
 def test_resume_checks_all_frozen_fingerprints(tmp_path, monkeypatch, change):
     import video_compute_value.runner as runner
     run = tmp_path / "results" / "test"
@@ -40,6 +40,8 @@ def test_resume_checks_all_frozen_fingerprints(tmp_path, monkeypatch, change):
         source.write_text("changed", encoding="utf-8")
     elif change == "environment":
         env["packages"]["torch"] = "different"
+    elif change == "driver":
+        env["nvidia_driver_version"] = "changed"
     elif change == "cohort":
         write_json(run / "cohort_manifest.json", {"videos": ["changed"]})
     elif change == "order":
