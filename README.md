@@ -22,7 +22,7 @@ No environment activation is required.
 Set-Location -LiteralPath 'C:\video-compute-value'
 .\scripts\bootstrap.ps1 -Model
 .\scripts\validate.ps1
-$run = 'results/e000_20261027_implementation'
+$run = 'results/e000_20261027_collection_v1'
 $python = '.\.venv\Scripts\python.exe'
 & $python -m video_compute_value.e000 preflight --config configs/e000.yaml --run-dir $run
 ```
