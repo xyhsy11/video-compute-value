@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=77,<81"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "video-compute-value"
+version = "0.1.0"
+description = "Traceable frozen video-QA feasibility and measurement pilot"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "PyYAML==6.0.2", "numpy==2.2.6", "av==16.0.1", "Pillow==11.3.0",
+  "psutil==6.1.1", "huggingface-hub==0.35.3", "matplotlib==3.10.7", "pyarrow==21.0.0",
+]
+
+[project.optional-dependencies]
+model = ["torch==2.8.0", "torchvision==0.23.0", "transformers==4.57.1", "accelerate==1.10.1", "nvidia-ml-py==12.560.30"]
+dev = ["pytest==8.4.2", "ruff==0.14.2"]
+
+[project.scripts]
+video-compute-value = "video_compute_value.e000:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"

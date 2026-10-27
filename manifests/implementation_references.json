@@ -1,0 +1,12 @@
+{
+  "consulted_on": "2026-10-27",
+  "references": [
+    {"url": "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct", "model_revision_observed": "ebb281ec70b05090aa6165b016eac8ec08e71b17", "role": "Model card; actual acquisition re-resolves and freezes a SHA"},
+    {"url": "https://github.com/QwenLM/Qwen3-VL", "role": "Upstream project reference"},
+    {"url": "https://huggingface.co/docs/transformers/v4.57.1/model_doc/qwen3_vl", "version": "4.57.1", "role": "Released native adapter API"},
+    {"url": "https://github.com/huggingface/transformers/blob/v4.57.1/src/transformers/models/qwen3_vl/processing_qwen3_vl.py", "role": "Inspected source-index/fps timestamp handling and token expansion; installed source SHA-256 recorded at freeze"},
+    {"url": "https://github.com/huggingface/transformers/blob/v4.57.1/src/transformers/models/qwen3_vl/video_processing_qwen3_vl.py", "role": "Inspected temporal grouping, spatial grid, do_resize and do_sample_frames behavior"},
+    {"url": "https://github.com/MME-Benchmarks/Video-MME", "role": "Original benchmark, official acquisition links and restrictions"},
+    {"url": "https://docs.pytorch.org/docs/2.8/notes/cuda.html", "version": "2.8", "role": "Synchronization, allocated/reserved memory, and peak counters"}
+  ]
+}
