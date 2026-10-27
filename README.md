@@ -100,6 +100,8 @@ time tags; all selected PTS, represented pair times, grids, counts and tokens ar
 & $python -m video_compute_value.e000 resume --config configs/e000.yaml --run-dir $run
 & $python -m video_compute_value.e000 analyze --config configs/e000.yaml --run-dir $run
 & $python -m video_compute_value.e000 verify --config configs/e000.yaml --run-dir $run
+# After a complete verified collection, reproduce the descriptive quality addendum:
+& $python scripts/report_quality.py --config configs/e000.yaml --run-dir $run
 ```
 
 `smoke` resolves immutable revisions and explicit generation settings, hashes model
