@@ -114,11 +114,11 @@ class QwenAdapter:
                 raise Blocked("INPUT_INTEGRITY_FAILED", "Native timestamp grouping disagrees with PTS")
             token_text = self.processor.tokenizer.decode(inputs["input_ids"][0], skip_special_tokens=False)
             actual_tags = re.findall(r"<([0-9]+\.[0-9]) seconds>", token_text)
-            if actual_tags != [f"{t:.1f}" for t in expected_times]:
+            if actual_tags != [f"{t:.1f}" for t in represented]:
                 raise Blocked("INPUT_INTEGRITY_FAILED", "Actual timestamp tokens disagree")
             details.update(frames_processor=len(frames), frames_represented=grid[0][0] * 2,
                            video_grid_thw=grid, visual_tokens=token_count,
-                           model_timestamps=expected_times, model_timestamp_text=actual_tags,
+                           model_timestamps=[float(t) for t in represented], model_timestamp_text=actual_tags,
                            spatial_height=video["target_height"], spatial_width=video["target_width"])
         details["tensor_shapes"] = {key: list(value.shape) for key, value in inputs.items()}
         details["input_tokens"] = int(inputs["input_ids"].shape[-1])
