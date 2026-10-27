@@ -1,0 +1,18 @@
+{
+  "unit_tests": {
+    "command": "python -m pytest -q --basetemp .cache/pytest",
+    "passed": 42,
+    "real_model_results": false
+  },
+  "static_checks": {
+    "command": "ruff check src tests scripts/report_quality.py",
+    "passed": true
+  },
+  "windows_timeout_lifecycle": {
+    "synthetic_child_processes": 1,
+    "survivors_after_launcher_kill": 0,
+    "test_children_cleaned_up": true,
+    "real_model_inference": false
+  },
+  "real_model_evidence": "Separate frozen fit probes and atomic measured records; synthetic checks are never counted as model results"
+}

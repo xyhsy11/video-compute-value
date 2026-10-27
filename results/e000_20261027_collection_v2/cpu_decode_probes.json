@@ -1,0 +1,46 @@
+{
+  "config_hash": "fe08f0eeb76e08ca8d5152074557cb440f0130869583c9e4b8664d1f679a1066",
+  "kind": "CPU-only preparation, not model calls or primary request measurements",
+  "videos": {
+    "v0m3E_uSyFg": {
+      "elapsed_seconds": 3.3697560999989946,
+      "frames_decoded": 1780,
+      "frames_selected": 64
+    },
+    "blSnLEZe-sI": {
+      "elapsed_seconds": 2.6532709000002797,
+      "frames_decoded": 2606,
+      "frames_selected": 64
+    },
+    "1q-5IIyZL20": {
+      "elapsed_seconds": 6.059115899999597,
+      "frames_decoded": 3272,
+      "frames_selected": 64
+    },
+    "kij9GXWdmik": {
+      "elapsed_seconds": 3.016265599999315,
+      "frames_decoded": 1499,
+      "frames_selected": 64
+    },
+    "SnOc5W0PgVE": {
+      "elapsed_seconds": 2.891122799999721,
+      "frames_decoded": 1603,
+      "frames_selected": 64
+    },
+    "WViSvPFUVd8": {
+      "elapsed_seconds": 4.634689000000435,
+      "frames_decoded": 1799,
+      "frames_selected": 64
+    },
+    "PU-XOFIJMlg": {
+      "elapsed_seconds": 5.205055899999934,
+      "frames_decoded": 2985,
+      "frames_selected": 64
+    },
+    "N1cdUjctpG8": {
+      "elapsed_seconds": 2.6190528999995877,
+      "frames_decoded": 2590,
+      "frames_selected": 64
+    }
+  }
+}

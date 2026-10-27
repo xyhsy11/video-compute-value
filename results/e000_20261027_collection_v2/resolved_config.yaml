@@ -1,0 +1,241 @@
+additional_disk_limit_gib: 20
+annotation_filename: videomme/test-00000-of-00001.parquet
+annotation_repo: lmms-eval/Video-MME
+annotation_revision: ead1408f75b618502df9a1d8e0950166bf0a2a0b
+attention_backend: sdpa
+batch_size: 1
+chat_template_hash: 03f40b433e3c55503d6ce2ec4678e01dcd2c67fb958d9df0b4deb636a8da20a1
+cohort_hash: 5f823c2fd2b8aae5902d27651c97d6e7a9ecaebf2a1def1876a3c8128561c52c
+config_hash: fe08f0eeb76e08ca8d5152074557cb440f0130869583c9e4b8664d1f679a1066
+config_input_hash: ea28fa62925af8ddee37085bac8d6ffe750239da890d62184701a8ced4bf7d3b
+cpu_threads: 4
+cumulative_execution_limit_hours: 4
+dataset: Video-MME v1
+do_sample: false
+dtype: bfloat16
+duration_category: short
+environment_fingerprint:
+  gpu:
+    available: true
+    name: NVIDIA GeForce RTX 3080 Laptop GPU
+    runtime: '12.8'
+    total_bytes: 17179344896
+  nvidia_driver_version: '621.01'
+  os: Windows-11-10.0.22631-SP0
+  packages:
+    Pillow: 11.3.0
+    PyYAML: 6.0.2
+    accelerate: 1.10.1
+    av: 16.0.1
+    huggingface-hub: 0.35.3
+    numpy: 2.2.6
+    nvidia-ml-py: 12.560.30
+    psutil: 6.1.1
+    pyarrow: 21.0.0
+    safetensors: 0.8.0
+    tokenizers: 0.22.2
+    torch: 2.8.0+cu128
+    torchvision: 0.23.0+cu128
+    transformers: 4.57.1
+  packages_all:
+    Jinja2: 3.1.6
+    MarkupSafe: 3.0.3
+    PyYAML: 6.0.2
+    Pygments: 2.21.0
+    accelerate: 1.10.1
+    av: 16.0.1
+    certifi: 2026.10.23
+    charset-normalizer: 3.5.2
+    colorama: 0.4.6
+    contourpy: 1.4.0
+    cycler: 0.12.1
+    filelock: 4.2.4
+    fonttools: 4.67.0
+    fsspec: 2026.9.0
+    huggingface-hub: 0.35.3
+    idna: '3.20'
+    iniconfig: 2.3.1
+    kiwisolver: 1.5.1
+    matplotlib: 3.10.7
+    mpmath: 1.3.0
+    networkx: 3.6.1
+    numpy: 2.2.6
+    nvidia-ml-py: 12.560.30
+    packaging: '26.3'
+    pillow: 11.3.0
+    pip: 25.0.1
+    pluggy: 1.7.0
+    psutil: 6.1.1
+    pyarrow: 21.0.0
+    pyparsing: 3.3.3
+    pytest: 8.4.2
+    python-dateutil: 3.0.0
+    regex: 2026.9.29
+    requests: 2.34.2
+    ruff: 0.14.2
+    safetensors: 0.8.0
+    setuptools: 78.1.0
+    six: 1.17.0
+    sympy: 1.14.0
+    tokenizers: 0.22.2
+    torch: 2.8.0+cu128
+    torchvision: 0.23.0+cu128
+    tqdm: 4.70.1
+    transformers: 4.57.1
+    typing_extensions: 4.16.0
+    tzdata: '2026.5'
+    urllib3: 2.8.0
+    video-compute-value: 0.1.0
+  python: 3.12.14
+  thread_environment:
+    MKL_NUM_THREADS: '4'
+    OMP_NUM_THREADS: '4'
+    OPENBLAS_NUM_THREADS: null
+experiment_id: e000_frozen_videoqa_feasibility_v1
+files:
+  chat_template.json: 6f8a6a55027e3da5160105556cda5dd69f6423f1c32645f6730d32de7773d0c4
+  config.json: edac7703329133edfc53e46ac0081835144c99d7eebf28b71c732694d435224d
+  generation_config.json: 8469742d1fce0de951c8909b26a2c0c0d8490837ce476efb114da9e0cefc4d44
+  merges.txt: 599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3
+  model-00001-of-00002.safetensors: 30a01a0556622645a3cce87b655bbbbbc1f170c196099f1b666c93202c3339a9
+  model-00002-of-00002.safetensors: 046296a2a387efb43b0c997d5833c789604d168834f6e0d3064bf7bb13d002a6
+  model.safetensors.index.json: 58a7841d7bff2548dd91577d216274a83cf1b500bc6a534b809d6c1b1707cf2b
+  preprocessor_config.json: 27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516
+  tokenizer.json: a5d85b6dcc535e6b93115a9ef287e6132fdbf30270da6218194ba742261173c7
+  tokenizer_config.json: c2da771801886ad9ae98181793ffd3dfb7f1af30f6f7c6a4e15d7dbba52e2399
+  video_preprocessor_config.json: 7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13
+  vocab.json: ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910
+frame_budgets:
+- 8
+- 16
+- 32
+- 48
+- 64
+generation:
+  _from_model_config: false
+  assistant_confidence_threshold: 0.4
+  assistant_early_exit: null
+  assistant_lookbehind: 10
+  bad_words_ids: null
+  begin_suppress_tokens: null
+  bos_token_id: null
+  cache_config: null
+  cache_implementation: null
+  constraints: null
+  decoder_start_token_id: null
+  disable_compile: false
+  diversity_penalty: 0.0
+  do_sample: false
+  dola_layers: null
+  early_stopping: false
+  encoder_no_repeat_ngram_size: 0
+  encoder_repetition_penalty: 1.0
+  eos_token_id: 151645
+  epsilon_cutoff: 0.0
+  eta_cutoff: 0.0
+  exponential_decay_length_penalty: null
+  force_words_ids: null
+  forced_bos_token_id: null
+  forced_eos_token_id: null
+  guidance_scale: null
+  is_assistant: false
+  length_penalty: 1.0
+  low_memory: null
+  max_length: 20
+  max_matching_ngram_size: null
+  max_new_tokens: 8
+  max_time: null
+  min_length: 0
+  min_new_tokens: null
+  min_p: null
+  no_repeat_ngram_size: 0
+  num_assistant_tokens: 20
+  num_assistant_tokens_schedule: constant
+  num_beam_groups: 1
+  num_beams: 1
+  num_return_sequences: 1
+  output_attentions: false
+  output_hidden_states: false
+  output_logits: null
+  output_scores: false
+  pad_token_id: 151643
+  penalty_alpha: null
+  prefill_chunk_size: null
+  prompt_lookup_num_tokens: null
+  remove_invalid_values: false
+  renormalize_logits: false
+  repetition_penalty: 1.0
+  return_dict_in_generate: false
+  return_legacy_cache: null
+  sequence_bias: null
+  stop_strings: null
+  suppress_tokens: null
+  target_lookbehind: 10
+  temperature: 1.0
+  token_healing: false
+  top_k: 50
+  top_p: 1.0
+  transformers_version: 4.57.1
+  typical_p: 1.0
+  use_cache: true
+  watermarking_config: null
+max_new_tokens: 8
+max_pixels_per_frame: 65536
+measurement_version: resident-local-file-per-question-host-sync-v1
+memory_sampling_interval_seconds: 0.05
+model_id: Qwen/Qwen3-VL-4B-Instruct
+model_manifest_hash: 200b8ac22335fc84107e754988f864cc70e980bf4c790ad693d79b391d5286b1
+model_path: C:\video-compute-value\.cache\huggingface\hub\models--Qwen--Qwen3-VL-4B-Instruct\snapshots\ebb281ec70b05090aa6165b016eac8ec08e71b17
+model_revision: ebb281ec70b05090aa6165b016eac8ec08e71b17
+num_beams: 1
+num_videos: 8
+offload: false
+order_hash: 2812cafe116372be817b259ebd71ad68341e694e6e28b93cc1c472be9822d68f
+os_file_cache: Ordinary OS caching permitted; not cold disk
+parser_version: strict-option-v1
+processor_revision: ebb281ec70b05090aa6165b016eac8ec08e71b17
+processor_source_hashes:
+  transformers.models.qwen3_vl.processing_qwen3_vl: efd8d64aaf608aad1ffb3e6d503d6a99e5227d007df95c1d9fa905d998cda4a9
+  transformers.models.qwen3_vl.video_processing_qwen3_vl: a49a83fc45cd9baa3e391a68af79743c70d47b86d7d6c81a262fda4104f89db7
+profile_question:
+- v0m3E_uSyFg
+- 234-1
+prompt: 'Choose the best option for the question.
+
+  Reply with one letter only: A, B, C, or D.'
+quantization: null
+questions_per_video: 3
+reference_budget: 64
+repetitions: 3
+revision: ebb281ec70b05090aa6165b016eac8ec08e71b17
+run_id: e000_20261027_collection_v2
+seed: 20261027
+source_git_revision: d388b31b186d1ce3c2a33003f96ac5bf27b08080
+source_hash: dfab7f85cc34f665ceb1c4abffb2e67c14f7094b20eb3f55c39a58df3ea78623
+spatial:
+  do_resize: false
+  do_sample_frames: false
+  factor: 32
+  image_mean:
+  - 0.5
+  - 0.5
+  - 0.5
+  image_std:
+  - 0.5
+  - 0.5
+  - 0.5
+  pixel_cap: 65536
+  rescale_factor: 0.00392156862745098
+  resize: Pillow RGB BICUBIC preserves content aspect; centered RGB(0,0,0) padding
+    to fixed 32-pixel grid canvas
+temporal: CFR only, source-index/source-fps, pair mean rounded to 0.1 seconds by native
+  processor
+tokenizer_revision: ebb281ec70b05090aa6165b016eac8ec08e71b17
+two_warmups:
+- - v0m3E_uSyFg
+  - 234-1
+- - v0m3E_uSyFg
+  - 234-2
+video_acquisition_limit_gib: 1
+weights_frozen: true
+worker_timeout_seconds: 1800

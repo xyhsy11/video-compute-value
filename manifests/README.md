@@ -2,7 +2,8 @@
 
 Actual frozen source identifiers, local video SHA-256 hashes, annotation/label hashes,
 and exclusions are written to each run's `source_provenance.json`. Full annotations,
-labels, frame timelines, local paths, and exposure manifests remain in ignored local files.
+labels and full frame timelines remain in ignored local cohort files. Exposure identifiers,
+execution-order identifiers, frozen settings and appropriate summaries can be committed.
 
 Upstream access: https://github.com/MME-Benchmarks/Video-MME#-dataset
 

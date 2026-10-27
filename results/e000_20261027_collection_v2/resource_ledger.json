@@ -1,0 +1,177 @@
+{
+  "created_at": "2026-10-27T09:58:33.825323+00:00",
+  "root": "C:\\video-compute-value",
+  "active_seconds": 6168.483366338563,
+  "download_bytes": 82077313,
+  "video_transfer_bytes": 81653854,
+  "storage_baseline_bytes": 0,
+  "storage_peak_bytes": 17026548539,
+  "sessions": [
+    {
+      "name": "preflight",
+      "started_at": "2026-10-27T09:58:33.825323+00:00",
+      "finished_at": "2026-10-27T09:58:37.904598+00:00",
+      "outcome": "completed",
+      "active_seconds": 4.0789999999997235
+    },
+    {
+      "name": "prepare",
+      "started_at": "2026-10-27T09:58:40.004428+00:00",
+      "finished_at": "2026-10-27T10:20:11.327408+00:00",
+      "active_seconds": 1291.32298,
+      "outcome": "interrupted-conservative-charge"
+    },
+    {
+      "name": "preflight",
+      "started_at": "2026-10-27T10:20:11.327408+00:00",
+      "finished_at": "2026-10-27T10:20:18.700107+00:00",
+      "outcome": "completed",
+      "active_seconds": 7.375
+    },
+    {
+      "name": "prepare",
+      "started_at": "2026-10-27T10:20:24.245493+00:00",
+      "finished_at": "2026-10-27T10:24:41.751936+00:00",
+      "outcome": "completed",
+      "active_seconds": 257.5
+    },
+    {
+      "name": "account",
+      "started_at": "2026-10-27T10:26:35.177008+00:00",
+      "finished_at": "2026-10-27T10:26:40.276877+00:00",
+      "outcome": "completed",
+      "active_seconds": 5.110000000000582
+    },
+    {
+      "name": "analyze",
+      "started_at": "2026-10-27T10:26:45.853285+00:00",
+      "finished_at": "2026-10-27T10:26:51.535728+00:00",
+      "outcome": "completed",
+      "active_seconds": 5.67200000000048
+    },
+    {
+      "name": "verify",
+      "started_at": "2026-10-27T10:26:58.603547+00:00",
+      "finished_at": "2026-10-27T10:27:03.491976+00:00",
+      "outcome": "completed",
+      "active_seconds": 4.890000000001237
+    },
+    {
+      "name": "smoke",
+      "started_at": "2026-10-27T10:27:09.218543+00:00",
+      "finished_at": "2026-10-27T10:36:23.196212+00:00",
+      "outcome": "completed",
+      "active_seconds": 553.9840000000004
+    },
+    {
+      "name": "account",
+      "started_at": "2026-10-27T10:40:01.196461+00:00",
+      "finished_at": "2026-10-27T10:40:07.853663+00:00",
+      "outcome": "completed",
+      "active_seconds": 6.656999999999243
+    },
+    {
+      "name": "smoke",
+      "started_at": "2026-10-27T10:40:14.270974+00:00",
+      "finished_at": "2026-10-27T10:44:59.719315+00:00",
+      "outcome": "completed",
+      "active_seconds": 285.4529999999995
+    },
+    {
+      "name": "account",
+      "started_at": "2026-10-27T10:48:05.392062+00:00",
+      "finished_at": "2026-10-27T10:48:11.135707+00:00",
+      "outcome": "completed",
+      "active_seconds": 5.75
+    },
+    {
+      "name": "prepare",
+      "started_at": "2026-10-27T10:48:17.627448+00:00",
+      "finished_at": "2026-10-27T10:48:50.374818+00:00",
+      "outcome": "completed",
+      "active_seconds": 32.75
+    },
+    {
+      "name": "smoke",
+      "started_at": "2026-10-27T10:48:56.440612+00:00",
+      "finished_at": "2026-10-27T10:53:44.451893+00:00",
+      "outcome": "completed",
+      "active_seconds": 288.0149999999994
+    },
+    {
+      "name": "run",
+      "started_at": "2026-10-27T10:53:51.262055+00:00",
+      "finished_at": "2026-10-27T11:42:50.198280+00:00",
+      "outcome": "completed",
+      "active_seconds": 2938.937
+    },
+    {
+      "name": "account",
+      "started_at": "2026-10-27T11:44:44.429074+00:00",
+      "finished_at": "2026-10-27T11:44:51.677371+00:00",
+      "outcome": "completed",
+      "active_seconds": 7.233999999998559
+    },
+    {
+      "name": "verify",
+      "started_at": "2026-10-27T11:44:59.922477+00:00",
+      "finished_at": "2026-10-27T11:45:43.291746+00:00",
+      "outcome": "completed",
+      "active_seconds": 43.375
+    },
+    {
+      "name": "descriptive-quality-addendum",
+      "started_at": "2026-10-27T11:45:50.413237+00:00",
+      "finished_at": "2026-10-27T11:45:56.595344+00:00",
+      "outcome": "completed",
+      "active_seconds": 6.186999999999898
+    }
+  ],
+  "storage_scope": "Entire new project, including environment, caches, temp and Git",
+  "storage_current_bytes": 17026548539,
+  "interrupted_transfer_upper_bound_bytes": 1048576,
+  "accounting_notes": [
+    "The first acquisition worker was restarted to reduce checkpoint overhead. Its unclosed session is conservatively charged full elapsed wall time on next CLI entry.",
+    "CUDA dependency installation and initial validity tests overlapped that acquisition session and are included in its elapsed wall time; they are not double charged.",
+    "Up to one interrupted 1 MiB range is reserved in addition to confirmed video transfer bytes."
+  ],
+  "external_events": [
+    {
+      "name": "Conservative bootstrap window from environment creation to first preflight, including CPU dependencies and engineering gaps",
+      "active_seconds": 299.694931268692
+    },
+    {
+      "name": "CPU validity tests and static checks",
+      "active_seconds": 9.1953943,
+      "recorded_at": "2026-10-27T10:26:40.273888+00:00"
+    },
+    {
+      "name": "CPU validity tests and static checks",
+      "active_seconds": 8.7963008,
+      "recorded_at": "2026-10-27T10:40:07.851669+00:00"
+    },
+    {
+      "name": "CPU validity tests and static checks",
+      "active_seconds": 9.0718496,
+      "recorded_at": "2026-10-27T10:48:11.132715+00:00"
+    },
+    {
+      "name": "Post-collection plot QA, source-hash and publication audit",
+      "active_seconds": 97.43391036987305,
+      "recorded_at": "2026-10-27T11:44:51.672872+00:00"
+    }
+  ],
+  "model_download_logical_bytes": 8887284080,
+  "prior_runs": [
+    {
+      "run_id": "e000_20261027_implementation",
+      "completed_model_calls": 25,
+      "reason": "Initial real fit probes preserved; collection uses stricter provenance and independent verification"
+    },
+    {
+      "run_id": "e000_20261027_collection_v1",
+      "completed_model_calls": 25,
+      "reason": "Precollection input audit replaced grid stretching with aspect-preserving letterboxing"
+    }
+  ]
+}

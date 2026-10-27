@@ -1,0 +1,110 @@
+{
+  "observed_at": "2026-10-27T10:49:29.489641+00:00",
+  "os": "Windows-11-10.0.22631-SP0",
+  "python": "3.12.14",
+  "python_executable": "C:\\video-compute-value\\.venv\\Scripts\\python.exe",
+  "packages": {
+    "torch": "2.8.0+cu128",
+    "torchvision": "0.23.0+cu128",
+    "transformers": "4.57.1",
+    "accelerate": "1.10.1",
+    "av": "16.0.1",
+    "numpy": "2.2.6",
+    "Pillow": "11.3.0",
+    "PyYAML": "6.0.2",
+    "psutil": "6.1.1",
+    "huggingface-hub": "0.35.3",
+    "pyarrow": "21.0.0",
+    "tokenizers": "0.22.2",
+    "safetensors": "0.8.0",
+    "nvidia-ml-py": "12.560.30"
+  },
+  "packages_all": {
+    "accelerate": "1.10.1",
+    "av": "16.0.1",
+    "certifi": "2026.10.23",
+    "charset-normalizer": "3.5.2",
+    "colorama": "0.4.6",
+    "contourpy": "1.4.0",
+    "cycler": "0.12.1",
+    "filelock": "4.2.4",
+    "fonttools": "4.67.0",
+    "fsspec": "2026.9.0",
+    "huggingface-hub": "0.35.3",
+    "idna": "3.20",
+    "iniconfig": "2.3.1",
+    "Jinja2": "3.1.6",
+    "kiwisolver": "1.5.1",
+    "MarkupSafe": "3.0.3",
+    "matplotlib": "3.10.7",
+    "mpmath": "1.3.0",
+    "networkx": "3.6.1",
+    "numpy": "2.2.6",
+    "nvidia-ml-py": "12.560.30",
+    "packaging": "26.3",
+    "pillow": "11.3.0",
+    "pip": "25.0.1",
+    "pluggy": "1.7.0",
+    "psutil": "6.1.1",
+    "pyarrow": "21.0.0",
+    "Pygments": "2.21.0",
+    "pyparsing": "3.3.3",
+    "pytest": "8.4.2",
+    "python-dateutil": "3.0.0",
+    "PyYAML": "6.0.2",
+    "regex": "2026.9.29",
+    "requests": "2.34.2",
+    "ruff": "0.14.2",
+    "safetensors": "0.8.0",
+    "setuptools": "78.1.0",
+    "six": "1.17.0",
+    "sympy": "1.14.0",
+    "tokenizers": "0.22.2",
+    "torch": "2.8.0+cu128",
+    "torchvision": "0.23.0+cu128",
+    "tqdm": "4.70.1",
+    "transformers": "4.57.1",
+    "typing_extensions": "4.16.0",
+    "tzdata": "2026.5",
+    "urllib3": "2.8.0",
+    "video-compute-value": "0.1.0"
+  },
+  "ram_total_bytes": 34110488576,
+  "ram_available_bytes": 14144757760,
+  "disk_free_bytes": 138405031936,
+  "cpu_count": 16,
+  "thread_environment": {
+    "OMP_NUM_THREADS": "4",
+    "MKL_NUM_THREADS": "4",
+    "OPENBLAS_NUM_THREADS": null
+  },
+  "power": {
+    "plugged_in": true,
+    "battery_percent": 100
+  },
+  "nvidia_smi": {
+    "returncode": 0,
+    "stdout": "name, memory.total [MiB], memory.free [MiB], driver_version, temperature.gpu, power.draw [W]\nNVIDIA GeForce RTX 3080 Laptop GPU, 16384 MiB, 15783 MiB, 621.01, 51.62, 23.36 W",
+    "stderr": ""
+  },
+  "cache_roots": {
+    "project": "C:\\video-compute-value\\.cache",
+    "existing_huggingface": "C:\\Users\\韩思宇\\.cache\\huggingface"
+  },
+  "reusable_caches": [
+    {
+      "path": "C:\\video-compute-value\\.cache\\huggingface",
+      "bytes": 8887284080
+    }
+  ],
+  "cuda": {
+    "available": true,
+    "runtime": "12.8",
+    "torch_threads": 4,
+    "name": "NVIDIA GeForce RTX 3080 Laptop GPU",
+    "free_bytes": 16010706944,
+    "total_bytes": 17179344896,
+    "bf16_supported": true
+  },
+  "nvidia_driver_version": "621.01"
+}

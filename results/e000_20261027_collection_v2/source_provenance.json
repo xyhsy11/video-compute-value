@@ -1,0 +1,60 @@
+{
+  "dataset": {
+    "repo": "lmms-eval/Video-MME",
+    "revision": "ead1408f75b618502df9a1d8e0950166bf0a2a0b",
+    "acquisition_source": "Existing local official annotations",
+    "archives": []
+  },
+  "annotation_file_sha256": "7fffab8ed38ecc2f9f0eca4c44d8a11636f0ee96116ede83580c8b9ae0faf986",
+  "sources": [
+    {
+      "source_id": "v0m3E_uSyFg",
+      "sha256": "06d009c5bda28ceae6bb2864eefc2092d87b4a3c4b4b15395036cc9a2739bd54",
+      "annotation_hash": "712e8ef2f252c02249777d8c04050c9ad7309e4df0bfec4f8c409cebc083ba11",
+      "label_hash": "956e9350c1f4247fc0ce6d04e383eeab3ffbff95de2b85a8866a78a23b532d52"
+    },
+    {
+      "source_id": "blSnLEZe-sI",
+      "sha256": "01e27798c9fbc05751f233371231c9774ba829ec152992a795857d6d69cfa3c2",
+      "annotation_hash": "69adb9748d724a11ccf18409f595d439555f2d9009f83f7a9ca9c830ffbba955",
+      "label_hash": "5160e81c7e1dc81c98a7cccda9e2b14b0f12f70d231990c345000fab5ec37d1d"
+    },
+    {
+      "source_id": "1q-5IIyZL20",
+      "sha256": "458096926c6cb4ee86dbfa284327ca3742fc687b02bd34bd3289eb95e326b927",
+      "annotation_hash": "d13948692df32ab20335e8b06ad95358be0ec66330b42ebe1f125593f89d560f",
+      "label_hash": "8600211cf528b3f70009c83e40a1390dd41fecdec6e86097a6aba37c29f8239d"
+    },
+    {
+      "source_id": "kij9GXWdmik",
+      "sha256": "af4e9c6315dbe69a4d41c6b0a1c871ceaadfc65bffe3c8cad739d64940fae74f",
+      "annotation_hash": "5792c683c7ea3509cc8664ad644f03dd10f9b689165251ce6b6bfe1d49dcda76",
+      "label_hash": "47c7d5d356b9e9dd5d2633676f2135035b01e4a009be8778c48039de337a914c"
+    },
+    {
+      "source_id": "SnOc5W0PgVE",
+      "sha256": "f60c6fea20cc30aafe49ff8afcb4426140775532c56e967e1843c61a90350dc3",
+      "annotation_hash": "cf143e2022e0de70d424d2e6ff33fa16958838425a5f685954ea73f85df7b7a0",
+      "label_hash": "0ad90b445cb560df6dea5c2218ae4a04abc9b2c17eaef03898be0db7b4f5c804"
+    },
+    {
+      "source_id": "WViSvPFUVd8",
+      "sha256": "ac0c741591d09b54cb1959a00f9a601af0becebd0d02ff08c863514c9278b73d",
+      "annotation_hash": "1e4237e4163367c6fb10fe4491d1024eaf41960a474273acecc4622cb84152a4",
+      "label_hash": "7fb4a67fe0a01ebbbba47876fa253c4bbc7638f7d39aec0094b6b294dc75e7f8"
+    },
+    {
+      "source_id": "PU-XOFIJMlg",
+      "sha256": "764f6b84520abd22810427075e3c89e1ba3e61ad3f534d6b1d85cd2e91fc5117",
+      "annotation_hash": "e4a3affd680cdac7e6ad4f03b7c24a8fe577655662e4818f994db8e495c3a8c3",
+      "label_hash": "d88d0db0a0fce0c3dcfc07e16999d6e529c1526a168dbe0e1f8cff2f4c30b4fc"
+    },
+    {
+      "source_id": "N1cdUjctpG8",
+      "sha256": "eb20f82e79f7772edeb608eff50fde844a89e8f71530f9912efd85ba136f13dc",
+      "annotation_hash": "9e36a6da14bfd34d03d99eb56b474243392ba48414ce7da6ac11e890fb866f8f",
+      "label_hash": "b31d9c62fc2adbe9c081f01d9d582dcbf1aa5ad4c27409a4668597a8eeb6a203"
+    }
+  ],
+  "excluded": []
+}

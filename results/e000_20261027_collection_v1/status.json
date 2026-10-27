@@ -1,0 +1,9 @@
+{
+  "status": "PARTIAL",
+  "message": "All five fit, integrity and component probes passed; collection approved by resource projection",
+  "updated_at": "2026-10-27T10:44:59.716323+00:00",
+  "real_inference": true,
+  "completed_model_calls": 25,
+  "planned_video_calls": 360,
+  "planned_text_calls": 24
+}

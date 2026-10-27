@@ -27,9 +27,6 @@ results/**/private/
 results/**/.lock
 results/**/.worker.lock
 results/**/cohort_manifest.json
-results/**/exposure_manifest.json
-results/**/resolved_config.yaml
-results/**/execution_order.json
 results/**/records/
 results/**/diagnostics/
 results/**/raw_trials.jsonl
@@ -41,3 +38,23 @@ results/**/probe_*.json
 results/**/worker_*.log
 results/**/resolved_model/
 *.tmp
+
+# Preserve development probes locally; publish their safe provenance/accounting only.
+results/e000_20261027_implementation/*
+!results/e000_20261027_implementation/resource_ledger.json
+!results/e000_20261027_implementation/status.json
+!results/e000_20261027_implementation/source_provenance.json
+!results/e000_20261027_implementation/environment.json
+!results/e000_20261027_implementation/model_manifest.json
+!results/e000_20261027_implementation/resolved_config.yaml
+!results/e000_20261027_implementation/exposure_manifest.json
+!results/e000_20261027_implementation/execution_order.json
+results/e000_20261027_collection_v1/*
+!results/e000_20261027_collection_v1/resource_ledger.json
+!results/e000_20261027_collection_v1/status.json
+!results/e000_20261027_collection_v1/source_provenance.json
+!results/e000_20261027_collection_v1/environment.json
+!results/e000_20261027_collection_v1/model_manifest.json
+!results/e000_20261027_collection_v1/resolved_config.yaml
+!results/e000_20261027_collection_v1/exposure_manifest.json
+!results/e000_20261027_collection_v1/execution_order.json

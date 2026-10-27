@@ -1,0 +1,8 @@
+{
+  "config_hash": "fe08f0eeb76e08ca8d5152074557cb440f0130869583c9e4b8664d1f679a1066",
+  "projection_seconds": 5728.508736000376,
+  "safety_factor": 1.5,
+  "additional_decode_seconds_per_request": 2.6893598000006023,
+  "formula": "1.5 * (16 * worst_worker_startup_and_overhead + (384 + 32) * worst_request + 120 verification seconds)",
+  "ready_at": "2026-10-27T10:53:44.438964+00:00"
+}

@@ -1,0 +1,9 @@
+{
+  "status": "REPEATABILITY_UNRESOLVED",
+  "message": "Parsed answers disagree across repetitions",
+  "updated_at": "2026-10-27T11:45:43.263128+00:00",
+  "real_inference": true,
+  "completed_model_calls": 441,
+  "planned_video_calls": 360,
+  "planned_text_calls": 24
+}

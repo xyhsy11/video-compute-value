@@ -1,0 +1,37 @@
+{
+  "purpose": "development pilot; never untouched confirmation data",
+  "sources": [
+    {
+      "source_id": "v0m3E_uSyFg",
+      "sha256": "06d009c5bda28ceae6bb2864eefc2092d87b4a3c4b4b15395036cc9a2739bd54"
+    },
+    {
+      "source_id": "blSnLEZe-sI",
+      "sha256": "01e27798c9fbc05751f233371231c9774ba829ec152992a795857d6d69cfa3c2"
+    },
+    {
+      "source_id": "1q-5IIyZL20",
+      "sha256": "458096926c6cb4ee86dbfa284327ca3742fc687b02bd34bd3289eb95e326b927"
+    },
+    {
+      "source_id": "kij9GXWdmik",
+      "sha256": "af4e9c6315dbe69a4d41c6b0a1c871ceaadfc65bffe3c8cad739d64940fae74f"
+    },
+    {
+      "source_id": "SnOc5W0PgVE",
+      "sha256": "f60c6fea20cc30aafe49ff8afcb4426140775532c56e967e1843c61a90350dc3"
+    },
+    {
+      "source_id": "WViSvPFUVd8",
+      "sha256": "ac0c741591d09b54cb1959a00f9a601af0becebd0d02ff08c863514c9278b73d"
+    },
+    {
+      "source_id": "PU-XOFIJMlg",
+      "sha256": "764f6b84520abd22810427075e3c89e1ba3e61ad3f534d6b1d85cd2e91fc5117"
+    },
+    {
+      "source_id": "N1cdUjctpG8",
+      "sha256": "eb20f82e79f7772edeb608eff50fde844a89e8f71530f9912efd85ba136f13dc"
+    }
+  ]
+}

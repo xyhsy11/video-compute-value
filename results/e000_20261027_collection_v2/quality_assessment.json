@@ -1,0 +1,180 @@
+{
+  "video_rep1_valid_outputs": 120,
+  "video_rep1_outputs": 120,
+  "text_valid_outputs": 23,
+  "text_outputs": 24,
+  "text_correct_out_of_24": 14,
+  "questions": [
+    {
+      "source_id": "1q-5IIyZL20",
+      "question_id": "197-1",
+      "incorrect_video_conditions_out_of_5": 0,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": false
+    },
+    {
+      "source_id": "1q-5IIyZL20",
+      "question_id": "197-2",
+      "incorrect_video_conditions_out_of_5": 0,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": true
+    },
+    {
+      "source_id": "1q-5IIyZL20",
+      "question_id": "197-3",
+      "incorrect_video_conditions_out_of_5": 2,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": true
+    },
+    {
+      "source_id": "N1cdUjctpG8",
+      "question_id": "002-1",
+      "incorrect_video_conditions_out_of_5": 1,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": false
+    },
+    {
+      "source_id": "N1cdUjctpG8",
+      "question_id": "002-2",
+      "incorrect_video_conditions_out_of_5": 5,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": false
+    },
+    {
+      "source_id": "N1cdUjctpG8",
+      "question_id": "002-3",
+      "incorrect_video_conditions_out_of_5": 1,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": true
+    },
+    {
+      "source_id": "PU-XOFIJMlg",
+      "question_id": "098-1",
+      "incorrect_video_conditions_out_of_5": 1,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": true
+    },
+    {
+      "source_id": "PU-XOFIJMlg",
+      "question_id": "098-2",
+      "incorrect_video_conditions_out_of_5": 2,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": true
+    },
+    {
+      "source_id": "PU-XOFIJMlg",
+      "question_id": "098-3",
+      "incorrect_video_conditions_out_of_5": 0,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": false
+    },
+    {
+      "source_id": "SnOc5W0PgVE",
+      "question_id": "078-1",
+      "incorrect_video_conditions_out_of_5": 0,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": true
+    },
+    {
+      "source_id": "SnOc5W0PgVE",
+      "question_id": "078-2",
+      "incorrect_video_conditions_out_of_5": 0,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": true
+    },
+    {
+      "source_id": "SnOc5W0PgVE",
+      "question_id": "078-3",
+      "incorrect_video_conditions_out_of_5": 0,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": true
+    },
+    {
+      "source_id": "WViSvPFUVd8",
+      "question_id": "079-1",
+      "incorrect_video_conditions_out_of_5": 0,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": true
+    },
+    {
+      "source_id": "WViSvPFUVd8",
+      "question_id": "079-2",
+      "incorrect_video_conditions_out_of_5": 0,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": true
+    },
+    {
+      "source_id": "WViSvPFUVd8",
+      "question_id": "079-3",
+      "incorrect_video_conditions_out_of_5": 0,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": true
+    },
+    {
+      "source_id": "blSnLEZe-sI",
+      "question_id": "034-1",
+      "incorrect_video_conditions_out_of_5": 3,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": true
+    },
+    {
+      "source_id": "blSnLEZe-sI",
+      "question_id": "034-2",
+      "incorrect_video_conditions_out_of_5": 5,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": false
+    },
+    {
+      "source_id": "blSnLEZe-sI",
+      "question_id": "034-3",
+      "incorrect_video_conditions_out_of_5": 2,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": false
+    },
+    {
+      "source_id": "kij9GXWdmik",
+      "question_id": "235-1",
+      "incorrect_video_conditions_out_of_5": 5,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": false
+    },
+    {
+      "source_id": "kij9GXWdmik",
+      "question_id": "235-2",
+      "incorrect_video_conditions_out_of_5": 0,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": true
+    },
+    {
+      "source_id": "kij9GXWdmik",
+      "question_id": "235-3",
+      "incorrect_video_conditions_out_of_5": 3,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": true
+    },
+    {
+      "source_id": "v0m3E_uSyFg",
+      "question_id": "234-1",
+      "incorrect_video_conditions_out_of_5": 0,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": false
+    },
+    {
+      "source_id": "v0m3E_uSyFg",
+      "question_id": "234-2",
+      "incorrect_video_conditions_out_of_5": 0,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": false
+    },
+    {
+      "source_id": "v0m3E_uSyFg",
+      "question_id": "234-3",
+      "incorrect_video_conditions_out_of_5": 0,
+      "invalid_video_conditions_out_of_5": 0,
+      "text_only_correct": false
+    }
+  ],
+  "code_sha256": "f969792969ee2d205a0fe81874fd9a4e005f5fd3d66b291ecefa674099d9a4c3",
+  "analysis_git_revision": "8f07ebed80028a6202fd2edb45b342f21471ed62",
+  "denominators": "The 120 video outputs are five conditions on the SAME 24 questions in eight videos; not 120 independent examples"
+}

@@ -1,0 +1,9 @@
+{
+  "parent_run": "e000_20261027_collection_v1",
+  "inherited_active_seconds": 2739.729606368693,
+  "prior_model_calls": 50,
+  "source_cohort_will_be_revalidated": true,
+  "spatial_preprocessing": "centered black letterboxing; no stretched content",
+  "budget_reset": false,
+  "sources_revalidated_identical": true
+}

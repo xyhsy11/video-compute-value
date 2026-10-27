@@ -1,0 +1,17 @@
+{
+  "complete_collection": true,
+  "summary_reproduces": true,
+  "frozen_provenance_verified": true,
+  "records_valid": true,
+  "calls_reconciled": true,
+  "prepared_input_repeatability": true,
+  "parsed_answer_repeatability": false,
+  "timing_stability": false,
+  "no_live_memory_growth_flags": true,
+  "fit_and_input_integrity_probes": true,
+  "errors": [],
+  "unclosed_call_ids": [],
+  "verified_records": 384,
+  "real_inference_verified": true,
+  "verified_at": "2026-10-27T11:45:43.255133+00:00"
+}
