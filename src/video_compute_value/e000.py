@@ -108,7 +108,7 @@ def main(argv=None):
                     from .analysis import analyze, verify
                     analyze(config, run)
                     if args.command == "verify":
-                        if not verify(config, run)["records_valid"]:
+                        if not verify(config, run, root)["records_valid"]:
                             return 3
                 elif args.command == "account":
                     if args.event_seconds is None or args.event_seconds < 0 or not args.event_name:

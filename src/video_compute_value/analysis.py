@@ -46,7 +46,7 @@ def summarize(config, rows, failures, events):
         for row in subset:
             per_question[(row["source_id"], row["question_id"])].append(row)
         question_medians, timing_ranges, video_medians = [], [], defaultdict(list)
-        agreements, token_agreements, input_agreements = [], [], []
+        agreements, token_agreements, output_agreements, input_agreements = [], [], [], []
         for (source, question), group in sorted(per_question.items()):
             times = [r["latency_seconds"] for r in group]
             full = len(group) == expected_reps and len({r["repetition"] for r in group}) == expected_reps
@@ -58,6 +58,7 @@ def summarize(config, rows, failures, events):
                 if budget:
                     agreements.append(len({r["parsed_answer"] for r in group}) == 1)
                     token_agreements.append(len({tuple(r["generated_token_ids"]) for r in group}) == 1)
+                    output_agreements.append(len({r["decoded_output"] for r in group}) == 1)
                     input_agreements.append(len({digest([r["input_tensor_hashes"], r["input_metadata_hash"]]) for r in group}) == 1)
             cells.append({"source_id": source, "question_id": question, "budget": budget,
                           "complete_repetitions": full, "latency_seconds": times,
@@ -80,6 +81,7 @@ def summarize(config, rows, failures, events):
                "timing_stability_target_passed": complete and median(timing_ranges) <= 0.2,
                "parsed_answer_agreement": all(agreements) if budget and complete else None,
                "raw_token_agreement": all(token_agreements) if budget and complete else None,
+               "raw_output_agreement": all(output_agreements) if budget and complete else None,
                "prepared_input_agreement": all(input_agreements) if budget and complete else None,
                "live_memory_growth_flag": any(r.get("live_memory_growth_flag", False) for r in subset)}
         for key in ("visual_tokens", "input_tokens", "output_tokens"):
@@ -116,12 +118,29 @@ def summarize(config, rows, failures, events):
                 "sample_size": "24 questions clustered in eight videos; repeated calls are not new examples"}}
 
 
+def setup_costs(run):
+    worker_reports = [read_json(p) for p in run.glob("worker_*.json") if p.name != "worker_failure.json"]
+    completed = [e for e in read_jsonl(run / "worker_calls.jsonl") if e.get("event") == "completed"]
+    ledger = read_json(run / "resource_ledger.json") if (run / "resource_ledger.json").exists() else {}
+    return {
+        "worker_model_load_seconds": sum(r.get("load_seconds", 0) for r in worker_reports),
+        "worker_model_load_count": len(worker_reports),
+        "warmup_elapsed_seconds": sum(e["elapsed_seconds"] for e in completed if e.get("kind") == "warmup"),
+        "probe_profile_elapsed_seconds": sum(e["elapsed_seconds"] for e in completed
+                                              if e.get("kind") in ("fit_probe", "integrity_probe", "component_profile")),
+        "preparation_session_seconds": sum(s.get("active_seconds", 0) for s in ledger.get("sessions", []) if s["name"] == "prepare"),
+        "external_setup_seconds": sum(e["active_seconds"] for e in ledger.get("external_events", [])),
+        "definition": "Descriptive startup/diagnostic costs; overlapping wall intervals are not summed as a disjoint decomposition",
+    }
+
+
 def analyze(config, run):
     from .runner import export_records, records
     run = Path(run)
     export_records(run)
     rows = records(run)
     summary = summarize(config, rows, read_jsonl(run / "failed_attempts.jsonl"), read_jsonl(run / "worker_calls.jsonl"))
+    summary["setup_costs"] = setup_costs(run)
     summary["generated_at"] = utc_now()
     write_json(run / "summary.json", summary)
     buffer = io.StringIO(newline="")
@@ -220,6 +239,10 @@ Recorded active execution seconds before this report command finishes:
 20 GiB additional storage, with at most 1 GiB video transfer. Setup costs and failed
 attempts remain in `resource_ledger.json`; idle time between closed sessions is excluded.
 
+Saved setup and diagnostic costs: `{summary.get('setup_costs', {})}`.
+These descriptive intervals can overlap; they are not added into a purported
+disjoint decomposition of the primary request timer.
+
 Operational confirmation requires all source/config/environment/integrity gates,
 all 384 completed calls, stable parsed answers, interpretable timing, complete
 memory records, reconciled calls, and independent saved-record verification.
@@ -239,7 +262,7 @@ using the exact commands in the README. Use `resume` after interrupted collectio
     atomic_text(run / "report.md", text)
 
 
-def verify(config, run):
+def verify(config, run, root=None):
     from .runner import records
     from .model import validate_grid
     run = Path(run)
@@ -251,7 +274,7 @@ def verify(config, run):
     if rows:
         try:
             from .runner import validate_frozen
-            frozen = validate_frozen(config, run, run.parent.parent)
+            frozen = validate_frozen(config, run, Path(root) if root else run.parent.parent)
             order = read_json(run / "execution_order.json")
             expected_trials = {trial_identity(run.name, frozen["config_hash"], pair[0], pair[1], block["budget"],
                                               block["repetition"])["trial_id"] for block in order for pair in block["questions"]}
@@ -292,6 +315,7 @@ def verify(config, run):
     events = read_jsonl(run / "worker_calls.jsonl")
     failures = read_jsonl(run / "failed_attempts.jsonl")
     reconstructed = summarize(config, rows, failures, events)
+    reconstructed["setup_costs"] = setup_costs(run)
     saved = read_json(run / "summary.json")
     saved.pop("generated_at", None)
     summary_matches = saved == reconstructed

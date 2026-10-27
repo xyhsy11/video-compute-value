@@ -59,15 +59,15 @@ class Ledger:
         extra = time.monotonic() - self.started if self.started is not None else 0
         return self.value["active_seconds"] + extra
 
-    def save(self):
-        if time.monotonic() - self._last_storage_check >= 2 or "storage_current_bytes" not in self.value:
+    def save(self, force_storage=False):
+        if force_storage or time.monotonic() - self._last_storage_check >= 30 or "storage_current_bytes" not in self.value:
             self.value["storage_current_bytes"] = tree_bytes(self.root)
             self._last_storage_check = time.monotonic()
         self.value["storage_peak_bytes"] = max(self.value["storage_peak_bytes"], self.value["storage_current_bytes"])
         write_json(self.path, self.value)
 
     def check(self, projected_seconds=0, projected_bytes=0):
-        self.save()
+        self.save(force_storage=projected_bytes > 256 * 1024 * 1024)
         if self.consumed_seconds() + projected_seconds > self.config["cumulative_execution_limit_hours"] * 3600:
             raise Blocked("BLOCKED_RESOURCE", "Cumulative active execution time budget exceeded")
         if self.value["storage_current_bytes"] + projected_bytes > self.config["additional_disk_limit_gib"] * GIB:
@@ -82,7 +82,7 @@ class Ledger:
         self.save()
 
     def allow_video_transfer(self, size):
-        if self.value["video_transfer_bytes"] + size > self.config["video_acquisition_limit_gib"] * GIB:
+        if self.value["video_transfer_bytes"] + self.value.get("interrupted_transfer_upper_bound_bytes", 0) + size > self.config["video_acquisition_limit_gib"] * GIB:
             raise Blocked("BLOCKED_RESOURCE", "1 GiB cumulative video transfer budget exceeded")
 
     @contextmanager
@@ -111,7 +111,7 @@ class Ledger:
             self.started = None
             self.value["active_seconds"] += elapsed
             record.update(finished_at=utc_now(), active_seconds=elapsed)
-            self.save()
+            self.save(force_storage=True)
 
 
 def environment(root):
@@ -122,6 +122,7 @@ def environment(root):
     record = {
         "observed_at": utc_now(), "os": platform.platform(), "python": platform.python_version(),
         "python_executable": sys.executable, "packages": packages,
+        "packages_all": {d.metadata["Name"]: d.version for d in importlib.metadata.distributions()},
         "ram_total_bytes": memory.total, "ram_available_bytes": memory.available,
         "disk_free_bytes": disk.free, "cpu_count": psutil.cpu_count(),
         "thread_environment": {k: os.environ.get(k) for k in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS")},
@@ -147,6 +148,7 @@ def environment(root):
 
 def environment_fingerprint(record):
     return {"os": record["os"], "python": record["python"], "packages": record["packages"],
+            "packages_all": record.get("packages_all"),
             "gpu": None if not record["cuda"] else {k: record["cuda"].get(k) for k in
                                                      ("available", "runtime", "name", "total_bytes")},
             "thread_environment": record["thread_environment"]}

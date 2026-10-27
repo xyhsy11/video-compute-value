@@ -15,7 +15,7 @@ from pathlib import Path
 
 import yaml
 
-from .common import (Blocked, append_json, atomic_text, digest, exclusive_lock, file_hash,
+from .common import (Blocked, append_json, atomic_text, command_output, digest, exclusive_lock, file_hash,
                      read_json, read_jsonl, utc_now, write_json)
 from .dataset import validate_cohort
 from .measurement import MemorySampler, timed_request
@@ -64,7 +64,8 @@ def resolve_model(config, root, ledger):
     except Blocked:
         raise
     except Exception as exc:
-        raise Blocked("BLOCKED_MODEL_ACCESS", f"Pinned model acquisition failed: {type(exc).__name__}") from exc
+        detail = re.sub(r"(https?://[^\s?]+)\?[^\s]+", r"\1?[query redacted]", str(exc))[:1000]
+        raise Blocked("BLOCKED_MODEL_ACCESS", f"Pinned model acquisition failed: {type(exc).__name__}: {detail}") from exc
     processor = AutoProcessor.from_pretrained(path, local_files_only=True, trust_remote_code=False, use_fast=True)
     generation = GenerationConfig(max_new_tokens=config["max_new_tokens"], do_sample=False, num_beams=1,
                                    eos_token_id=processor.tokenizer.eos_token_id,
@@ -98,6 +99,8 @@ def freeze(config, run, root, ledger):
     env = environment(root)
     order = make_order(config, cohort)
     frozen = {**config, **manifest, "run_id": run.name, "config_input_hash": digest(config),
+              "model_revision": manifest["revision"], "annotation_revision": cohort["dataset"]["revision"],
+              "source_git_revision": command_output(["git", "rev-parse", "HEAD"]).get("stdout"),
               "model_manifest_hash": digest(manifest), "cohort_hash": digest(cohort), "order_hash": digest(order),
               "environment_fingerprint": environment_fingerprint(env), "source_hash": source_hash(root),
               "prompt": PROMPT, "parser_version": PARSER_VERSION, "measurement_version": MEASUREMENT_VERSION,
@@ -227,7 +230,7 @@ def coordinate(command, config, run, root, ledger, config_path):
         completed = {r["trial_id"] for r in records(run)}
     from .analysis import analyze, verify
     analyze(config, run)
-    verify(config, run)
+    verify(config, run, root)
 
 
 def worker(config, run, root, block_index, mode):
