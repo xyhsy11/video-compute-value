@@ -33,6 +33,7 @@ def resolve_model(config, root, ledger):
     from huggingface_hub import HfApi, snapshot_download
     from transformers import AutoProcessor, GenerationConfig
     from .model import adapter_source_hashes
+    from .generation import resolve_greedy_policy
     if not torch.cuda.is_available():
         raise Blocked("BLOCKED_RESOURCE", "CUDA unavailable; CPU inference is outside this protocol")
     expected = {"torch": "2.8.0", "torchvision": "0.23.0", "transformers": "4.57.1", "accelerate": "1.10.1"}
@@ -73,11 +74,15 @@ def resolve_model(config, root, ledger):
                                    bos_token_id=processor.tokenizer.bos_token_id, use_cache=True)
     if generation.eos_token_id is None or generation.pad_token_id is None:
         raise Blocked("INPUT_INTEGRITY_FAILED", "EOS and padding must resolve explicitly")
+    checkpoint_generation = GenerationConfig.from_pretrained(path, local_files_only=True)
+    generation_policy = resolve_greedy_policy(generation, checkpoint_generation)
+    generation = GenerationConfig(**generation_policy["effective_generation"])
     manifest = {"model_id": config["model_id"], "revision": revision, "processor_revision": revision,
                 "tokenizer_revision": revision, "model_path": str(path.resolve()),
                 "files": {f.rfilename: file_hash(path / f.rfilename) for f in files},
                 "dtype": "bfloat16" if torch.cuda.is_bf16_supported() else "float16",
                 "attention_backend": config["attention_backend"], "generation": generation.to_dict(),
+                "generation_policy": generation_policy, "checkpoint_generation": checkpoint_generation.to_dict(),
                 "processor_source_hashes": adapter_source_hashes(),
                 "chat_template_hash": digest(processor.chat_template),
                 "spatial": {"factor": 32, "pixel_cap": config["max_pixels_per_frame"],
@@ -265,7 +270,8 @@ def worker(config, run, root, block_index, mode):
             adapter = QwenAdapter(frozen)
             worker_key = f"{mode}_{block_index}_{time.time_ns()}"
             write_json(run / f"worker_{worker_key}.json", {"load_seconds": adapter.load_seconds,
-                       "baseline": adapter.baseline, "budget": budget, "repetition": repetition, "pid": os.getpid()})
+                       "baseline": adapter.baseline, "budget": budget, "repetition": repetition, "pid": os.getpid(),
+                       "generation_policy": adapter.generation_policy})
             completed = {r["trial_id"] for r in records(run)}
             timed_calls_seconds = 0.0
 

@@ -13,6 +13,7 @@ import numpy as np
 
 from .common import Blocked, digest, file_hash
 from .protocol import make_prompt, parse_answer
+from .generation import resolve_greedy_policy
 from .video import decode_selected
 
 
@@ -66,6 +67,9 @@ class QwenAdapter:
             frozen["model_path"], dtype=getattr(torch, frozen["dtype"]),
             attn_implementation=frozen["attention_backend"], local_files_only=True, trust_remote_code=False,
             device_map={"": "cuda:0"}, low_cpu_mem_usage=True)
+        self.generation_policy = resolve_greedy_policy(self.generation, self.model.generation_config)
+        if frozen.get("generation_policy") not in (None, self.generation_policy):
+            raise Blocked("INPUT_INTEGRITY_FAILED", "Effective generation policy differs from frozen manifest")
         self.model.eval()
         self.model.requires_grad_(False)
         torch.cuda.synchronize()
@@ -132,7 +136,8 @@ class QwenAdapter:
     def generate(self, inputs):
         with self.torch.inference_mode():
             self.model_call_count += 1
-            output = self.model.generate(**inputs, generation_config=self.generation)
+            output = self.model.generate(**inputs, generation_config=self.generation,
+                                         **self.generation_policy["call_overrides"])
         new_ids = output[0, inputs["input_ids"].shape[-1]:].detach().cpu().tolist()
         text = self.processor.tokenizer.decode(new_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)
         answer = parse_answer(text)
