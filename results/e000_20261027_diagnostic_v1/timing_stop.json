@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-28T04:14:04.393553+00:00",
+  "reason": "Observed bounded-allocator warmup exceeds the parent forecast; reservations 20514340864 bytes and 144.3460531 seconds in preserved completed warmup. Retried warmup still pending after more than 160 seconds. Stop before spending remaining budget.",
+  "timed_requests_completed": 0,
+  "known_completed_warmups": 1,
+  "interrupted_warmup_attempts": 2,
+  "new_comparison_run": "e000_20261028_diagnostic_v2",
+  "resource_consumption_reset": false
+}

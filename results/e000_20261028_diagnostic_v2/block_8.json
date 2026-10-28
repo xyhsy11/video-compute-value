@@ -1,0 +1,43 @@
+{
+  "complete": true,
+  "block": {
+    "arm": "request_trim",
+    "budget": 8,
+    "repetition": 3,
+    "questions": [
+      [
+        "blSnLEZe-sI",
+        "034-1"
+      ],
+      [
+        "1q-5IIyZL20",
+        "197-1"
+      ],
+      [
+        "N1cdUjctpG8",
+        "002-1"
+      ],
+      [
+        "kij9GXWdmik",
+        "235-1"
+      ],
+      [
+        "WViSvPFUVd8",
+        "079-1"
+      ],
+      [
+        "SnOc5W0PgVE",
+        "078-1"
+      ],
+      [
+        "v0m3E_uSyFg",
+        "234-1"
+      ],
+      [
+        "PU-XOFIJMlg",
+        "098-1"
+      ]
+    ],
+    "profile": false
+  }
+}

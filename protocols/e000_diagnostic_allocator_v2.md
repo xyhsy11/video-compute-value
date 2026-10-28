@@ -22,7 +22,7 @@ Nested CPU preparation timing excludes cache trimming. Ordinary OS caching remai
 Freeze source hashes, effective generation policy, exact paired questions, order
 and parent input hashes. Compare answer/token consistency, question-wise three-run
 median latency, relative range `(max-min)/median`, sampled device usage and PyTorch
-allocator statistics. Report >=20% timing range failures honestly. No replacement
+allocator statistics. Report >20% timing range failures honestly (the target is <=20%). No replacement
 five-budget accuracy curve or adaptive-computation claim.
 
 The cost forecast sums exact parent request costs, same-budget auxiliary costs,

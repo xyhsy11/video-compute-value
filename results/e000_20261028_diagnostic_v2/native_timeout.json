@@ -1,0 +1,30 @@
+{
+  "worker_timeout_seconds": 600,
+  "worker_block": 10,
+  "source_id": "1q-5IIyZL20",
+  "question_id": "197-1",
+  "budget": 64,
+  "repetition": 3,
+  "call_id": "a54710ca5f1c73b5014c3ac75b698de034af70ce9f592171c30900cb6511f0bf_1793163159697589400",
+  "attempt_started_at": "2026-10-28T04:52:39.697589+00:00",
+  "worker_finished_at": "2026-10-28T05:00:42.599180+00:00",
+  "outstanding_attempt_wall_seconds": 482.901591,
+  "not_a_completed_primary_latency": true,
+  "output_available": false,
+  "primary_predictions_retried": false,
+  "subsequent_unattempted_identities": [
+    [
+      "SnOc5W0PgVE",
+      "078-1"
+    ],
+    [
+      "v0m3E_uSyFg",
+      "234-1"
+    ],
+    [
+      "kij9GXWdmik",
+      "235-1"
+    ]
+  ],
+  "complete_native_64_latency_summary_withheld": true
+}

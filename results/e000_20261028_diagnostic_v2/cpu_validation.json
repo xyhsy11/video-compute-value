@@ -1,0 +1,18 @@
+{
+  "recorded_at": "2026-10-28T05:13:04.831999+00:00",
+  "pytest": {
+    "command": ".venv/Scripts/python.exe -m pytest -q --basetemp .cache/final-diagnostic-validation",
+    "passed": 54,
+    "failed": 0,
+    "reported_seconds": 25.15
+  },
+  "ruff": {
+    "command": ".venv/Scripts/ruff.exe check src tests scripts",
+    "passed": true
+  },
+  "figure_qa": {
+    "png_visually_reviewed": true,
+    "svg_xml_parsed": true,
+    "native64_censored_estimates_withheld": true
+  }
+}

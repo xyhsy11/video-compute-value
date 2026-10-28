@@ -1,0 +1,9 @@
+{
+  "status": "PARTIAL",
+  "answer_cause_confirmed": true,
+  "fixed_greedy_unstable_cases": 0,
+  "forensic_completed_calls": 396,
+  "timing_intervention": "stopped for budget after allocator regression",
+  "timed_requests_completed": 0,
+  "continued_in": "e000_20261028_diagnostic_v2"
+}

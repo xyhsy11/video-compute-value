@@ -1,0 +1,12 @@
+{
+  "observed_at_utc": "2026-10-28T04:58:41.4675543Z",
+  "observation": "During pending native Uniform-64 repetition 3 request; device-wide snapshot, outside primary timer",
+  "gpu": {
+    "utilization.gpu [%]": "100 %",
+    "memory.used [MiB]": "16120 MiB",
+    "memory.total [MiB]": "16384 MiB",
+    "temperature.gpu": "72.56",
+    "clocks.current.sm [MHz]": "1800 MHz",
+    "power.draw [W]": "69.68 W"
+  }
+}

@@ -1,0 +1,312 @@
+{
+  "created_at": "2026-10-27T09:58:33.825323+00:00",
+  "root": "C:\\video-compute-value",
+  "active_seconds": 11605.415727438558,
+  "download_bytes": 82077313,
+  "video_transfer_bytes": 81653854,
+  "storage_baseline_bytes": 0,
+  "storage_peak_bytes": 17029753960,
+  "sessions": [
+    {
+      "name": "preflight",
+      "started_at": "2026-10-27T09:58:33.825323+00:00",
+      "finished_at": "2026-10-27T09:58:37.904598+00:00",
+      "outcome": "completed",
+      "active_seconds": 4.0789999999997235
+    },
+    {
+      "name": "prepare",
+      "started_at": "2026-10-27T09:58:40.004428+00:00",
+      "finished_at": "2026-10-27T10:20:11.327408+00:00",
+      "active_seconds": 1291.32298,
+      "outcome": "interrupted-conservative-charge"
+    },
+    {
+      "name": "preflight",
+      "started_at": "2026-10-27T10:20:11.327408+00:00",
+      "finished_at": "2026-10-27T10:20:18.700107+00:00",
+      "outcome": "completed",
+      "active_seconds": 7.375
+    },
+    {
+      "name": "prepare",
+      "started_at": "2026-10-27T10:20:24.245493+00:00",
+      "finished_at": "2026-10-27T10:24:41.751936+00:00",
+      "outcome": "completed",
+      "active_seconds": 257.5
+    },
+    {
+      "name": "account",
+      "started_at": "2026-10-27T10:26:35.177008+00:00",
+      "finished_at": "2026-10-27T10:26:40.276877+00:00",
+      "outcome": "completed",
+      "active_seconds": 5.110000000000582
+    },
+    {
+      "name": "analyze",
+      "started_at": "2026-10-27T10:26:45.853285+00:00",
+      "finished_at": "2026-10-27T10:26:51.535728+00:00",
+      "outcome": "completed",
+      "active_seconds": 5.67200000000048
+    },
+    {
+      "name": "verify",
+      "started_at": "2026-10-27T10:26:58.603547+00:00",
+      "finished_at": "2026-10-27T10:27:03.491976+00:00",
+      "outcome": "completed",
+      "active_seconds": 4.890000000001237
+    },
+    {
+      "name": "smoke",
+      "started_at": "2026-10-27T10:27:09.218543+00:00",
+      "finished_at": "2026-10-27T10:36:23.196212+00:00",
+      "outcome": "completed",
+      "active_seconds": 553.9840000000004
+    },
+    {
+      "name": "account",
+      "started_at": "2026-10-27T10:40:01.196461+00:00",
+      "finished_at": "2026-10-27T10:40:07.853663+00:00",
+      "outcome": "completed",
+      "active_seconds": 6.656999999999243
+    },
+    {
+      "name": "smoke",
+      "started_at": "2026-10-27T10:40:14.270974+00:00",
+      "finished_at": "2026-10-27T10:44:59.719315+00:00",
+      "outcome": "completed",
+      "active_seconds": 285.4529999999995
+    },
+    {
+      "name": "account",
+      "started_at": "2026-10-27T10:48:05.392062+00:00",
+      "finished_at": "2026-10-27T10:48:11.135707+00:00",
+      "outcome": "completed",
+      "active_seconds": 5.75
+    },
+    {
+      "name": "prepare",
+      "started_at": "2026-10-27T10:48:17.627448+00:00",
+      "finished_at": "2026-10-27T10:48:50.374818+00:00",
+      "outcome": "completed",
+      "active_seconds": 32.75
+    },
+    {
+      "name": "smoke",
+      "started_at": "2026-10-27T10:48:56.440612+00:00",
+      "finished_at": "2026-10-27T10:53:44.451893+00:00",
+      "outcome": "completed",
+      "active_seconds": 288.0149999999994
+    },
+    {
+      "name": "run",
+      "started_at": "2026-10-27T10:53:51.262055+00:00",
+      "finished_at": "2026-10-27T11:42:50.198280+00:00",
+      "outcome": "completed",
+      "active_seconds": 2938.937
+    },
+    {
+      "name": "account",
+      "started_at": "2026-10-27T11:44:44.429074+00:00",
+      "finished_at": "2026-10-27T11:44:51.677371+00:00",
+      "outcome": "completed",
+      "active_seconds": 7.233999999998559
+    },
+    {
+      "name": "verify",
+      "started_at": "2026-10-27T11:44:59.922477+00:00",
+      "finished_at": "2026-10-27T11:45:43.291746+00:00",
+      "outcome": "completed",
+      "active_seconds": 43.375
+    },
+    {
+      "name": "descriptive-quality-addendum",
+      "started_at": "2026-10-27T11:45:50.413237+00:00",
+      "finished_at": "2026-10-27T11:45:56.595344+00:00",
+      "outcome": "completed",
+      "active_seconds": 6.186999999999898
+    },
+    {
+      "name": "diagnostic-init",
+      "started_at": "2026-10-27T12:01:13.921941+00:00",
+      "finished_at": "2026-10-27T12:01:21.834794+00:00",
+      "outcome": "completed",
+      "active_seconds": 7.906000000000859
+    },
+    {
+      "name": "diagnostic-forensics",
+      "started_at": "2026-10-27T12:01:30.636097+00:00",
+      "finished_at": "2026-10-27T12:01:38.219957+00:00",
+      "outcome": "FileNotFoundError",
+      "active_seconds": 7.57799999999952
+    },
+    {
+      "name": "diagnostic-forensics",
+      "started_at": "2026-10-27T12:04:32.585478+00:00",
+      "finished_at": "2026-10-27T12:05:03.665626+00:00",
+      "outcome": "Blocked",
+      "active_seconds": 31.07799999999952
+    },
+    {
+      "name": "account",
+      "started_at": "2026-10-27T12:08:34.760290+00:00",
+      "finished_at": "2026-10-27T12:08:41.723315+00:00",
+      "outcome": "completed",
+      "active_seconds": 6.95299999999952
+    },
+    {
+      "name": "diagnostic-forensics",
+      "started_at": "2026-10-27T12:08:50.125785+00:00",
+      "finished_at": "2026-10-27T12:24:17.962807+00:00",
+      "outcome": "completed",
+      "active_seconds": 927.8439999999991
+    },
+    {
+      "name": "diagnostic-greedy",
+      "started_at": "2026-10-27T12:26:39.451226+00:00",
+      "finished_at": "2026-10-27T12:32:07.056507+00:00",
+      "outcome": "completed",
+      "active_seconds": 327.60999999999876
+    },
+    {
+      "name": "diagnostic-timing",
+      "started_at": "2026-10-27T12:32:16.733410+00:00",
+      "finished_at": "2026-10-27T12:35:55.135449+00:00",
+      "active_seconds": 218.402039,
+      "outcome": "interrupted-system-shutdown-upper-bound",
+      "shutdown_event_record_id": 2752719
+    },
+    {
+      "name": "diagnostic-timing",
+      "started_at": "2026-10-28T04:08:51.166458+00:00",
+      "finished_at": "2026-10-28T04:13:14.178379+00:00",
+      "outcome": "Blocked",
+      "active_seconds": 263.0
+    },
+    {
+      "name": "matched-native-versus-request-trim",
+      "started_at": "2026-10-28T04:16:18.806719+00:00",
+      "finished_at": "2026-10-28T04:16:38.244542+00:00",
+      "outcome": "PermissionError",
+      "active_seconds": 19.436999999999898
+    },
+    {
+      "name": "matched-native-versus-request-trim",
+      "started_at": "2026-10-28T04:17:19.647152+00:00",
+      "finished_at": "2026-10-28T05:00:42.599180+00:00",
+      "outcome": "TimeoutExpired",
+      "active_seconds": 2602.953
+    },
+    {
+      "name": "complete-prespecified-cleanup-counterpart-after-native-timeout",
+      "started_at": "2026-10-28T05:01:43.684437+00:00",
+      "finished_at": "2026-10-28T05:04:50.817166+00:00",
+      "outcome": "completed",
+      "active_seconds": 187.125
+    },
+    {
+      "name": "final-cpu-regression-and-static-checks",
+      "started_at": "2026-10-28T05:05:28.027910+00:00",
+      "finished_at": "2026-10-28T05:06:12.667718+00:00",
+      "outcome": "completed",
+      "active_seconds": 44.64000000000033
+    },
+    {
+      "name": "diagnostic-independent-verification",
+      "started_at": "2026-10-28T05:06:53.772466+00:00",
+      "finished_at": "2026-10-28T05:08:35.467572+00:00",
+      "outcome": "completed",
+      "active_seconds": 101.70299999999952
+    },
+    {
+      "name": "diagnostic-report-and-figures",
+      "started_at": "2026-10-28T05:08:59.985019+00:00",
+      "finished_at": "2026-10-28T05:09:29.190082+00:00",
+      "outcome": "completed",
+      "active_seconds": 29.20299999999952
+    }
+  ],
+  "storage_scope": "Entire new project, including environment, caches, temp and Git",
+  "storage_current_bytes": 17029753960,
+  "interrupted_transfer_upper_bound_bytes": 1048576,
+  "accounting_notes": [
+    "The first acquisition worker was restarted to reduce checkpoint overhead. Its unclosed session is conservatively charged full elapsed wall time on next CLI entry.",
+    "CUDA dependency installation and initial validity tests overlapped that acquisition session and are included in its elapsed wall time; they are not double charged.",
+    "Up to one interrupted 1 MiB range is reserved in addition to confirmed video transfer bytes.",
+    "Interrupted timing coordinator charged from its start through the recorded Kernel-General event 13 system shutdown; no execution is possible after shutdown. Original unclosed ledger and private OS event evidence preserved. No previous consumption removed."
+  ],
+  "external_events": [
+    {
+      "name": "Conservative bootstrap window from environment creation to first preflight, including CPU dependencies and engineering gaps",
+      "active_seconds": 299.694931268692
+    },
+    {
+      "name": "CPU validity tests and static checks",
+      "active_seconds": 9.1953943,
+      "recorded_at": "2026-10-27T10:26:40.273888+00:00"
+    },
+    {
+      "name": "CPU validity tests and static checks",
+      "active_seconds": 8.7963008,
+      "recorded_at": "2026-10-27T10:40:07.851669+00:00"
+    },
+    {
+      "name": "CPU validity tests and static checks",
+      "active_seconds": 9.0718496,
+      "recorded_at": "2026-10-27T10:48:11.132715+00:00"
+    },
+    {
+      "name": "Post-collection plot QA, source-hash and publication audit",
+      "active_seconds": 97.43391036987305,
+      "recorded_at": "2026-10-27T11:44:51.672872+00:00"
+    },
+    {
+      "name": "Conservative initial diagnostic inspection allowance",
+      "active_seconds": 120,
+      "recorded_at": "2026-10-27T12:01:13.141966+00:00"
+    },
+    {
+      "name": "Diagnostic logging validation",
+      "active_seconds": 1.5003221,
+      "recorded_at": "2026-10-27T12:08:41.719940+00:00"
+    },
+    {
+      "name": "Conservative post-restart inspection and reconciliation allowance",
+      "active_seconds": 120,
+      "recorded_at": "2026-10-28T04:08:49.256651+00:00"
+    },
+    {
+      "name": "Conservative production patch, CPU validation and next-plan preparation allowance",
+      "active_seconds": 60,
+      "recorded_at": "2026-10-28T04:16:02.682462+00:00"
+    },
+    {
+      "name": "Conservative untracked initialization, result review, figure QA and final Git publication allowance",
+      "active_seconds": 180,
+      "recorded_at": "2026-10-28T05:06:32.125213+00:00"
+    },
+    {
+      "name": "Supplemental conservative allowance for untracked final storage walks, figure repair and publication review",
+      "active_seconds": 180,
+      "recorded_at": "2026-10-28T05:10:43.874100+00:00"
+    }
+  ],
+  "model_download_logical_bytes": 8887284080,
+  "prior_runs": [
+    {
+      "run_id": "e000_20261027_implementation",
+      "completed_model_calls": 25,
+      "reason": "Initial real fit probes preserved; collection uses stricter provenance and independent verification"
+    },
+    {
+      "run_id": "e000_20261027_collection_v1",
+      "completed_model_calls": 25,
+      "reason": "Precollection input audit replaced grid stretching with aspect-preserving letterboxing"
+    },
+    {
+      "run_id": "e000_20261027_collection_v2",
+      "completed_model_calls": 441,
+      "reason": "Completed parent pilot preserved; separate diagnostic inherits all consumption"
+    }
+  ]
+}

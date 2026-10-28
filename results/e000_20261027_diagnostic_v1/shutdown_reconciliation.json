@@ -1,0 +1,14 @@
+{
+  "shutdown_utc": "2026-10-27T12:35:55.135449+00:00",
+  "provider": "Microsoft-Windows-Kernel-General",
+  "event_id": 13,
+  "record_id": 2752719,
+  "charged_session_seconds": 218.402039,
+  "prior_active_seconds": 7598.9526884385605,
+  "active_seconds_after_reconciliation": 7937.35472743856,
+  "remaining_seconds": 6462.64527256144,
+  "timed_requests_saved_before_shutdown": 0,
+  "completed_warmups": 1,
+  "unclosed_warmup_attempts": 1,
+  "policy": "Full coordinator wall time through verified OS shutdown, preserving previous ledger; powered-off time is not active execution"
+}

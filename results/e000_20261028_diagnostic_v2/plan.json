@@ -1,0 +1,607 @@
+{
+  "run_id": "e000_20261028_diagnostic_v2",
+  "frozen_at": "2026-10-28T04:16:18.292581+00:00",
+  "parent_run": "results/e000_20261027_collection_v2",
+  "prior_diagnostic_run": "results/e000_20261027_diagnostic_v1",
+  "blocks": [
+    {
+      "arm": "native",
+      "budget": 64,
+      "repetition": 1,
+      "questions": [
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ],
+        [
+          "kij9GXWdmik",
+          "235-1"
+        ],
+        [
+          "N1cdUjctpG8",
+          "002-1"
+        ],
+        [
+          "WViSvPFUVd8",
+          "079-1"
+        ],
+        [
+          "PU-XOFIJMlg",
+          "098-1"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-1"
+        ],
+        [
+          "blSnLEZe-sI",
+          "034-1"
+        ],
+        [
+          "1q-5IIyZL20",
+          "197-1"
+        ]
+      ],
+      "profile": true
+    },
+    {
+      "arm": "request_trim",
+      "budget": 64,
+      "repetition": 1,
+      "questions": [
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ],
+        [
+          "kij9GXWdmik",
+          "235-1"
+        ],
+        [
+          "N1cdUjctpG8",
+          "002-1"
+        ],
+        [
+          "WViSvPFUVd8",
+          "079-1"
+        ],
+        [
+          "PU-XOFIJMlg",
+          "098-1"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-1"
+        ],
+        [
+          "blSnLEZe-sI",
+          "034-1"
+        ],
+        [
+          "1q-5IIyZL20",
+          "197-1"
+        ]
+      ],
+      "profile": true
+    },
+    {
+      "arm": "request_trim",
+      "budget": 8,
+      "repetition": 1,
+      "questions": [
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ],
+        [
+          "N1cdUjctpG8",
+          "002-1"
+        ],
+        [
+          "blSnLEZe-sI",
+          "034-1"
+        ],
+        [
+          "PU-XOFIJMlg",
+          "098-1"
+        ],
+        [
+          "1q-5IIyZL20",
+          "197-1"
+        ],
+        [
+          "kij9GXWdmik",
+          "235-1"
+        ],
+        [
+          "WViSvPFUVd8",
+          "079-1"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-1"
+        ]
+      ],
+      "profile": true
+    },
+    {
+      "arm": "native",
+      "budget": 8,
+      "repetition": 1,
+      "questions": [
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ],
+        [
+          "N1cdUjctpG8",
+          "002-1"
+        ],
+        [
+          "blSnLEZe-sI",
+          "034-1"
+        ],
+        [
+          "PU-XOFIJMlg",
+          "098-1"
+        ],
+        [
+          "1q-5IIyZL20",
+          "197-1"
+        ],
+        [
+          "kij9GXWdmik",
+          "235-1"
+        ],
+        [
+          "WViSvPFUVd8",
+          "079-1"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-1"
+        ]
+      ],
+      "profile": true
+    },
+    {
+      "arm": "request_trim",
+      "budget": 8,
+      "repetition": 2,
+      "questions": [
+        [
+          "1q-5IIyZL20",
+          "197-1"
+        ],
+        [
+          "kij9GXWdmik",
+          "235-1"
+        ],
+        [
+          "PU-XOFIJMlg",
+          "098-1"
+        ],
+        [
+          "WViSvPFUVd8",
+          "079-1"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-1"
+        ],
+        [
+          "blSnLEZe-sI",
+          "034-1"
+        ],
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ],
+        [
+          "N1cdUjctpG8",
+          "002-1"
+        ]
+      ],
+      "profile": false
+    },
+    {
+      "arm": "native",
+      "budget": 8,
+      "repetition": 2,
+      "questions": [
+        [
+          "1q-5IIyZL20",
+          "197-1"
+        ],
+        [
+          "kij9GXWdmik",
+          "235-1"
+        ],
+        [
+          "PU-XOFIJMlg",
+          "098-1"
+        ],
+        [
+          "WViSvPFUVd8",
+          "079-1"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-1"
+        ],
+        [
+          "blSnLEZe-sI",
+          "034-1"
+        ],
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ],
+        [
+          "N1cdUjctpG8",
+          "002-1"
+        ]
+      ],
+      "profile": false
+    },
+    {
+      "arm": "request_trim",
+      "budget": 64,
+      "repetition": 2,
+      "questions": [
+        [
+          "PU-XOFIJMlg",
+          "098-1"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-1"
+        ],
+        [
+          "kij9GXWdmik",
+          "235-1"
+        ],
+        [
+          "WViSvPFUVd8",
+          "079-1"
+        ],
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ],
+        [
+          "N1cdUjctpG8",
+          "002-1"
+        ],
+        [
+          "1q-5IIyZL20",
+          "197-1"
+        ],
+        [
+          "blSnLEZe-sI",
+          "034-1"
+        ]
+      ],
+      "profile": false
+    },
+    {
+      "arm": "native",
+      "budget": 64,
+      "repetition": 2,
+      "questions": [
+        [
+          "PU-XOFIJMlg",
+          "098-1"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-1"
+        ],
+        [
+          "kij9GXWdmik",
+          "235-1"
+        ],
+        [
+          "WViSvPFUVd8",
+          "079-1"
+        ],
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ],
+        [
+          "N1cdUjctpG8",
+          "002-1"
+        ],
+        [
+          "1q-5IIyZL20",
+          "197-1"
+        ],
+        [
+          "blSnLEZe-sI",
+          "034-1"
+        ]
+      ],
+      "profile": false
+    },
+    {
+      "arm": "request_trim",
+      "budget": 8,
+      "repetition": 3,
+      "questions": [
+        [
+          "blSnLEZe-sI",
+          "034-1"
+        ],
+        [
+          "1q-5IIyZL20",
+          "197-1"
+        ],
+        [
+          "N1cdUjctpG8",
+          "002-1"
+        ],
+        [
+          "kij9GXWdmik",
+          "235-1"
+        ],
+        [
+          "WViSvPFUVd8",
+          "079-1"
+        ],
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-1"
+        ],
+        [
+          "PU-XOFIJMlg",
+          "098-1"
+        ]
+      ],
+      "profile": false
+    },
+    {
+      "arm": "native",
+      "budget": 8,
+      "repetition": 3,
+      "questions": [
+        [
+          "blSnLEZe-sI",
+          "034-1"
+        ],
+        [
+          "1q-5IIyZL20",
+          "197-1"
+        ],
+        [
+          "N1cdUjctpG8",
+          "002-1"
+        ],
+        [
+          "kij9GXWdmik",
+          "235-1"
+        ],
+        [
+          "WViSvPFUVd8",
+          "079-1"
+        ],
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-1"
+        ],
+        [
+          "PU-XOFIJMlg",
+          "098-1"
+        ]
+      ],
+      "profile": false
+    },
+    {
+      "arm": "native",
+      "budget": 64,
+      "repetition": 3,
+      "questions": [
+        [
+          "PU-XOFIJMlg",
+          "098-1"
+        ],
+        [
+          "WViSvPFUVd8",
+          "079-1"
+        ],
+        [
+          "blSnLEZe-sI",
+          "034-1"
+        ],
+        [
+          "N1cdUjctpG8",
+          "002-1"
+        ],
+        [
+          "1q-5IIyZL20",
+          "197-1"
+        ],
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-1"
+        ],
+        [
+          "kij9GXWdmik",
+          "235-1"
+        ]
+      ],
+      "profile": false
+    },
+    {
+      "arm": "request_trim",
+      "budget": 64,
+      "repetition": 3,
+      "questions": [
+        [
+          "PU-XOFIJMlg",
+          "098-1"
+        ],
+        [
+          "WViSvPFUVd8",
+          "079-1"
+        ],
+        [
+          "blSnLEZe-sI",
+          "034-1"
+        ],
+        [
+          "N1cdUjctpG8",
+          "002-1"
+        ],
+        [
+          "1q-5IIyZL20",
+          "197-1"
+        ],
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-1"
+        ],
+        [
+          "kij9GXWdmik",
+          "235-1"
+        ]
+      ],
+      "profile": false
+    }
+  ],
+  "sources": {
+    "scripts/diagnose_allocator_v2.py": "bd1e54849a3dce4e262ff9048114e133374a70f805ed6d46d0f657c90e7c1bad",
+    "scripts/diagnose_e000_timing.py": "bd3a700da9c7f31c1ca54c616c60f1b3e08c79c2c8dc3b4185232811c6a2a343",
+    "scripts/diagnostic_generation.py": "180eea11e333e1ecc7bb8df7151cacbdd68cc5ff6269470bc8d1605223db2185",
+    "src/video_compute_value/__init__.py": "297e50639b10a6f4af7bf7a66654d2bb7c371ac8a727f0c53c956fdf86d2766b",
+    "src/video_compute_value/acquire.py": "e2fc6847e46167ed0e689ab64a9a8f9a8df4c45c10764b725046543e0c4ae9d4",
+    "src/video_compute_value/analysis.py": "5477c01ad6bc07f63e108a381ff15621f0e61ccf48ff1a1dcd65182a2c558d88",
+    "src/video_compute_value/common.py": "e6ee339d58e88f7e4c4d1c8e45cf7c84afbcf694cdf92a899a437d7b4c3e8846",
+    "src/video_compute_value/dataset.py": "8424f1039aadc24ace9c9c24340b12106250d694fb6866d1adeb87457ed2d9e3",
+    "src/video_compute_value/e000.py": "3e58cb25032c86f3cf2a7f2aa11f8471ace572d1dfc0905c5540279348976518",
+    "src/video_compute_value/generation.py": "8ae62994e456a4d667c9f4597e167625d2c2747cb6f9049837cdf82329b16b25",
+    "src/video_compute_value/measurement.py": "3c3d92a075dc64db174264e3b457ef1f37af5c1d80ff41a6f22b117051a186c5",
+    "src/video_compute_value/model.py": "ffa368e4c225ecebe5e5cab7416a5388225fc403c891ff9076979dc8904eede3",
+    "src/video_compute_value/protocol.py": "6eb670de964ed313b05349e07698a58a9e61c7e59e165ad2483e094df154b7fd",
+    "src/video_compute_value/resources.py": "0a12d42124467bed251c2faf5d0b9cb6ef1781451329ba418e54ad153dfa72d3",
+    "src/video_compute_value/runner.py": "75b6f4da3412ce633c5c047262321ff2232cc680799dc137ab89206399ba67f1",
+    "src/video_compute_value/video.py": "37304e677108357e5916600113532da923509933a0ac147e2002244c5fb0933f"
+  },
+  "source_git_revision": "ffaf01dd4c13f726c8df048e0db584e3eac7c38c",
+  "generation_policy": {
+    "version": "explicit-greedy-v2",
+    "call_overrides": {
+      "use_model_defaults": false,
+      "do_sample": false,
+      "num_beams": 1,
+      "max_new_tokens": 8,
+      "eos_token_id": 151645,
+      "pad_token_id": 151643,
+      "bos_token_id": 151643
+    },
+    "effective_generation": {
+      "max_length": 20,
+      "max_new_tokens": 8,
+      "min_length": 0,
+      "min_new_tokens": null,
+      "early_stopping": false,
+      "max_time": null,
+      "stop_strings": null,
+      "do_sample": false,
+      "num_beams": 1,
+      "use_cache": true,
+      "cache_implementation": null,
+      "cache_config": null,
+      "return_legacy_cache": null,
+      "prefill_chunk_size": null,
+      "temperature": 1.0,
+      "top_k": 50,
+      "top_p": 1.0,
+      "min_p": null,
+      "typical_p": 1.0,
+      "epsilon_cutoff": 0.0,
+      "eta_cutoff": 0.0,
+      "repetition_penalty": 1.0,
+      "encoder_repetition_penalty": 1.0,
+      "length_penalty": 1.0,
+      "no_repeat_ngram_size": 0,
+      "bad_words_ids": null,
+      "renormalize_logits": false,
+      "forced_bos_token_id": null,
+      "forced_eos_token_id": null,
+      "remove_invalid_values": false,
+      "exponential_decay_length_penalty": null,
+      "suppress_tokens": null,
+      "begin_suppress_tokens": null,
+      "sequence_bias": null,
+      "token_healing": false,
+      "guidance_scale": null,
+      "watermarking_config": null,
+      "num_return_sequences": 1,
+      "output_attentions": false,
+      "output_hidden_states": false,
+      "output_scores": false,
+      "output_logits": null,
+      "return_dict_in_generate": false,
+      "pad_token_id": 151643,
+      "bos_token_id": 151643,
+      "eos_token_id": 151645,
+      "encoder_no_repeat_ngram_size": 0,
+      "decoder_start_token_id": null,
+      "is_assistant": false,
+      "num_assistant_tokens": 20,
+      "num_assistant_tokens_schedule": "constant",
+      "assistant_confidence_threshold": 0.4,
+      "prompt_lookup_num_tokens": null,
+      "max_matching_ngram_size": null,
+      "assistant_early_exit": null,
+      "assistant_lookbehind": 10,
+      "target_lookbehind": 10,
+      "disable_compile": false,
+      "low_memory": null,
+      "penalty_alpha": null,
+      "dola_layers": null,
+      "diversity_penalty": 0.0,
+      "num_beam_groups": 1,
+      "constraints": null,
+      "force_words_ids": null,
+      "_from_model_config": false,
+      "transformers_version": "4.57.1"
+    },
+    "effective_mode": "greedy_search"
+  },
+  "config": {
+    "cumulative_execution_limit_hours": 4,
+    "additional_disk_limit_gib": 20,
+    "video_acquisition_limit_gib": 1
+  },
+  "timed_requests": 96,
+  "warmups": 24,
+  "profiles": 4,
+  "selection": "First official question per source, eight sources, budgets 8 and 64, three repetitions; no correctness selection",
+  "intervention": "Default native allocator in both arms. request_trim calls torch.cuda.empty_cache after input transfer and before model.generate, inside original full-request timer. No offload, no extra synchronization fences.",
+  "preserved_prior_regression": "Prior max_split_size_mb:128 arm stopped after excessive reservations and warmup costs; no primary requests completed.",
+  "boundary": "Original synchronized resident-model local-file full request; trim time is included; nested CPU preparation clock has no CUDA fence",
+  "forecast_seconds_with_safety": 3044.6534787,
+  "forecast_basis": "Matched parent request times plus same-budget warmups, 100 seconds cold-start/serialization allowance per worker, 0.5 seconds per call overhead; 1.5 safety factor",
+  "worker_timeout_seconds": 600,
+  "final_validation_reserve_seconds": 240,
+  "no_budget_reset": true,
+  "plan_hash": "1ddddc0576b8d51d1f30f99f2de042289bebdc73056eb0c075cc262ca119914d"
+}

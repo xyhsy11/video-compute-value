@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-28T05:02:02.288567+00:00",
+  "plan_hash": "1ddddc0576b8d51d1f30f99f2de042289bebdc73056eb0c075cc262ca119914d",
+  "block": 11,
+  "reason": "Complete original paired comparison after native block deadline; no retry or replacement of the timed-out identity",
+  "remaining_seconds_before": 3498.6612725614395,
+  "source_or_plan_changed": false,
+  "model_call_projection": 10
+}

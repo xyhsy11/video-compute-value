@@ -1,0 +1,17 @@
+{
+  "status": "DIAGNOSTIC_COMPLETE",
+  "updated_at": "2026-10-28T05:13:05.339316+00:00",
+  "original_results_preserved": true,
+  "answer_disagreement_cause": "checkpoint defaults enabled sampling",
+  "fixed_greedy_unstable_forensic_cells": 0,
+  "paired_timing_requests": 92,
+  "primary_collection_complete": false,
+  "timed_out": 1,
+  "unattempted": 3,
+  "native_meets_20_percent_subset_target": false,
+  "request_trim_meets_20_percent_subset_target": false,
+  "full_five_budget_greedy_revalidation": false,
+  "new_model_invocations_confirmed": 518,
+  "additional_possible_model_invocations": 3,
+  "cumulative_model_invocations_upper_bound": 1012
+}

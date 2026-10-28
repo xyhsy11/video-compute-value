@@ -1,0 +1,140 @@
+{
+  "conditions": [
+    {
+      "arm": "native",
+      "budget": 8,
+      "requests": 24,
+      "cells": 8,
+      "median_seconds": 9.8440484,
+      "median_relative_range": 0.15814829568443475,
+      "planned_requests": 24,
+      "complete_cells": 8,
+      "complete": true,
+      "cells_exceeding_50_percent": 0,
+      "answer_unstable_cells": 0,
+      "peak_allocated_gib": 8.408251285552979,
+      "peak_reserved_gib": 8.4453125,
+      "sampled_device_peak_gib": 10.577735900878906,
+      "median_cpu_prepare_seconds": 8.8812393,
+      "median_request_minus_cpu_prepare_seconds": 0.9373040000000006,
+      "median_cpu_share_of_request": 0.9040091242591974,
+      "cpu_total_centered_correlation": 0.9814350634099286,
+      "median_cpu_relative_range": 0.14151206382508888,
+      "median_trim_host_seconds": 0.0,
+      "max_allocation_retries": 0,
+      "max_inactive_split_gib": 0.011126995086669922,
+      "max_request_seconds": 17.5761134,
+      "gpu_temperature_range_c": [
+        58,
+        62
+      ],
+      "gpu_sm_clock_range_mhz": [
+        1800,
+        1800
+      ]
+    },
+    {
+      "arm": "native",
+      "budget": 64,
+      "requests": 20,
+      "cells": 8,
+      "median_seconds": null,
+      "median_relative_range": null,
+      "planned_requests": 24,
+      "complete_cells": 4,
+      "complete": false,
+      "cells_exceeding_50_percent": 0,
+      "answer_unstable_cells": 0,
+      "peak_allocated_gib": 10.317323207855225,
+      "peak_reserved_gib": 14.146484375,
+      "sampled_device_peak_gib": 15.878890991210938,
+      "median_cpu_prepare_seconds": 9.5505705,
+      "median_request_minus_cpu_prepare_seconds": 2.7609443499999995,
+      "median_cpu_share_of_request": 0.7869743523711659,
+      "cpu_total_centered_correlation": 0.9661289700158228,
+      "median_cpu_relative_range": null,
+      "median_trim_host_seconds": 0.0,
+      "max_allocation_retries": 0,
+      "max_inactive_split_gib": 0.011126995086669922,
+      "max_request_seconds": 23.1081034,
+      "gpu_temperature_range_c": [
+        63,
+        68
+      ],
+      "gpu_sm_clock_range_mhz": [
+        1800,
+        1800
+      ]
+    },
+    {
+      "arm": "request_trim",
+      "budget": 8,
+      "requests": 24,
+      "cells": 8,
+      "median_seconds": 9.99393215,
+      "median_relative_range": 0.2693929101643091,
+      "planned_requests": 24,
+      "complete_cells": 8,
+      "complete": true,
+      "cells_exceeding_50_percent": 1,
+      "answer_unstable_cells": 0,
+      "peak_allocated_gib": 8.408434391021729,
+      "peak_reserved_gib": 8.453125,
+      "sampled_device_peak_gib": 10.334068298339844,
+      "median_cpu_prepare_seconds": 9.005688899999999,
+      "median_request_minus_cpu_prepare_seconds": 0.9096027000000002,
+      "median_cpu_share_of_request": 0.9039436291487821,
+      "cpu_total_centered_correlation": 0.9988254339957626,
+      "median_cpu_relative_range": 0.2873974377617954,
+      "median_trim_host_seconds": 0.0129493,
+      "max_allocation_retries": 0,
+      "max_inactive_split_gib": 0.011126995086669922,
+      "max_request_seconds": 28.3684121,
+      "gpu_temperature_range_c": [
+        58,
+        61
+      ],
+      "gpu_sm_clock_range_mhz": [
+        1710,
+        1800
+      ]
+    },
+    {
+      "arm": "request_trim",
+      "budget": 64,
+      "requests": 24,
+      "cells": 8,
+      "median_seconds": 11.76403195,
+      "median_relative_range": 0.14422301953741146,
+      "planned_requests": 24,
+      "complete_cells": 8,
+      "complete": true,
+      "cells_exceeding_50_percent": 0,
+      "answer_unstable_cells": 0,
+      "peak_allocated_gib": 10.316789150238037,
+      "peak_reserved_gib": 10.4765625,
+      "sampled_device_peak_gib": 12.41756820678711,
+      "median_cpu_prepare_seconds": 8.782927950000001,
+      "median_request_minus_cpu_prepare_seconds": 2.715831849999999,
+      "median_cpu_share_of_request": 0.7606340769410584,
+      "cpu_total_centered_correlation": 0.9919268453008814,
+      "median_cpu_relative_range": 0.1706043056162914,
+      "median_trim_host_seconds": 0.0480764,
+      "max_allocation_retries": 0,
+      "max_inactive_split_gib": 0.011126995086669922,
+      "max_request_seconds": 21.0781295,
+      "gpu_temperature_range_c": [
+        62,
+        75
+      ],
+      "gpu_sm_clock_range_mhz": [
+        1800,
+        1800
+      ]
+    }
+  ],
+  "primary_accuracy_curve": false,
+  "timing_target": 0.2,
+  "partial_condition_note": "Native-64 counts, peaks and correlations use completed observations only; complete latency and timing-range estimates are withheld",
+  "selection": "8 sources, first official question each, Uniform-8/64, 3 repetitions, paired policies"
+}

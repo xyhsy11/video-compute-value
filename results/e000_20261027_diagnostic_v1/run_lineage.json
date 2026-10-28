@@ -1,0 +1,8 @@
+{
+  "parent_run": "results\\e000_20261027_collection_v2",
+  "budget_reset": false,
+  "inherited_seconds": 6168.483366338563,
+  "parent_model_calls": 491,
+  "diagnostic_only": true,
+  "no_primary_trials_replaced": true
+}

@@ -1,0 +1,252 @@
+{
+  "cases": [
+    {
+      "source_id": "1q-5IIyZL20",
+      "question_id": "197-3",
+      "budget": 8,
+      "selection": "all parent disagreement cells",
+      "predecessors": [
+        [
+          "blSnLEZe-sI",
+          "034-3"
+        ],
+        [
+          "WViSvPFUVd8",
+          "079-1"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-2"
+        ]
+      ]
+    },
+    {
+      "source_id": "N1cdUjctpG8",
+      "question_id": "002-3",
+      "budget": 8,
+      "selection": "all parent disagreement cells",
+      "predecessors": [
+        [
+          "kij9GXWdmik",
+          "235-1"
+        ],
+        [
+          "WViSvPFUVd8",
+          "079-2"
+        ],
+        [
+          "1q-5IIyZL20",
+          "197-1"
+        ]
+      ]
+    },
+    {
+      "source_id": "PU-XOFIJMlg",
+      "question_id": "098-1",
+      "budget": 8,
+      "selection": "all parent disagreement cells",
+      "predecessors": [
+        [
+          "WViSvPFUVd8",
+          "079-2"
+        ],
+        [
+          "N1cdUjctpG8",
+          "002-2"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-1"
+        ]
+      ]
+    },
+    {
+      "source_id": "blSnLEZe-sI",
+      "question_id": "034-1",
+      "budget": 48,
+      "selection": "all parent disagreement cells",
+      "predecessors": [
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ],
+        [
+          "PU-XOFIJMlg",
+          "098-2"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-1"
+        ]
+      ]
+    },
+    {
+      "source_id": "kij9GXWdmik",
+      "question_id": "235-1",
+      "budget": 8,
+      "selection": "all parent disagreement cells",
+      "predecessors": [
+        [
+          "1q-5IIyZL20",
+          "197-1"
+        ],
+        [
+          "SnOc5W0PgVE",
+          "078-3"
+        ],
+        [
+          "blSnLEZe-sI",
+          "034-3"
+        ]
+      ]
+    },
+    {
+      "source_id": "kij9GXWdmik",
+      "question_id": "235-1",
+      "budget": 32,
+      "selection": "all parent disagreement cells",
+      "predecessors": [
+        [
+          "PU-XOFIJMlg",
+          "098-2"
+        ],
+        [
+          "blSnLEZe-sI",
+          "034-3"
+        ],
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ]
+      ]
+    },
+    {
+      "source_id": "kij9GXWdmik",
+      "question_id": "235-3",
+      "budget": 8,
+      "selection": "all parent disagreement cells",
+      "predecessors": [
+        [
+          "SnOc5W0PgVE",
+          "078-2"
+        ],
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ],
+        [
+          "v0m3E_uSyFg",
+          "234-3"
+        ]
+      ]
+    },
+    {
+      "source_id": "kij9GXWdmik",
+      "question_id": "235-3",
+      "budget": 48,
+      "selection": "all parent disagreement cells",
+      "predecessors": [
+        [
+          "SnOc5W0PgVE",
+          "078-2"
+        ],
+        [
+          "SnOc5W0PgVE",
+          "078-1"
+        ],
+        [
+          "blSnLEZe-sI",
+          "034-1"
+        ]
+      ]
+    },
+    {
+      "source_id": "N1cdUjctpG8",
+      "question_id": "002-1",
+      "budget": 8,
+      "selection": "lexicographically first stable control at this budget",
+      "predecessors": [
+        [
+          "SnOc5W0PgVE",
+          "078-3"
+        ],
+        [
+          "kij9GXWdmik",
+          "235-3"
+        ],
+        [
+          "N1cdUjctpG8",
+          "002-3"
+        ]
+      ]
+    },
+    {
+      "source_id": "N1cdUjctpG8",
+      "question_id": "002-1",
+      "budget": 32,
+      "selection": "lexicographically first stable control at this budget",
+      "predecessors": [
+        [
+          "WViSvPFUVd8",
+          "079-2"
+        ],
+        [
+          "1q-5IIyZL20",
+          "197-3"
+        ],
+        [
+          "1q-5IIyZL20",
+          "197-3"
+        ]
+      ]
+    },
+    {
+      "source_id": "N1cdUjctpG8",
+      "question_id": "002-1",
+      "budget": 48,
+      "selection": "lexicographically first stable control at this budget",
+      "predecessors": [
+        [
+          "1q-5IIyZL20",
+          "197-1"
+        ],
+        [
+          "kij9GXWdmik",
+          "235-2"
+        ],
+        [
+          "SnOc5W0PgVE",
+          "078-3"
+        ]
+      ]
+    }
+  ],
+  "arms": [
+    "native",
+    "reset_rope",
+    "deterministic_math"
+  ],
+  "config": {
+    "experiment_id": "e000_frozen_videoqa_diagnostic_v1",
+    "parent_run": "results/e000_20261027_collection_v2",
+    "run_id": "e000_20261027_diagnostic_v1",
+    "seed": 20261027,
+    "cumulative_execution_limit_hours": 4,
+    "additional_disk_limit_gib": 20,
+    "video_acquisition_limit_gib": 1,
+    "forensic_repetitions": 3,
+    "forensic_arms": [
+      "native",
+      "reset_rope",
+      "deterministic_math"
+    ],
+    "forensic_worker_timeout_seconds": 900,
+    "timing_worker_timeout_seconds": 1200,
+    "reserve_final_validation_seconds": 240
+  },
+  "script_sha256": "e219cf2074591df6dc0d8758bbaca6242e8a7717c6040ff0ede8880685762c97",
+  "frozen_at": "2026-10-27T12:08:57.540527+00:00",
+  "intrusive": true,
+  "prepared_tensor_reuse": true,
+  "maximum_model_calls": 297
+}

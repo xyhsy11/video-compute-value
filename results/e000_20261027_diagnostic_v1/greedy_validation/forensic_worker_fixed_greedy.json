@@ -1,0 +1,11 @@
+{
+  "policy": {
+    "deterministic_algorithms": false,
+    "cudnn_deterministic": false,
+    "cublas_workspace_config": null,
+    "sdpa_kernel": "native dispatch",
+    "reset_rope": false
+  },
+  "model_load_seconds": 6.532876299999771,
+  "calls": 99
+}

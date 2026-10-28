@@ -12,6 +12,21 @@ The original specification is in
 The user's subsequent explicit instruction authorizes GitHub creation and publication.
 This repository is separate from `video-refresh-benchmark`.
 
+## Diagnostic correction (2026-10-28)
+
+The original `e000_20261027_collection_v2` files remain unchanged. Its requested
+`do_sample=False` was silently replaced by checkpoint sampling defaults in
+Transformers 4.57.1. Treat that run's accuracy/latency curves as historical sampled
+outputs, not protocol-valid greedy results. The production adapter now applies
+explicit call-level controls and checks/records the effective generation policy.
+
+The [diagnostic report](results/e000_20261028_diagnostic_v2/report.md) records the
+forensic replication, corrected answer validation and paired timing investigation.
+Its targeted subset does not replace the full five-budget quality curve. Frozen
+historical runs require their original source revision; current code deliberately
+rejects resuming them after a source change. A new directory does not renew the resource allowance;
+inherit the latest cumulative ledger before starting another named run.
+
 ## Installation on Windows (PowerShell)
 
 Use an isolated Python 3.11/3.12 environment. The bootstrap detects Python on PATH
@@ -22,7 +37,7 @@ No environment activation is required.
 Set-Location -LiteralPath 'C:\video-compute-value'
 .\scripts\bootstrap.ps1 -Model
 .\scripts\validate.ps1
-$run = 'results/e000_20261027_collection_v2'
+$run = 'results/e000_new_named_collection'
 $python = '.\.venv\Scripts\python.exe'
 & $python -m video_compute_value.e000 preflight --config configs/e000.yaml --run-dir $run
 ```

@@ -1,0 +1,11 @@
+{
+  "policy": {
+    "deterministic_algorithms": true,
+    "cudnn_deterministic": true,
+    "cublas_workspace_config": ":4096:8",
+    "sdpa_kernel": "math",
+    "reset_rope": false
+  },
+  "model_load_seconds": 7.580238100001225,
+  "calls": 99
+}
