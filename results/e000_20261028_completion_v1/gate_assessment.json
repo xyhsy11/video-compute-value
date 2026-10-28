@@ -1,0 +1,25 @@
+{
+  "status": "BLOCKED_RESOURCE",
+  "feasibility_confirmed": false,
+  "new_full_video_requests": {
+    "required": 360,
+    "completed": 0
+  },
+  "new_full_text_requests": {
+    "required": 24,
+    "completed": 0
+  },
+  "cpu_equivalence_passed": true,
+  "historical_integrity_passed": true,
+  "unit_tests_passed": true,
+  "effective_greedy_historical_inference_verified": true,
+  "new_full_effective_greedy_gate_passed": false,
+  "new_full_raw_token_repeatability_gate_passed": false,
+  "new_full_input_repeatability_gate_passed": false,
+  "new_all_budgets_gpu_fit_gate_passed": false,
+  "new_full_20_percent_timing_gate_passed": false,
+  "new_full_memory_complete": false,
+  "new_full_accuracy_latency_summary_reproduced": false,
+  "full_forecast_fits_remaining_allowance": false,
+  "limits_increased": false
+}

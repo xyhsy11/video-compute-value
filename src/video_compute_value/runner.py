@@ -40,33 +40,50 @@ def resolve_model(config, root, ledger):
     for name, version in expected.items():
         if importlib.metadata.version(name).split("+")[0] != version:
             raise Blocked("BLOCKED_ENVIRONMENT", f"Install the pinned {name}=={version} stack")
-    try:
-        info = HfApi().model_info(config["model_id"], revision=config.get("model_revision"), files_metadata=True)
-        revision = info.sha
-        if not re.fullmatch(r"[a-f0-9]{40}", revision):
-            raise Blocked("INPUT_INTEGRITY_FAILED", "Model revision is unresolved")
-        files = [f for f in info.siblings if f.rfilename.endswith((".json", ".txt", ".safetensors"))]
-        local_cache = Path(root, ".cache", "huggingface", "hub")
-        reusable = Path.home() / ".cache" / "huggingface" / "hub"
-        path = None
-        for cache in (local_cache, reusable):
-            candidate = cache / ("models--" + config["model_id"].replace("/", "--")) / "snapshots" / revision
-            if all((candidate / f.rfilename).is_file() for f in files):
-                path = candidate
-                break
-        if path is None:
-            required = sum(f.size or 0 for f in files)
-            ledger.check(projected_bytes=required + 256 * 1024 * 1024)
-            path = Path(snapshot_download(config["model_id"], revision=revision, cache_dir=local_cache,
-                                         allow_patterns=[f.rfilename for f in files], max_workers=1))
-            # Conservative logical bytes; HF metadata traffic is not included in this estimate.
-            ledger.value["model_download_logical_bytes"] = required
-            ledger.save()
-    except Blocked:
-        raise
-    except Exception as exc:
-        detail = re.sub(r"(https?://[^\s?]+)\?[^\s]+", r"\1?[query redacted]", str(exc))[:1000]
-        raise Blocked("BLOCKED_MODEL_ACCESS", f"Pinned model acquisition failed: {type(exc).__name__}: {detail}") from exc
+    verified_hashes = None
+    if config.get("reuse_model_manifest"):
+        from types import SimpleNamespace
+        previous = read_json(Path(root, config["reuse_model_manifest"]))
+        revision = previous["revision"]
+        if previous["model_id"] != config["model_id"] or revision != config.get("model_revision"):
+            raise Blocked("INPUT_INTEGRITY_FAILED", "Cached model manifest does not match pinned identity")
+        path = Path(previous["model_path"]).resolve()
+        verified_hashes = {}
+        for name, expected_hash in previous["files"].items():
+            relative = Path(name)
+            target = path / relative
+            if relative.is_absolute() or ".." in relative.parts or file_hash(target) != expected_hash:
+                raise Blocked("INPUT_INTEGRITY_FAILED", f"Cached model file changed: {name}")
+            verified_hashes[name] = expected_hash
+        files = [SimpleNamespace(rfilename=name) for name in verified_hashes]
+    else:
+        try:
+            info = HfApi().model_info(config["model_id"], revision=config.get("model_revision"), files_metadata=True)
+            revision = info.sha
+            if not re.fullmatch(r"[a-f0-9]{40}", revision):
+                raise Blocked("INPUT_INTEGRITY_FAILED", "Model revision is unresolved")
+            files = [f for f in info.siblings if f.rfilename.endswith((".json", ".txt", ".safetensors"))]
+            local_cache = Path(root, ".cache", "huggingface", "hub")
+            reusable = Path.home() / ".cache" / "huggingface" / "hub"
+            path = None
+            for cache in (local_cache, reusable):
+                candidate = cache / ("models--" + config["model_id"].replace("/", "--")) / "snapshots" / revision
+                if all((candidate / f.rfilename).is_file() for f in files):
+                    path = candidate
+                    break
+            if path is None:
+                required = sum(f.size or 0 for f in files)
+                ledger.check(projected_bytes=required + 256 * 1024 * 1024)
+                path = Path(snapshot_download(config["model_id"], revision=revision, cache_dir=local_cache,
+                                             allow_patterns=[f.rfilename for f in files], max_workers=1))
+                # Conservative logical bytes; HF metadata traffic is not included in this estimate.
+                ledger.value["model_download_logical_bytes"] = required
+                ledger.save()
+        except Blocked:
+            raise
+        except Exception as exc:
+            detail = re.sub(r"(https?://[^\s?]+)\?[^\s]+", r"\1?[query redacted]", str(exc))[:1000]
+            raise Blocked("BLOCKED_MODEL_ACCESS", f"Pinned model acquisition failed: {type(exc).__name__}: {detail}") from exc
     processor = AutoProcessor.from_pretrained(path, local_files_only=True, trust_remote_code=False, use_fast=True)
     generation = GenerationConfig(max_new_tokens=config["max_new_tokens"], do_sample=False, num_beams=1,
                                    eos_token_id=processor.tokenizer.eos_token_id,
@@ -79,7 +96,7 @@ def resolve_model(config, root, ledger):
     generation = GenerationConfig(**generation_policy["effective_generation"])
     manifest = {"model_id": config["model_id"], "revision": revision, "processor_revision": revision,
                 "tokenizer_revision": revision, "model_path": str(path.resolve()),
-                "files": {f.rfilename: file_hash(path / f.rfilename) for f in files},
+                "files": verified_hashes if verified_hashes is not None else {f.rfilename: file_hash(path / f.rfilename) for f in files},
                 "dtype": "bfloat16" if torch.cuda.is_bf16_supported() else "float16",
                 "attention_backend": config["attention_backend"], "generation": generation.to_dict(),
                 "generation_policy": generation_policy, "checkpoint_generation": checkpoint_generation.to_dict(),
@@ -183,6 +200,39 @@ def launch(config_path, run, root, block, mode, timeout):
     return time.perf_counter() - started
 
 
+def validate_probe_pair(first, second):
+    if any(first[key] != second[key] for key in ("input_tensor_hashes", "input_metadata_hash")):
+        raise Blocked("INPUT_INTEGRITY_FAILED", "Repeated preparation differs")
+    if any(first[key] != second[key] for key in ("generated_token_ids", "decoded_output", "parsed_answer", "generation_policy_sha256")):
+        raise Blocked("REPEATABILITY_UNRESOLVED", "Greedy probe outputs or effective generation receipts differ")
+
+
+def collection_projection(probes, cpu_probes, reference_source):
+    """Forecast remaining collection only; all probes have already been charged."""
+    import statistics
+    startup = statistics.median(max(0, p["worker_wall_seconds"] - p["timed_calls_seconds"]) for p in probes)
+    decode_reference = cpu_probes[reference_source]["elapsed_seconds"]
+    video_seconds, conditions = 0.0, []
+    for probe in probes:
+        profile = probe["component_profile"]
+        reference_cpu = profile["components_seconds"]["cpu_prepare"]
+        remainder = max(0, profile["latency_seconds"] - reference_cpu)
+        cpu = [max(0.001, reference_cpu + p["elapsed_seconds"] - decode_reference) for p in cpu_probes.values()]
+        # 9 primary calls/source plus six fixed first-source collection warmups/budget.
+        cpu_cost = 9 * sum(cpu) + 6 * reference_cpu
+        video_seconds += cpu_cost + 78 * remainder
+        conditions.append({"budget": probe["budget"], "estimated_cpu_seconds": cpu_cost,
+                           "profile_request_minus_cpu_seconds": remainder})
+    text_proxy = max(1.0, next(c["profile_request_minus_cpu_seconds"] for c in conditions if c["budget"] == 8))
+    raw = video_seconds + 26 * text_proxy + 16 * startup + 416 * .25 + 180 + 600
+    return {"projection_seconds": raw * 1.5, "safety_factor": 1.5, "raw_estimate_seconds": raw,
+        "estimated_video_call_seconds": video_seconds, "text_proxy_seconds": text_proxy,
+        "worker_startup_median_seconds": startup, "additional_record_overhead_seconds": 416 * .25,
+        "verification_reserve_seconds": 180, "retry_contingency_seconds": 600,
+        "conditions": conditions, "scope": "Remaining 384 primary requests, 32 warmups, 16 fresh workers; preflight already charged",
+        "method": "Measured per-budget synchronized profiles adjusted by all-source decode probes; first-question processor proxy; no accuracy-based tuning"}
+
+
 def coordinate(command, config, run, root, ledger, config_path):
     from .e000 import status
     if command == "smoke":
@@ -192,7 +242,9 @@ def coordinate(command, config, run, root, ledger, config_path):
         for video in read_json(run / "cohort_manifest.json")["videos"]:
             ledger.check()
             started = time.perf_counter()
-            frames, details = decode_selected(video_input(video), config["reference_budget"])
+            frames, details = decode_selected(video_input(video), config["reference_budget"],
+                decoder_threads=config.get("decoder_threads", 1),
+                decoder_thread_type=config.get("decoder_thread_type", "NONE"))
             elapsed = time.perf_counter() - started
             cpu_probes[video["source_id"]] = {"elapsed_seconds": elapsed,
                 "frames_decoded": details["frames_decoded"], "frames_selected": len(frames)}
@@ -200,7 +252,7 @@ def coordinate(command, config, run, root, ledger, config_path):
         write_json(run / "cpu_decode_probes.json", {"config_hash": frozen["config_hash"],
                    "kind": "CPU-only preparation, not model calls or primary request measurements", "videos": cpu_probes})
         probes = []
-        for budget in config["frame_budgets"]:
+        for budget in config.get("probe_budget_order", config["frame_budgets"]):
             ledger.check()
             wall_seconds = launch(config_path, run, root, budget, "probe", min(config["worker_timeout_seconds"],
                    max(1, int(config["cumulative_execution_limit_hours"] * 3600 - ledger.consumed_seconds()))))
@@ -209,23 +261,30 @@ def coordinate(command, config, run, root, ledger, config_path):
             write_json(run / f"probe_{budget}.json", probe)
             probes.append(probe)
         write_json(run / "probes.json", {"config_hash": frozen["config_hash"], "probes": probes})
-        # 16 independent collection workers, each with two warmups, + all 384 measured calls.
-        # Entire process wall time minus its five timed requests includes imports,
-        # cohort validation, model loading, warmups' overhead, hashing and serialization.
-        worst_startup = max(max(0, p["worker_wall_seconds"] - p["timed_calls_seconds"]) for p in probes)
-        # Account for clips with more expensive decoding than the prespecified model probe.
-        decode_adjustment = max(0, max(v["elapsed_seconds"] for v in cpu_probes.values()) -
-                                cpu_probes[frozen["profile_question"][0]]["elapsed_seconds"])
-        worst_request = max(p["latency_seconds"] for p in probes) + decode_adjustment
-        # Text-only conservatively receives the worst video request cost.
-        raw_estimate = 16 * worst_startup + (384 + 32) * worst_request + 120
-        projection = raw_estimate * 1.5
+        if config.get("projection_method") == "weighted-profile-v2":
+            estimate = collection_projection(probes, cpu_probes, frozen["profile_question"][0])
+            projection = estimate["projection_seconds"]
+        else:
+            # 16 independent collection workers, each with two warmups, + all 384 measured calls.
+            # Entire process wall time minus its five timed requests includes imports,
+            # cohort validation, model loading, warmups' overhead, hashing and serialization.
+            worst_startup = max(max(0, p["worker_wall_seconds"] - p["timed_calls_seconds"]) for p in probes)
+            # Account for clips with more expensive decoding than the prespecified model probe.
+            decode_adjustment = max(0, max(v["elapsed_seconds"] for v in cpu_probes.values()) -
+                                    cpu_probes[frozen["profile_question"][0]]["elapsed_seconds"])
+            worst_request = max(p["latency_seconds"] for p in probes) + decode_adjustment
+            # Text-only conservatively receives the worst video request cost.
+            raw_estimate = 16 * worst_startup + (384 + 32) * worst_request + 120
+            projection = raw_estimate * 1.5
         ledger.check(projected_seconds=projection)
-        write_json(run / "collection_ready.json", {"config_hash": frozen["config_hash"],
-                    "projection_seconds": projection, "safety_factor": 1.5,
-                    "additional_decode_seconds_per_request": decode_adjustment,
-                    "formula": "1.5 * (16 * worst_worker_startup_and_overhead + (384 + 32) * worst_request + 120 verification seconds)",
-                    "ready_at": utc_now()})
+        if config.get("projection_method") == "weighted-profile-v2":
+            write_json(run / "collection_ready.json", {"config_hash": frozen["config_hash"], **estimate, "ready_at": utc_now()})
+        else:
+            write_json(run / "collection_ready.json", {"config_hash": frozen["config_hash"],
+                        "projection_seconds": projection, "safety_factor": 1.5,
+                        "additional_decode_seconds_per_request": decode_adjustment,
+                        "formula": "1.5 * (16 * worst_worker_startup_and_overhead + (384 + 32) * worst_request + 120 verification seconds)",
+                        "ready_at": utc_now()})
         status(run, "PARTIAL", "All five fit, integrity and component probes passed; collection approved by resource projection")
         return
     frozen = validate_frozen(config, run, root)
@@ -244,7 +303,11 @@ def coordinate(command, config, run, root, ledger, config_path):
         if all(identity in completed for identity in wanted):
             continue
         fraction_remaining = (384 - len(completed)) / 384
-        ledger.check(projected_seconds=ready["projection_seconds"] * fraction_remaining)
+        if config.get("projection_method") == "weighted-profile-v2":
+            fixed_reserve = (ready["verification_reserve_seconds"] + ready["retry_contingency_seconds"]) * ready["safety_factor"]
+            ledger.check(projected_seconds=max(0, ready["projection_seconds"] - fixed_reserve) * fraction_remaining + fixed_reserve)
+        else:
+            ledger.check(projected_seconds=ready["projection_seconds"] * fraction_remaining)
         timeout = min(config["worker_timeout_seconds"], max(1, int(config["cumulative_execution_limit_hours"] * 3600 - ledger.consumed_seconds())))
         launch(config_path, run, root, index, "collect", timeout)
         export_records(run)
@@ -271,7 +334,9 @@ def worker(config, run, root, block_index, mode):
             worker_key = f"{mode}_{block_index}_{time.time_ns()}"
             write_json(run / f"worker_{worker_key}.json", {"load_seconds": adapter.load_seconds,
                        "baseline": adapter.baseline, "budget": budget, "repetition": repetition, "pid": os.getpid(),
-                       "generation_policy": adapter.generation_policy})
+                       "generation_policy": adapter.generation_policy,
+                       "allocator_backend": adapter.torch.cuda.memory.get_allocator_backend(),
+                       "allocator_environment": {key: os.environ.get(key) for key in ("PYTORCH_CUDA_ALLOC_CONF", "PYTORCH_ALLOC_CONF")}})
             completed = {r["trial_id"] for r in records(run)}
             timed_calls_seconds = 0.0
 
@@ -321,13 +386,12 @@ def worker(config, run, root, block_index, mode):
                 pair = frozen["profile_question"]
                 first = execute(pair, "fit_probe")
                 second = execute(pair, "integrity_probe")
-                if first["input_tensor_hashes"] != second["input_tensor_hashes"] or first["input_metadata_hash"] != second["input_metadata_hash"]:
-                    raise Blocked("INPUT_INTEGRITY_FAILED", "Repeated preparation differs")
+                validate_probe_pair(first, second)
                 component = execute(pair, "component_profile", profile=True)
                 write_json(run / f"probe_{budget}.json", {"config_hash": frozen["config_hash"], "budget": budget,
                            "load_seconds": adapter.load_seconds, "latency_seconds": first["latency_seconds"],
                            "timed_calls_seconds": timed_calls_seconds,
-                           "integrity_passed": True, "fit": first, "repeat": second, "component_profile": component})
+                           "integrity_passed": True, "generation_repeatability_passed": True, "fit": first, "repeat": second, "component_profile": component})
             else:
                 for pair in block["questions"]:
                     identity = trial_identity(run.name, frozen["config_hash"], pair[0], pair[1], budget, repetition)

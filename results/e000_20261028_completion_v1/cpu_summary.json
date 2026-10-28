@@ -1,0 +1,58 @@
+{
+  "decode": [
+    {
+      "budget": 8,
+      "pairs": 8,
+      "serial_median_seconds": 6.900783499999999,
+      "threaded_median_seconds": 2.6878248,
+      "median_paired_decode_speedup": 2.5627901149846237
+    },
+    {
+      "budget": 64,
+      "pairs": 8,
+      "serial_median_seconds": 7.54671135,
+      "threaded_median_seconds": 3.6397311500000002,
+      "median_paired_decode_speedup": 2.118648429281895
+    }
+  ],
+  "prepare": [
+    {
+      "budget": 8,
+      "sources": 8,
+      "median_prepare_seconds": 2.3626555,
+      "maximum_prepare_seconds": 4.1707921,
+      "weighted_call_cpu_seconds": 2.6531164891566266
+    },
+    {
+      "budget": 16,
+      "sources": 8,
+      "median_prepare_seconds": 2.61842155,
+      "maximum_prepare_seconds": 4.5524147,
+      "weighted_call_cpu_seconds": 2.8843477590361446
+    },
+    {
+      "budget": 32,
+      "sources": 8,
+      "median_prepare_seconds": 2.73375465,
+      "maximum_prepare_seconds": 5.4723662,
+      "weighted_call_cpu_seconds": 3.197074495180723
+    },
+    {
+      "budget": 48,
+      "sources": 8,
+      "median_prepare_seconds": 2.6986271,
+      "maximum_prepare_seconds": 4.8688844,
+      "weighted_call_cpu_seconds": 3.0088614674698797
+    },
+    {
+      "budget": 64,
+      "sources": 8,
+      "median_prepare_seconds": 2.9453853,
+      "maximum_prepare_seconds": 4.7462154,
+      "weighted_call_cpu_seconds": 3.1358048289156626
+    }
+  ],
+  "timing_stability_assessed": false,
+  "cpu_only_diagnostic": true,
+  "note": "Single paired decode observations and one candidate preparation per source/budget; no new end-to-end speedup or accuracy measurement"
+}

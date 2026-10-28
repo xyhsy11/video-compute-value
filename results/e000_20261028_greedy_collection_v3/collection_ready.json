@@ -1,0 +1,44 @@
+{
+  "projection_seconds": 4833.494277149573,
+  "safety_factor": 1.5,
+  "raw_estimate_seconds": 3222.329518099715,
+  "estimated_video_call_seconds": 1837.5692828997287,
+  "text_proxy_seconds": 1.0,
+  "worker_startup_median_seconds": 29.672514699999155,
+  "additional_record_overhead_seconds": 104.0,
+  "verification_reserve_seconds": 180,
+  "retry_contingency_seconds": 600,
+  "conditions": [
+    {
+      "budget": 64,
+      "estimated_cpu_seconds": 262.3207352999458,
+      "profile_request_minus_cpu_seconds": 2.1931594000000003
+    },
+    {
+      "budget": 8,
+      "estimated_cpu_seconds": 309.9764186999457,
+      "profile_request_minus_cpu_seconds": 0.6694156999999996
+    },
+    {
+      "budget": 16,
+      "estimated_cpu_seconds": 270.18652829994573,
+      "profile_request_minus_cpu_seconds": 0.7857244999999997
+    },
+    {
+      "budget": 32,
+      "estimated_cpu_seconds": 244.71915389994572,
+      "profile_request_minus_cpu_seconds": 1.0511732
+    },
+    {
+      "budget": 48,
+      "estimated_cpu_seconds": 262.4460812999458,
+      "profile_request_minus_cpu_seconds": 1.5559165
+    }
+  ],
+  "scope": "Remaining 384 primary requests, 32 warmups, 16 fresh workers; preflight already charged",
+  "method": "Measured per-budget synchronized profiles adjusted by all-source decode probes; first-question processor proxy; no accuracy-based tuning",
+  "config_hash": "4f5f5d9816c4a546f63e2cdc5dda2e663be566628a48a4f98d713c43024bb63e",
+  "ready_at": "2026-10-28T07:57:21.462441+00:00",
+  "effective_resource_limit_seconds": 20400,
+  "successful_probes_revalidated_without_new_model_calls": true
+}

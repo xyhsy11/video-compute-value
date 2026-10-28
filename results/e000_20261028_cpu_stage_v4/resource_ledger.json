@@ -1,0 +1,537 @@
+{
+  "created_at": "2026-10-27T09:58:33.825323+00:00",
+  "root": "C:\\video-compute-value",
+  "active_seconds": 20286.51462543856,
+  "download_bytes": 82077313,
+  "video_transfer_bytes": 81653854,
+  "storage_baseline_bytes": 0,
+  "storage_peak_bytes": 17037011063,
+  "sessions": [
+    {
+      "name": "preflight",
+      "started_at": "2026-10-27T09:58:33.825323+00:00",
+      "finished_at": "2026-10-27T09:58:37.904598+00:00",
+      "outcome": "completed",
+      "active_seconds": 4.0789999999997235
+    },
+    {
+      "name": "prepare",
+      "started_at": "2026-10-27T09:58:40.004428+00:00",
+      "finished_at": "2026-10-27T10:20:11.327408+00:00",
+      "active_seconds": 1291.32298,
+      "outcome": "interrupted-conservative-charge"
+    },
+    {
+      "name": "preflight",
+      "started_at": "2026-10-27T10:20:11.327408+00:00",
+      "finished_at": "2026-10-27T10:20:18.700107+00:00",
+      "outcome": "completed",
+      "active_seconds": 7.375
+    },
+    {
+      "name": "prepare",
+      "started_at": "2026-10-27T10:20:24.245493+00:00",
+      "finished_at": "2026-10-27T10:24:41.751936+00:00",
+      "outcome": "completed",
+      "active_seconds": 257.5
+    },
+    {
+      "name": "account",
+      "started_at": "2026-10-27T10:26:35.177008+00:00",
+      "finished_at": "2026-10-27T10:26:40.276877+00:00",
+      "outcome": "completed",
+      "active_seconds": 5.110000000000582
+    },
+    {
+      "name": "analyze",
+      "started_at": "2026-10-27T10:26:45.853285+00:00",
+      "finished_at": "2026-10-27T10:26:51.535728+00:00",
+      "outcome": "completed",
+      "active_seconds": 5.67200000000048
+    },
+    {
+      "name": "verify",
+      "started_at": "2026-10-27T10:26:58.603547+00:00",
+      "finished_at": "2026-10-27T10:27:03.491976+00:00",
+      "outcome": "completed",
+      "active_seconds": 4.890000000001237
+    },
+    {
+      "name": "smoke",
+      "started_at": "2026-10-27T10:27:09.218543+00:00",
+      "finished_at": "2026-10-27T10:36:23.196212+00:00",
+      "outcome": "completed",
+      "active_seconds": 553.9840000000004
+    },
+    {
+      "name": "account",
+      "started_at": "2026-10-27T10:40:01.196461+00:00",
+      "finished_at": "2026-10-27T10:40:07.853663+00:00",
+      "outcome": "completed",
+      "active_seconds": 6.656999999999243
+    },
+    {
+      "name": "smoke",
+      "started_at": "2026-10-27T10:40:14.270974+00:00",
+      "finished_at": "2026-10-27T10:44:59.719315+00:00",
+      "outcome": "completed",
+      "active_seconds": 285.4529999999995
+    },
+    {
+      "name": "account",
+      "started_at": "2026-10-27T10:48:05.392062+00:00",
+      "finished_at": "2026-10-27T10:48:11.135707+00:00",
+      "outcome": "completed",
+      "active_seconds": 5.75
+    },
+    {
+      "name": "prepare",
+      "started_at": "2026-10-27T10:48:17.627448+00:00",
+      "finished_at": "2026-10-27T10:48:50.374818+00:00",
+      "outcome": "completed",
+      "active_seconds": 32.75
+    },
+    {
+      "name": "smoke",
+      "started_at": "2026-10-27T10:48:56.440612+00:00",
+      "finished_at": "2026-10-27T10:53:44.451893+00:00",
+      "outcome": "completed",
+      "active_seconds": 288.0149999999994
+    },
+    {
+      "name": "run",
+      "started_at": "2026-10-27T10:53:51.262055+00:00",
+      "finished_at": "2026-10-27T11:42:50.198280+00:00",
+      "outcome": "completed",
+      "active_seconds": 2938.937
+    },
+    {
+      "name": "account",
+      "started_at": "2026-10-27T11:44:44.429074+00:00",
+      "finished_at": "2026-10-27T11:44:51.677371+00:00",
+      "outcome": "completed",
+      "active_seconds": 7.233999999998559
+    },
+    {
+      "name": "verify",
+      "started_at": "2026-10-27T11:44:59.922477+00:00",
+      "finished_at": "2026-10-27T11:45:43.291746+00:00",
+      "outcome": "completed",
+      "active_seconds": 43.375
+    },
+    {
+      "name": "descriptive-quality-addendum",
+      "started_at": "2026-10-27T11:45:50.413237+00:00",
+      "finished_at": "2026-10-27T11:45:56.595344+00:00",
+      "outcome": "completed",
+      "active_seconds": 6.186999999999898
+    },
+    {
+      "name": "diagnostic-init",
+      "started_at": "2026-10-27T12:01:13.921941+00:00",
+      "finished_at": "2026-10-27T12:01:21.834794+00:00",
+      "outcome": "completed",
+      "active_seconds": 7.906000000000859
+    },
+    {
+      "name": "diagnostic-forensics",
+      "started_at": "2026-10-27T12:01:30.636097+00:00",
+      "finished_at": "2026-10-27T12:01:38.219957+00:00",
+      "outcome": "FileNotFoundError",
+      "active_seconds": 7.57799999999952
+    },
+    {
+      "name": "diagnostic-forensics",
+      "started_at": "2026-10-27T12:04:32.585478+00:00",
+      "finished_at": "2026-10-27T12:05:03.665626+00:00",
+      "outcome": "Blocked",
+      "active_seconds": 31.07799999999952
+    },
+    {
+      "name": "account",
+      "started_at": "2026-10-27T12:08:34.760290+00:00",
+      "finished_at": "2026-10-27T12:08:41.723315+00:00",
+      "outcome": "completed",
+      "active_seconds": 6.95299999999952
+    },
+    {
+      "name": "diagnostic-forensics",
+      "started_at": "2026-10-27T12:08:50.125785+00:00",
+      "finished_at": "2026-10-27T12:24:17.962807+00:00",
+      "outcome": "completed",
+      "active_seconds": 927.8439999999991
+    },
+    {
+      "name": "diagnostic-greedy",
+      "started_at": "2026-10-27T12:26:39.451226+00:00",
+      "finished_at": "2026-10-27T12:32:07.056507+00:00",
+      "outcome": "completed",
+      "active_seconds": 327.60999999999876
+    },
+    {
+      "name": "diagnostic-timing",
+      "started_at": "2026-10-27T12:32:16.733410+00:00",
+      "finished_at": "2026-10-27T12:35:55.135449+00:00",
+      "active_seconds": 218.402039,
+      "outcome": "interrupted-system-shutdown-upper-bound",
+      "shutdown_event_record_id": 2752719
+    },
+    {
+      "name": "diagnostic-timing",
+      "started_at": "2026-10-28T04:08:51.166458+00:00",
+      "finished_at": "2026-10-28T04:13:14.178379+00:00",
+      "outcome": "Blocked",
+      "active_seconds": 263.0
+    },
+    {
+      "name": "matched-native-versus-request-trim",
+      "started_at": "2026-10-28T04:16:18.806719+00:00",
+      "finished_at": "2026-10-28T04:16:38.244542+00:00",
+      "outcome": "PermissionError",
+      "active_seconds": 19.436999999999898
+    },
+    {
+      "name": "matched-native-versus-request-trim",
+      "started_at": "2026-10-28T04:17:19.647152+00:00",
+      "finished_at": "2026-10-28T05:00:42.599180+00:00",
+      "outcome": "TimeoutExpired",
+      "active_seconds": 2602.953
+    },
+    {
+      "name": "complete-prespecified-cleanup-counterpart-after-native-timeout",
+      "started_at": "2026-10-28T05:01:43.684437+00:00",
+      "finished_at": "2026-10-28T05:04:50.817166+00:00",
+      "outcome": "completed",
+      "active_seconds": 187.125
+    },
+    {
+      "name": "final-cpu-regression-and-static-checks",
+      "started_at": "2026-10-28T05:05:28.027910+00:00",
+      "finished_at": "2026-10-28T05:06:12.667718+00:00",
+      "outcome": "completed",
+      "active_seconds": 44.64000000000033
+    },
+    {
+      "name": "diagnostic-independent-verification",
+      "started_at": "2026-10-28T05:06:53.772466+00:00",
+      "finished_at": "2026-10-28T05:08:35.467572+00:00",
+      "outcome": "completed",
+      "active_seconds": 101.70299999999952
+    },
+    {
+      "name": "diagnostic-report-and-figures",
+      "started_at": "2026-10-28T05:08:59.985019+00:00",
+      "finished_at": "2026-10-28T05:09:29.190082+00:00",
+      "outcome": "completed",
+      "active_seconds": 29.20299999999952
+    },
+    {
+      "name": "completion-task-active-work-window",
+      "started_at": "2026-10-28T06:12:59.306997+00:00",
+      "finished_at": "2026-10-28T06:34:27.471524+00:00",
+      "outcome": "completed",
+      "active_seconds": 1288.155999999999
+    },
+    {
+      "name": "authorized-v3-preflight-collection-verification",
+      "started_at": "2026-10-28T06:54:24.077438+00:00",
+      "finished_at": "2026-10-28T07:05:54.004809+00:00",
+      "outcome": "completed",
+      "active_seconds": 689.9220000000005
+    },
+    {
+      "name": "preserve-interrupted-preflight-evidence",
+      "started_at": "2026-10-28T07:07:41.259185+00:00",
+      "finished_at": "2026-10-28T07:08:31.170699+00:00",
+      "outcome": "completed",
+      "active_seconds": 49.90599999999904
+    },
+    {
+      "name": "authorized-incomplete-preflight-independent-verification",
+      "started_at": "2026-10-28T07:12:15.624381+00:00",
+      "finished_at": "2026-10-28T07:13:15.749366+00:00",
+      "outcome": "TypeError",
+      "active_seconds": 60.125
+    },
+    {
+      "name": "preserved-interruption-schema-normalization-and-verification",
+      "started_at": "2026-10-28T07:14:04.128780+00:00",
+      "finished_at": "2026-10-28T07:15:03.885604+00:00",
+      "outcome": "completed",
+      "active_seconds": 59.76599999999962
+    },
+    {
+      "name": "authorized-v3-preflight-collection-verification",
+      "started_at": "2026-10-28T07:43:37.527711+00:00",
+      "finished_at": "2026-10-28T07:44:14.035570+00:00",
+      "outcome": "completed",
+      "active_seconds": 36.5
+    },
+    {
+      "name": "authorized-v3-preflight-collection-verification",
+      "started_at": "2026-10-28T07:44:58.491498+00:00",
+      "finished_at": "2026-10-28T07:53:15.504119+00:00",
+      "outcome": "completed",
+      "active_seconds": 497.01500000000124
+    },
+    {
+      "name": "authorized-v3-preflight-collection-verification",
+      "started_at": "2026-10-28T07:56:18.207019+00:00",
+      "finished_at": "2026-10-28T08:40:15.185809+00:00",
+      "outcome": "completed",
+      "active_seconds": 2636.9849999999988
+    },
+    {
+      "name": "Postcollection gate inspection and independent-closeout preparation",
+      "started_at": "2026-10-28T08:40:15.185809+00:00",
+      "finished_at": "2026-10-28T17:41:03.755287+09:00",
+      "active_seconds": 48.569478,
+      "outcome": "completed"
+    },
+    {
+      "name": "independent-full-collection-scientific-closeout",
+      "started_at": "2026-10-28T08:41:04.531576+00:00",
+      "finished_at": "2026-10-28T08:41:34.116677+00:00",
+      "outcome": "completed",
+      "active_seconds": 29.57800000000134
+    },
+    {
+      "name": "Postcollection timing review and CPU-stage diagnostic preparation",
+      "started_at": "2026-10-28T08:41:34.116677+00:00",
+      "finished_at": "2026-10-28T17:47:15.303997+09:00",
+      "active_seconds": 341.18732,
+      "outcome": "completed"
+    },
+    {
+      "name": "bounded-postcollection-cpu-stage-diagnostic",
+      "started_at": "2026-10-28T08:47:15.339425+00:00",
+      "finished_at": "2026-10-28T08:51:13.640612+00:00",
+      "outcome": "completed",
+      "active_seconds": 238.29699999999866
+    },
+    {
+      "name": "CPU-stage interpretation and final public-report preparation",
+      "started_at": "2026-10-28T08:51:13.640612+00:00",
+      "finished_at": "2026-10-28T17:54:07.898037+09:00",
+      "active_seconds": 174.257425,
+      "outcome": "completed"
+    },
+    {
+      "name": "Final cumulative-guard regression preparation",
+      "started_at": "2026-10-28T17:54:07.898037+09:00",
+      "finished_at": "2026-10-28T17:55:17.411141+09:00",
+      "active_seconds": 69.513104,
+      "outcome": "completed"
+    },
+    {
+      "name": "final-regression-static-and-post-followup-accounting-verification",
+      "started_at": "2026-10-28T08:55:17.411141+00:00",
+      "finished_at": "2026-10-28T08:56:01.481458+00:00",
+      "outcome": "completed",
+      "active_seconds": 44.07800000000134
+    },
+    {
+      "name": "Final regression review, figure inspection and handoff preparation",
+      "started_at": "2026-10-28T08:56:01.481458+00:00",
+      "finished_at": "2026-10-28T18:00:20.972289+09:00",
+      "active_seconds": 259.490831,
+      "outcome": "completed"
+    },
+    {
+      "name": "final-public-report-privacy-and-resource-reconciliation",
+      "started_at": "2026-10-28T09:00:20.972289+00:00",
+      "finished_at": "2026-10-28T09:01:32.975686+00:00",
+      "outcome": "AssertionError",
+      "active_seconds": 72.0
+    },
+    {
+      "name": "Review authorization-metadata privacy false positive and resume final handoff",
+      "started_at": "2026-10-28T09:01:32.975686+00:00",
+      "finished_at": "2026-10-28T18:04:34.335242+09:00",
+      "active_seconds": 181.359556,
+      "outcome": "completed"
+    },
+    {
+      "name": "final-handoff-after-exact-authorization-metadata-review",
+      "started_at": "2026-10-28T09:04:34.335242+00:00",
+      "finished_at": "2026-10-28T09:05:22.063162+00:00",
+      "outcome": "completed",
+      "active_seconds": 47.73500000000058
+    },
+    {
+      "name": "Final result review, inventory readout and conservative 30-second final response reserve",
+      "started_at": "2026-10-28T09:05:22.063162+00:00",
+      "finished_at": "2026-10-28T18:07:01.736287+09:00",
+      "active_seconds": 99.673125,
+      "outcome": "completed-conservative-reserve"
+    },
+    {
+      "name": "User-authorized publication initial inspection",
+      "started_at": "2026-10-28T09:22:36.153291+00:00",
+      "finished_at": "2026-10-28T18:24:14.657796+09:00",
+      "active_seconds": 98.504505,
+      "outcome": "completed"
+    },
+    {
+      "name": "authorized-publication-review-graphs-and-report",
+      "started_at": "2026-10-28T09:24:14.657796+00:00",
+      "finished_at": "2026-10-28T09:28:34.429926+00:00",
+      "outcome": "completed",
+      "active_seconds": 259.78099999999904
+    },
+    {
+      "name": "Conservative reserve for authorized Git commit/push, remote verification and final response",
+      "started_at": "2026-10-28T18:28:34.435911+09:00",
+      "finished_at": "2026-10-28T18:30:34.435911+09:00",
+      "active_seconds": 120,
+      "outcome": "conservative-reserve"
+    },
+    {
+      "name": "Additional conservative publication reserve for exact-byte indexing, commit/push and detailed illustrated handoff",
+      "started_at": "2026-10-28T18:31:47.250479+09:00",
+      "finished_at": "2026-10-28T18:33:47.250479+09:00",
+      "active_seconds": 192.814568,
+      "outcome": "conservative-reserve"
+    }
+  ],
+  "storage_scope": "Entire new project, including environment, caches, temp and Git",
+  "storage_current_bytes": 17037011063,
+  "interrupted_transfer_upper_bound_bytes": 1048576,
+  "accounting_notes": [
+    "The first acquisition worker was restarted to reduce checkpoint overhead. Its unclosed session is conservatively charged full elapsed wall time on next CLI entry.",
+    "CUDA dependency installation and initial validity tests overlapped that acquisition session and are included in its elapsed wall time; they are not double charged.",
+    "Up to one interrupted 1 MiB range is reserved in addition to confirmed video transfer bytes.",
+    "Interrupted timing coordinator charged from its start through the recorded Kernel-General event 13 system shutdown; no execution is possible after shutdown. Original unclosed ledger and private OS event evidence preserved. No previous consumption removed."
+  ],
+  "external_events": [
+    {
+      "name": "Conservative bootstrap window from environment creation to first preflight, including CPU dependencies and engineering gaps",
+      "active_seconds": 299.694931268692
+    },
+    {
+      "name": "CPU validity tests and static checks",
+      "active_seconds": 9.1953943,
+      "recorded_at": "2026-10-27T10:26:40.273888+00:00"
+    },
+    {
+      "name": "CPU validity tests and static checks",
+      "active_seconds": 8.7963008,
+      "recorded_at": "2026-10-27T10:40:07.851669+00:00"
+    },
+    {
+      "name": "CPU validity tests and static checks",
+      "active_seconds": 9.0718496,
+      "recorded_at": "2026-10-27T10:48:11.132715+00:00"
+    },
+    {
+      "name": "Post-collection plot QA, source-hash and publication audit",
+      "active_seconds": 97.43391036987305,
+      "recorded_at": "2026-10-27T11:44:51.672872+00:00"
+    },
+    {
+      "name": "Conservative initial diagnostic inspection allowance",
+      "active_seconds": 120,
+      "recorded_at": "2026-10-27T12:01:13.141966+00:00"
+    },
+    {
+      "name": "Diagnostic logging validation",
+      "active_seconds": 1.5003221,
+      "recorded_at": "2026-10-27T12:08:41.719940+00:00"
+    },
+    {
+      "name": "Conservative post-restart inspection and reconciliation allowance",
+      "active_seconds": 120,
+      "recorded_at": "2026-10-28T04:08:49.256651+00:00"
+    },
+    {
+      "name": "Conservative production patch, CPU validation and next-plan preparation allowance",
+      "active_seconds": 60,
+      "recorded_at": "2026-10-28T04:16:02.682462+00:00"
+    },
+    {
+      "name": "Conservative untracked initialization, result review, figure QA and final Git publication allowance",
+      "active_seconds": 180,
+      "recorded_at": "2026-10-28T05:06:32.125213+00:00"
+    },
+    {
+      "name": "Supplemental conservative allowance for untracked final storage walks, figure repair and publication review",
+      "active_seconds": 180,
+      "recorded_at": "2026-10-28T05:10:43.874100+00:00"
+    },
+    {
+      "name": "Conservative completion-task initial inspection and planning allowance",
+      "active_seconds": 180,
+      "recorded_at": "2026-10-28T06:12:14.709108+00:00"
+    },
+    {
+      "name": "Conservative final ledger scan, output inventory, privacy review and report closeout allowance",
+      "active_seconds": 120,
+      "recorded_at": "2026-10-28T06:37:06.992941+00:00"
+    },
+    {
+      "name": "Authorized collection initial inspection and source preparation",
+      "active_seconds": 30,
+      "recorded_at": "2026-10-28T06:54:24.077438+00:00"
+    },
+    {
+      "name": "Post-stall CPU investigation, resource reconciliation and recovery preparation",
+      "active_seconds": 107.254376,
+      "recorded_at": "2026-10-28T07:07:41.259185+00:00"
+    },
+    {
+      "name": "Recovery safeguards, public preflight reporting and CPU review; no additional GPU work",
+      "active_seconds": 224.453682,
+      "recorded_at": "2026-10-28T07:12:15.624381+00:00"
+    },
+    {
+      "name": "Incomplete-run reporting schema diagnosis and preserved normalization",
+      "active_seconds": 48.379414,
+      "recorded_at": "2026-10-28T07:14:04.128780+00:00"
+    },
+    {
+      "name": "Final output inventory, review and conservative closeout allowance",
+      "active_seconds": 55.125631,
+      "recorded_at": "2026-10-28T07:15:44.011235+00:00"
+    },
+    {
+      "name": "Reconcile actual final storage-walk duration beyond provision, plus final response reserve",
+      "active_seconds": 45.435147,
+      "recorded_at": "2026-10-28T07:16:34.446382+00:00"
+    },
+    {
+      "name": "Authorized GPU-isolation resumption inspection and bounded recovery preparation",
+      "active_seconds": 51.689718,
+      "recorded_at": "2026-10-28T07:43:36.468223+00:00"
+    },
+    {
+      "name": "Overlay automatic-restart investigation and bounded idle-load admission",
+      "active_seconds": 43.797982,
+      "recorded_at": "2026-10-28T07:44:57.833552+00:00"
+    },
+    {
+      "name": "Measured full-collection forecast, explicit resource grant, and resource-only resume preparation (conservative entire closed gap)",
+      "active_seconds": 179.749036,
+      "recorded_at": "2026-10-28T07:56:15.253155+00:00"
+    }
+  ],
+  "model_download_logical_bytes": 8887284080,
+  "prior_runs": [
+    {
+      "run_id": "e000_20261027_implementation",
+      "completed_model_calls": 25,
+      "reason": "Initial real fit probes preserved; collection uses stricter provenance and independent verification"
+    },
+    {
+      "run_id": "e000_20261027_collection_v1",
+      "completed_model_calls": 25,
+      "reason": "Precollection input audit replaced grid stretching with aspect-preserving letterboxing"
+    },
+    {
+      "run_id": "e000_20261027_collection_v2",
+      "completed_model_calls": 441,
+      "reason": "Completed parent pilot preserved; separate diagnostic inherits all consumption"
+    }
+  ],
+  "effective_authorized_limit_seconds": 20400,
+  "resource_authorization_file": "runtime_resource_grant.json"
+}

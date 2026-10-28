@@ -81,6 +81,8 @@ class QwenAdapter:
 
     def prepare(self, question, video=None, budget=0):
         from transformers.video_utils import VideoMetadata
+        preparation_started = time.perf_counter_ns()
+        self._prepared_budget = budget
         prompt = make_prompt(question)
         content = []
         kwargs, details = {}, {"frames_decoded": 0, "frames_selected": 0, "frames_processor": 0,
@@ -88,7 +90,9 @@ class QwenAdapter:
                                "temporal_padding": 0, "model_timestamps": [], "source_indices": [],
                                "actual_timestamps": []}
         if budget:
-            frames, decoded = decode_selected(video, budget)
+            frames, decoded = decode_selected(video, budget,
+                decoder_threads=self.frozen.get("decoder_threads", 1),
+                decoder_thread_type=self.frozen.get("decoder_thread_type", "NONE"))
             details.update(decoded)
             content.append({"type": "video"})
             metadata = VideoMetadata(total_num_frames=video["frame_count"], fps=float(Fraction(video["fps"])),
@@ -128,12 +132,18 @@ class QwenAdapter:
         details["input_tokens"] = int(inputs["input_ids"].shape[-1])
         if details["input_tokens"] + self.frozen["generation"]["max_new_tokens"] > self.model.config.text_config.max_position_embeddings:
             raise Blocked("INPUT_INTEGRITY_FAILED", "Input exceeds context; truncation is prohibited")
+        details["cpu_prepare_host_seconds"] = (time.perf_counter_ns() - preparation_started) / 1e9
         return inputs, details
 
     def transfer(self, inputs):
         return {key: value.to("cuda:0") for key, value in inputs.items()}
 
     def generate(self, inputs):
+        trimmed = getattr(self, "_prepared_budget", 0) in getattr(self, "frozen", {}).get("cuda_trim_budgets", [])
+        trim_started = time.perf_counter_ns()
+        if trimmed:
+            self.torch.cuda.empty_cache()  # Inside timed_request; weights and live inputs remain resident.
+        trim_seconds = (time.perf_counter_ns() - trim_started) / 1e9 if trimmed else 0.0
         with self.torch.inference_mode():
             self.model_call_count += 1
             output = self.model.generate(**inputs, generation_config=self.generation,
@@ -142,4 +152,6 @@ class QwenAdapter:
         text = self.processor.tokenizer.decode(new_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)
         answer = parse_answer(text)
         return {"generated_token_ids": new_ids, "decoded_output": text, "parsed_answer": answer,
-                "valid_answer": answer is not None, "output_tokens": len(new_ids)}
+                "valid_answer": answer is not None, "output_tokens": len(new_ids),
+                "generation_policy_sha256": digest(self.generation_policy),
+                "cuda_cache_trimmed": trimmed, "cuda_cache_trim_host_seconds": trim_seconds}

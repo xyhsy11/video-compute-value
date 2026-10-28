@@ -1,0 +1,11 @@
+{
+  "status": "BLOCKED_RESOURCE",
+  "feasibility_confirmed": false,
+  "full_corrected_collection_started": false,
+  "new_model_calls": 0,
+  "remaining_active_seconds": 1206.428272561443,
+  "projected_full_completion_seconds": 5968.635137973897,
+  "additional_active_seconds_required": 4762.206865412454,
+  "proposed_cumulative_limit_seconds": 19200,
+  "all_changes_must_remain_unstaged": true
+}

@@ -1,0 +1,1 @@
+Complete measured collection: 360 video and 24 text-only requests. These are descriptive accuracy, median resident-model latency and memory plots. Verdict: MEASUREMENT_UNSTABLE. Consult completion_report.md and verification.json; text-only is reported separately in the tables. Both plots were visually checked.

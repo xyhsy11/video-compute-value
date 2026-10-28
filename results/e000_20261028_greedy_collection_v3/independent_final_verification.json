@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-28T08:41:22.578626+00:00",
+  "passed": true,
+  "primary_records_checked": 384,
+  "parent_input_hash_and_metadata_matches": 384,
+  "outputs_independently_redecoded": 384,
+  "independent_accuracy_and_latency_summaries_match": true,
+  "cross_worker_repetition_cells_checked": 120,
+  "all_required_experimental_gates_passed": false,
+  "historical_preservation": {
+    "e000_20261027_collection_v2": {
+      "unchanged_files": 461,
+      "inventory_sha256": "0bbc98ff86dcc70aa67d2ae6783c222e2f480b118cc59f0aedcea29db793a80d"
+    },
+    "e000_20261027_diagnostic_v1": {
+      "unchanged_files": 438,
+      "inventory_sha256": "9141f10abfe56648173e15d5abe0e4750bfa803a68391a6218fb6a19c3739cc0"
+    },
+    "e000_20261028_diagnostic_v2": {
+      "unchanged_files": 173,
+      "inventory_sha256": "aa952b95c8d970018f24f8b6ab83d5ca6f69c6ffba337290a3771c36d2ee8776"
+    }
+  },
+  "confirmed_new_model_calls": 441,
+  "unknown_new_model_calls_upper_bound": 1,
+  "cumulative_model_calls_upper_bound": 1454,
+  "effective_resource_limit_seconds": 20400,
+  "git_index_empty": true
+}

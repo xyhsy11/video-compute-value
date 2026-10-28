@@ -1,0 +1,56 @@
+{
+  "at": "2026-10-28T08:41:21.079728+00:00",
+  "conditions": [
+    {
+      "budget": 8,
+      "median_cpu_fraction_of_request": 0.8017394808693109,
+      "median_cpu_repetition_relative_range": 0.661963139601568,
+      "median_remainder_repetition_relative_range": 0.5741589688373339,
+      "within_question_centered_cpu_total_pearson_r": 0.9970668307855115,
+      "timing_gate_passed": false,
+      "live_memory_growth_flag_count": 0,
+      "maximum_live_allocated_after_bytes": 8884171264
+    },
+    {
+      "budget": 16,
+      "median_cpu_fraction_of_request": 0.7665118201064502,
+      "median_cpu_repetition_relative_range": 0.3473265913846765,
+      "median_remainder_repetition_relative_range": 0.18347011347677772,
+      "within_question_centered_cpu_total_pearson_r": 0.9972680421012874,
+      "timing_gate_passed": false,
+      "live_memory_growth_flag_count": 0,
+      "maximum_live_allocated_after_bytes": 8885088768
+    },
+    {
+      "budget": 32,
+      "median_cpu_fraction_of_request": 0.6986760676475077,
+      "median_cpu_repetition_relative_range": 0.3096537653135478,
+      "median_remainder_repetition_relative_range": 0.08450358681430477,
+      "within_question_centered_cpu_total_pearson_r": 0.9930672026863947,
+      "timing_gate_passed": false,
+      "live_memory_growth_flag_count": 0,
+      "maximum_live_allocated_after_bytes": 8884171264
+    },
+    {
+      "budget": 48,
+      "median_cpu_fraction_of_request": 0.6284778521605001,
+      "median_cpu_repetition_relative_range": 0.2537726447281753,
+      "median_remainder_repetition_relative_range": 0.10432047368131284,
+      "within_question_centered_cpu_total_pearson_r": 0.9972391065872508,
+      "timing_gate_passed": true,
+      "live_memory_growth_flag_count": 0,
+      "maximum_live_allocated_after_bytes": 8884171264
+    },
+    {
+      "budget": 64,
+      "median_cpu_fraction_of_request": 0.5871747930849709,
+      "median_cpu_repetition_relative_range": 0.39411258051455694,
+      "median_remainder_repetition_relative_range": 0.09251879607472055,
+      "within_question_centered_cpu_total_pearson_r": 0.9968049836495542,
+      "timing_gate_passed": false,
+      "live_memory_growth_flag_count": 0,
+      "maximum_live_allocated_after_bytes": 8884171264
+    }
+  ],
+  "interpretation": "Descriptive within-question centered correlation; CPU time is included in total by definition. No unique causal attribution or significance claim."
+}

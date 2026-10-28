@@ -107,11 +107,13 @@ class Ledger:
             record["outcome"] = type(exc).__name__
             raise
         finally:
+            # Scan while the clock is still running; storage accounting is execution work too.
+            self.save(force_storage=True)
             elapsed = time.monotonic() - self.started
             self.started = None
             self.value["active_seconds"] += elapsed
             record.update(finished_at=utc_now(), active_seconds=elapsed)
-            self.save(force_storage=True)
+            write_json(self.path, self.value)
 
 
 def environment(root):

@@ -1,0 +1,8 @@
+{
+  "parent_ledger": "results\\e000_20261028_completion_v1\\resource_ledger.json",
+  "inherited_active_seconds": 13193.571727438557,
+  "budget_reset": false,
+  "parent_cohort": "results/e000_20261027_collection_v2/cohort_manifest.json",
+  "historical_model_invocations_upper_bound": 1012,
+  "base_git_revision": "52773383da61f6751ce2f216298f454097b45efa"
+}

@@ -58,3 +58,8 @@ results/e000_20261027_collection_v1/*
 !results/e000_20261027_collection_v1/resolved_config.yaml
 !results/e000_20261027_collection_v1/exposure_manifest.json
 !results/e000_20261027_collection_v1/execution_order.json
+
+results/**/private_execution.log
+
+# Retain per-question raw repetition timings locally; publish aggregate summaries.
+results/e000_20261028_greedy_collection_v3/summary.json

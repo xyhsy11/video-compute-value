@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-28T09:04:53.894882+00:00",
+  "cpu_stage_aggregates_independently_reproduced": true,
+  "parent_input_hash_matches": 48,
+  "experiment_primary_input_hash_matches": 384,
+  "historical_preserved_files": {
+    "e000_20261027_collection_v2": 461,
+    "e000_20261027_diagnostic_v1": 438,
+    "e000_20261028_diagnostic_v2": 173
+  },
+  "historical_hashes_rechecked_in_prior_final_reconciliation_before_authorization_metadata_flag": true,
+  "frozen_experiment_sources_unchanged": true,
+  "collection_saved_setup_costs_still_match": true,
+  "privacy_exclusions_verified": true,
+  "public_json_sensitive_fields_absent_except_exact_human_budget_grant": true,
+  "git_index_empty": true,
+  "no_experiment_gpu_workers_running": true,
+  "figures_visually_checked": true
+}

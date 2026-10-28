@@ -1,0 +1,8 @@
+{
+  "parent_ledger": "results\\e000_20261028_diagnostic_v2\\resource_ledger.json",
+  "inherited_seconds": 11605.415727438558,
+  "initial_review_allowance_seconds": 180,
+  "budget_reset": false,
+  "git_mutations_authorized": false,
+  "base_git_revision": "52773383da61f6751ce2f216298f454097b45efa"
+}

@@ -1,0 +1,17 @@
+{
+  "src/video_compute_value/video.py": "Versioned exact four-thread full sequential decoding; frozen pixels/timestamps retained.",
+  "src/video_compute_value/model.py": "Nested CPU-preparation timing, budget-specific in-timer allocator trim, per-request generation-policy receipts.",
+  "src/video_compute_value/protocol.py": "Frozen execution-policy validation and bounded explicit initial time authorization.",
+  "src/video_compute_value/runner.py": "Offline pinned-model reuse, allocator receipts, exact probe equality, full cost projection and cumulative reserve checks.",
+  "src/video_compute_value/analysis.py": "Raw-token/output/input repeatability and effective-generation/allocator receipts required for success; independent saved-record checks.",
+  "src/video_compute_value/resources.py": "Storage scans remain inside cumulative active accounting.",
+  "src/video_compute_value/e000.py": "Reject reset/stale cumulative ledgers and return failure for unpassed experimental verification gates.",
+  "src/video_compute_value/common.py": "Bounded retries for transient Windows atomic-replace permission failures; persistent failure preserves prior evidence.",
+  "tests/test_completion.py": "Regression coverage for semantic equality, trim timing, generation/probe controls, authorization/accounting and immutable evidence.",
+  "scripts/": "Bounded CPU audit, inherited-budget forecasts, authorized collection recovery and independent scientific closeout helpers.",
+  "configs/ and protocols/": "Versioned threaded-decode/trim64 candidate and authorized input configuration, preserving historical configurations.",
+  "README.md, AGENTS.md and .gitignore": "Current authorization/local Git restrictions, result guidance and private-log exclusion.",
+  "results/": "Historical evidence preserved; new CPU audit and real corrected collection, safe aggregates and private ignored raw provenance.",
+  "scripts/diagnose_e000_cpu_stages.py": "Separate bounded CPU stage attribution, 48 exact input-hash matches, no model/CUDA calls, inherited cumulative ledger.",
+  "scripts/finalize_e000_v3.py": "Independent full-record checks and reports; reject stale cumulative ledgers after follow-up; correct completed-figure documentation."
+}

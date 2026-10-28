@@ -111,7 +111,9 @@ def inspect_video(path, budgets, max_pixels):
                         "strategy": "full sequential decode; one codec thread"}}
 
 
-def decode_selected(video, budget):
+def decode_selected(video, budget, *, decoder_threads=1, decoder_thread_type="NONE"):
+    if (decoder_threads, decoder_thread_type) not in ((1, "NONE"), (4, "FRAME")):
+        raise ValueError("Supported frozen decoder policies are NONE/1 and FRAME/4")
     import av
     selection = video["selections"][str(budget)]
     indices = uniform_indices(video["timestamps"], video["duration"], budget)
@@ -124,8 +126,8 @@ def decode_selected(video, budget):
         raise Blocked("INPUT_INTEGRITY_FAILED", "Video size changed")
     with av.open(str(path)) as container:
         stream = container.streams.video[0]
-        stream.thread_type = "NONE"
-        stream.codec_context.thread_count = 1
+        stream.thread_type = decoder_thread_type
+        stream.codec_context.thread_count = decoder_threads
         for index, frame in enumerate(container.decode(stream)):
             count += 1
             if frame.pts is None or index >= len(video["timestamps"]):
@@ -141,4 +143,5 @@ def decode_selected(video, budget):
         raise Blocked("INPUT_INTEGRITY_FAILED", "Actual decoded/selected frame counts disagree")
     array = np.stack(selected)
     return array, {"frames_decoded": count, "frames_selected": budget,
-                   "source_indices": indices, "actual_timestamps": selection["timestamps"]}
+                   "source_indices": indices, "actual_timestamps": selection["timestamps"],
+                   "decoder_threads": decoder_threads, "decoder_thread_type": decoder_thread_type}

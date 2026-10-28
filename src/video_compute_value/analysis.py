@@ -222,7 +222,11 @@ and final CUDA synchronization. OS file caching is permitted: these are not cold
 measurements. Labels/scoring, diagnostic hashes, serialization, model loading,
 two warmups per worker, integrity probes and component profiling are outside this
 primary interval, but included in the execution ledger. Each request decodes again.
-No frame/features/prefix/KV reuse occurs between questions.
+No frame/features/prefix/KV reuse occurs between questions. Execution policy:
+`{config.get("execution_policy_version", "original-v1")}`; decoder
+`{config.get("decoder_thread_type", "NONE")}/{config.get("decoder_threads", 1)}`;
+cache trim budgets `{config.get("cuda_trim_budgets", [])}`. Cleanup is inside the
+request timer when the separately versioned policy enables it.
 
 Timing summaries first take each question's median over three repetitions, then
 the distribution over 24 question medians. Speedup is reference median / condition
@@ -238,7 +242,7 @@ allocator histories. Live allocation growth is flagged separately from reservati
 Recorded active execution seconds before this report command finishes:
 {ledger.get('active_seconds', 'unavailable')}. Recorded project storage bytes:
 {ledger.get('storage_current_bytes', 'unavailable')}; peak observed bytes:
-{ledger.get('storage_peak_bytes', 'unavailable')}. Limits: 14,400 active seconds,
+{ledger.get('storage_peak_bytes', 'unavailable')}. Limits: {config["cumulative_execution_limit_hours"] * 3600:.0f} active seconds,
 20 GiB additional storage, with at most 1 GiB video transfer. Setup costs and failed
 attempts remain in `resource_ledger.json`; idle time between closed sessions is excluded.
 
@@ -263,6 +267,46 @@ Next action: resolve the recorded blocker, then run `prepare`, `smoke`, and `run
 using the exact commands in the README. Use `resume` after interrupted collection.
 """
     atomic_text(run / "report.md", text)
+
+
+def repeatability_gates(complete, video_conditions):
+    fields = {"prepared_input_repeatability": "prepared_input_agreement",
+              "parsed_answer_repeatability": "parsed_answer_agreement",
+              "raw_token_repeatability": "raw_token_agreement",
+              "raw_output_repeatability": "raw_output_agreement"}
+    return {gate: bool(complete and video_conditions and all(r[field] for r in video_conditions))
+            for gate, field in fields.items()}
+
+
+def generation_receipts_valid(frozen, rows, run):
+    """Legacy declarations alone do not prove the effective mode used in inference."""
+    policy = frozen.get("generation_policy")
+    if not policy or not rows:
+        return False
+    try:
+        import re
+        from transformers import GenerationConfig
+        from .generation import resolve_greedy_policy
+        effective = resolve_greedy_policy(GenerationConfig(**frozen["generation"]),
+            GenerationConfig.from_pretrained(frozen["model_path"], local_files_only=True))
+        if effective != policy:
+            return False
+        receipts = {}
+        for row in rows:
+            key = row.get("worker_key", "")
+            if not re.fullmatch(r"collect_[0-9]+_[0-9]+", key):
+                return False
+            if row.get("generation_policy_sha256") != digest(effective):
+                return False
+            if key not in receipts:
+                receipts[key] = read_json(Path(run, f"worker_{key}.json"))
+            if receipts[key].get("generation_policy") != effective:
+                return False
+            if frozen.get("cuda_allocator_backend") and receipts[key].get("allocator_backend") != frozen["cuda_allocator_backend"]:
+                return False
+        return True
+    except (OSError, ValueError, KeyError, RuntimeError):
+        return False
 
 
 def verify(config, run, root=None):
@@ -337,6 +381,10 @@ def verify(config, run, root=None):
                         raise ValueError("Native timestamp text mismatch")
                     if len(row["model_timestamps"]) != len(times) or any(abs(a - b) > 1e-8 for a, b in zip(row["model_timestamps"], times)):
                         raise ValueError("Native temporal grouping mismatch")
+                if (row.get("decoder_threads", 1), row.get("decoder_thread_type", "NONE")) != (frozen.get("decoder_threads", 1), frozen.get("decoder_thread_type", "NONE")):
+                    raise ValueError("Frozen request decoder policy mismatch")
+                if row.get("cuda_cache_trimmed", False) != (row["budget"] in frozen.get("cuda_trim_budgets", [])):
+                    raise ValueError("Frozen request cache policy mismatch")
                 metadata = {k: row[k] for k in ("tensor_shapes", "source_indices", "actual_timestamps", "model_timestamps", "video_grid_thw")}
                 if digest(metadata) != row["input_metadata_hash"]:
                     raise ValueError("Saved input metadata hash mismatch")
@@ -375,14 +423,16 @@ def verify(config, run, root=None):
              "parsed_answer_repeatability": complete and all(r["parsed_answer_agreement"] for r in video_conditions),
              "timing_stability": complete and all(r["timing_stability_target_passed"] for r in video_conditions),
              "no_live_memory_growth_flags": complete and not any(r["live_memory_growth_flag"] for r in conditions)}
+    gates.update(repeatability_gates(complete, video_conditions))
+    gates["effective_greedy_generation"] = generation_receipts_valid(frozen, rows, run)
     if rows:
         probe_file = run / "probes.json"
         probe_data = read_json(probe_file) if probe_file.exists() else {}
         gates["fit_and_input_integrity_probes"] = probe_data.get("config_hash") == frozen.get("config_hash") and bool(frozen) and {
-            p["budget"] for p in probe_data.get("probes", []) if p.get("integrity_passed")} == set(config["frame_budgets"])
+            p["budget"] for p in probe_data.get("probes", []) if p.get("integrity_passed") and p.get("generation_repeatability_passed")} == set(config["frame_budgets"])
     else:
         gates["fit_and_input_integrity_probes"] = False
-    value = {**gates, "errors": errors, "unclosed_call_ids": orphaned,
+    value = {**gates, "all_operational_gates_passed": all(gates.values()), "errors": errors, "unclosed_call_ids": orphaned,
              "verified_records": len(rows), "real_inference_verified": bool(rows), "verified_at": utc_now()}
     write_json(run / "verification.json", value)
     if complete:
@@ -391,8 +441,10 @@ def verify(config, run, root=None):
             status(run, "INPUT_INTEGRITY_FAILED", "; ".join(errors[:3]))
         elif not gates["prepared_input_repeatability"]:
             status(run, "INPUT_INTEGRITY_FAILED", "Prepared inputs differ across repeated requests")
-        elif not gates["parsed_answer_repeatability"]:
-            status(run, "REPEATABILITY_UNRESOLVED", "Parsed answers disagree across repetitions")
+        elif not gates["effective_greedy_generation"]:
+            status(run, "INPUT_INTEGRITY_FAILED", "Effective greedy generation receipts are missing or disagree")
+        elif not all(gates[key] for key in ("parsed_answer_repeatability", "raw_token_repeatability", "raw_output_repeatability")):
+            status(run, "REPEATABILITY_UNRESOLVED", "Parsed answers, generated tokens or raw outputs disagree across repetitions")
         elif not gates["timing_stability"] or not gates["no_live_memory_growth_flags"]:
             status(run, "MEASUREMENT_UNSTABLE", "Timing stability or live allocation growth requires interpretation")
         elif all(gates.values()):

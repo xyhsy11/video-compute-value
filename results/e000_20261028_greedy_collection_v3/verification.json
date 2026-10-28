@@ -1,0 +1,21 @@
+{
+  "complete_collection": true,
+  "summary_reproduces": true,
+  "frozen_provenance_verified": true,
+  "records_valid": true,
+  "calls_reconciled": true,
+  "prepared_input_repeatability": true,
+  "parsed_answer_repeatability": true,
+  "timing_stability": false,
+  "no_live_memory_growth_flags": true,
+  "raw_token_repeatability": true,
+  "raw_output_repeatability": true,
+  "effective_greedy_generation": true,
+  "fit_and_input_integrity_probes": true,
+  "all_operational_gates_passed": false,
+  "errors": [],
+  "unclosed_call_ids": [],
+  "verified_records": 384,
+  "real_inference_verified": true,
+  "verified_at": "2026-10-28T08:40:02.291742+00:00"
+}

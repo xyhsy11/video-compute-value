@@ -1,0 +1,6 @@
+{
+  "source": "results/e000_20261027_collection_v2/cohort_manifest.json",
+  "only_changed_field": "config_hash",
+  "videos_questions_and_order_unchanged": true,
+  "original_sha256": "95db40e41ba3e00c32c31e55b73cfe87ec63a5c1bf00524b1fd8f3e49b9e67d6"
+}

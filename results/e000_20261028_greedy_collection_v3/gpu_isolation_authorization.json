@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-28T07:43:36.446761+00:00",
+  "human_reply": "Authorize closing Hearthstone and NVIDIA Overlay",
+  "authorized_process_names": [
+    "Hearthstone.exe",
+    "NVIDIA Overlay.exe"
+  ],
+  "resource_limit_seconds": 19200,
+  "other_restrictions_unchanged": true
+}

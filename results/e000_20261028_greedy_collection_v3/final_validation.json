@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-28T08:41:23.560882+00:00",
+  "pytest_passed": 75,
+  "pytest_reported_seconds": 17.79,
+  "pytest_receipt_sha256": "150390b792d976692025a39cee1e55953bbd699a3fa0676ad4b4f003197bfe38",
+  "pytest_command": ".venv/Scripts/python.exe -m pytest -q --basetemp .cache/authorized-v3-tests",
+  "ruff_check_passed": true,
+  "git_diff_check_passed": true,
+  "cpu_test_receipt_core_sources_unchanged": true,
+  "real_processor_and_gpu_paths_exercised": true,
+  "complete_primary_requests": 384
+}

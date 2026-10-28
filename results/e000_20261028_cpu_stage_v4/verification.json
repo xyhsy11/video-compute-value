@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "cpu_preparations": 48,
+  "parent_input_hash_matches": 48,
+  "model_calls": 0,
+  "cuda_initialized": false,
+  "private_record_sha256": "cd86af64c5cdbb78920e5767650ec136fffb464ff5cef491899c3de5d8820f1c",
+  "conditions": [
+    {
+      "budget": 8,
+      "successful_cpu_preparations": 24,
+      "total_cpu_prepare_seconds": 2.072356549999313,
+      "decode_selection_rgb_resize_stack": 2.0588920500013046,
+      "letterbox_subset": 0.08814049999455165,
+      "native_processor": 0.01057080000100541,
+      "chat_template": 0.00026360000083514024,
+      "copies_metadata_validation_other_seconds": 0.002763349999440834,
+      "median_repetition_relative_range": 0.11170107011066563
+    },
+    {
+      "budget": 64,
+      "successful_cpu_preparations": 24,
+      "total_cpu_prepare_seconds": 2.805712000001222,
+      "decode_selection_rgb_resize_stack": 2.7483610500003124,
+      "letterbox_subset": 0.6673147499950574,
+      "native_processor": 0.04675064999901224,
+      "chat_template": 0.0002974500002892455,
+      "copies_metadata_validation_other_seconds": 0.01670410000042466,
+      "median_repetition_relative_range": 0.11983802030126925
+    }
+  ],
+  "elapsed_loop_seconds": 200.98399999999674
+}

@@ -1,0 +1,6 @@
+{
+  "status": "BLOCKED_ENVIRONMENT_PREFLIGHT",
+  "next_action": "Await GPU isolation, then bounded preflight; full collection requires all five probes and measured resource projection",
+  "remaining_seconds_at_write": 5157.626896561442,
+  "frozen_sources_unchanged": true
+}

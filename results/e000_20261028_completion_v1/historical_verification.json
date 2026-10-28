@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "verified_at": "2026-10-28T06:31:19.519460+00:00",
+  "preservation": {
+    "e000_20261027_collection_v2": {
+      "unchanged_files": 461,
+      "inventory_sha256": "0bbc98ff86dcc70aa67d2ae6783c222e2f480b118cc59f0aedcea29db793a80d"
+    },
+    "e000_20261027_diagnostic_v1": {
+      "unchanged_files": 438,
+      "inventory_sha256": "9141f10abfe56648173e15d5abe0e4750bfa803a68391a6218fb6a19c3739cc0"
+    },
+    "e000_20261028_diagnostic_v2": {
+      "unchanged_files": 173,
+      "inventory_sha256": "aa952b95c8d970018f24f8b6ab83d5ca6f69c6ffba337290a3771c36d2ee8776"
+    }
+  },
+  "saved_outputs_redecoded": 901,
+  "model_files_rehashed": 12,
+  "corrected_worker_policies_checked": 12,
+  "observed_corrected_token_cells": 16,
+  "all_observed_corrected_tokens_equal": true,
+  "new_model_calls": 0,
+  "new_gpu_execution": false,
+  "new_generation_receipt_code_gpu_validated": false,
+  "cpu_saved_records_independently_verified": true
+}

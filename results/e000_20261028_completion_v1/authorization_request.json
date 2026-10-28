@@ -1,0 +1,8 @@
+{
+  "reason": "Complete corrected study exceeds remaining four-hour cumulative limit",
+  "minimum_additional_seconds_for_current_forecast": 4762.206865412454,
+  "requested_cumulative_limit_seconds": 19200,
+  "storage_limit_gib": 20,
+  "video_limit_gib": 1,
+  "authorization_received": false
+}

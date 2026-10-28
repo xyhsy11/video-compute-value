@@ -10,7 +10,7 @@ from pathlib import Path
 
 import yaml
 
-from .common import Blocked, append_json, exclusive_lock, read_jsonl, utc_now, write_json
+from .common import Blocked, append_json, exclusive_lock, read_json, read_jsonl, utc_now, write_json
 from .protocol import validate_config
 from .resources import Ledger, environment
 
@@ -80,6 +80,17 @@ def parser():
     return result
 
 
+def require_cumulative_ledger(run, root):
+    path = Path(run, "resource_ledger.json")
+    others = [p for p in Path(root, "results").glob("*/resource_ledger.json") if p.resolve() != path.resolve()]
+    previous = [read_json(p) for p in others]
+    if any(any(session.get("finished_at") is None for session in value.get("sessions", [])) for value in previous):
+        raise Blocked("BLOCKED_RESOURCE", "Another run has active or unreconciled cumulative accounting")
+    maximum = max((value.get("active_seconds", 0) for value in previous), default=0)
+    if maximum and (not path.exists() or read_json(path).get("active_seconds", 0) < maximum):
+        raise Blocked("BLOCKED_RESOURCE", "Inherit the latest closed cumulative resource ledger before starting/resuming this run")
+
+
 def main(argv=None):
     args = parser().parse_args(argv)
     root, run = args.root.resolve(), args.run_dir.resolve()
@@ -88,12 +99,21 @@ def main(argv=None):
     config = validate_config(yaml.safe_load(args.config.read_text(encoding="utf-8")))
     run.mkdir(parents=True, exist_ok=True)
     set_local_paths(root)
+    if config.get("cuda_allocator_backend") == "native":
+        os.environ.pop("PYTORCH_ALLOC_CONF", None)
+        os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "backend:native"
     os.environ["OMP_NUM_THREADS"] = str(config["cpu_threads"])
     os.environ["MKL_NUM_THREADS"] = str(config["cpu_threads"])
     if args.command == "worker":
         from .runner import worker
         return worker(config, run, root, args.block, args.mode)
     with exclusive_lock(run / ".lock"):
+        try:
+            require_cumulative_ledger(run, root)
+        except Blocked as exc:
+            status(run, exc.status, str(exc))
+            print(f"{exc.status}: {exc}", file=sys.stderr)
+            return 2
         ledger = Ledger(run / "resource_ledger.json", root, config)
         with ledger.track(args.command):
             try:
@@ -108,7 +128,8 @@ def main(argv=None):
                     from .analysis import analyze, verify
                     analyze(config, run)
                     if args.command == "verify":
-                        if not verify(config, run, root)["records_valid"]:
+                        checked = verify(config, run, root)
+                        if not checked["records_valid"] or not checked["all_operational_gates_passed"]:
                             return 3
                 elif args.command == "account":
                     if args.event_seconds is None or args.event_seconds < 0 or not args.event_name:

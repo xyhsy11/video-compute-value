@@ -1,0 +1,8 @@
+{
+  "status": "CPU_DIAGNOSTIC_COMPLETE",
+  "experiment_0_status": "MEASUREMENT_UNSTABLE",
+  "cpu_preparations_verified": 48,
+  "model_calls": 0,
+  "cuda_initialized": false,
+  "at": "2026-10-28T09:04:53.888894+00:00"
+}

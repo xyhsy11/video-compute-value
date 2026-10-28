@@ -9,7 +9,7 @@ project's main scientific claim.
 
 The original specification is in
 [`protocols/e000_frozen_videoqa_feasibility_v1.md`](protocols/e000_frozen_videoqa_feasibility_v1.md).
-The user's subsequent explicit instruction authorizes GitHub creation and publication.
+The user authorized publishing the verified code and public-safe reports on 2026-10-28. Restricted artifacts remain local and ignored.
 This repository is separate from `video-refresh-benchmark`.
 
 ## Diagnostic correction (2026-10-28)
@@ -26,6 +26,35 @@ Its targeted subset does not replace the full five-budget quality curve. Frozen
 historical runs require their original source revision; current code deliberately
 rejects resuming them after a source change. A new directory does not renew the resource allowance;
 inherit the latest cumulative ledger before starting another named run.
+
+## Local completion audit
+
+The [completion report](results/e000_20261028_completion_v1/report.md) records the
+new CPU equivalence audit and the cumulative-budget decision. The candidate
+[execution addendum v2](protocols/e000_execution_v2.md) uses four decoder threads
+and explicit Uniform-64-only cache trimming, with every added operation inside the
+full-request boundary. It requires a fresh named collection and real GPU validation.
+CPU equivalence and unit tests alone never establish `FEASIBILITY_CONFIRMED`.
+No historical sampled measurements are reused as corrected-greedy accuracy.
+
+The user explicitly authorized cumulative caps of 5h20m and then **5h40m
+(20,400 seconds)** on 2026-10-28 for `e000_20261028_greedy_collection_v3`; storage
+and video limits remain unchanged. The second, resource-only grant is saved in
+`runtime_resource_grant.json`, separately from unchanged experimental fingerprints.
+Use `scripts/collect_e000_authorized_v3.py` for the authorized collection and
+`scripts/finalize_e000_v3.py` for independent closeout. The [initial preflight report](results/e000_20261028_greedy_collection_v3/authorized_preflight_report.md)
+preserves the earlier stall and blocked decision; the final completion report is
+created only after all 384 primary requests complete and are independently checked.
+
+The [completed corrected collection](results/e000_20261028_greedy_collection_v3/completion_report.md)
+finished all 360 video and 24 text-only requests. Its verdict is
+**MEASUREMENT_UNSTABLE**: inputs and generated tokens repeat exactly, all budgets
+fit, and saved-record verification passes, but only Uniform-48 meets the proposed
+20% timing-range criterion. The [separate CPU stage diagnostic](results/e000_20261028_cpu_stage_v4/report.md)
+localizes most preparation cost to full video decoding/selection/RGB/resize/stacking;
+it does not replace the failed end-to-end timing measurements. The latest
+cumulative ledger is now in `results/e000_20261028_cpu_stage_v4/`, inherited from
+the completed collection. Further work must inherit that latest closed ledger.
 
 ## Installation on Windows (PowerShell)
 
@@ -192,7 +221,8 @@ real experiment results. Tests explicitly use synthetic fixtures.
 The resource ledger counts the complete new project, including `.venv`, caches,
 temporary files and Git, against 20 GiB. Model weights are downloaded once to the
 local HF cache or reused from an existing complete immutable cache. The 4-hour active
-limit spans resumptions. All CLI operations use the same ledger; externally launched
+limit spans resumptions; the explicitly authorized v3 coordinator/finalizer applies
+the recorded runtime grant up to 5h40m. All operations inherit the same ledger; externally launched
 setup/validation costs can be recorded explicitly:
 
 ```powershell

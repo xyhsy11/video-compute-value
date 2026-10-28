@@ -1,0 +1,15 @@
+{
+  "pytest": {
+    "command": ".venv/Scripts/python.exe -m pytest -q --basetemp .cache/completion-closeout-tests",
+    "passed": 70,
+    "failed": 0,
+    "reported_seconds": 28.8
+  },
+  "ruff": {
+    "command": ".venv/Scripts/ruff.exe check src tests scripts",
+    "passed": true
+  },
+  "new_real_model_calls": 0,
+  "cpu_only_unit_suite": true,
+  "standalone_accounting_and_immutable_evidence_guards_tested": true
+}

@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "raw_rgb_equal_pairs": 16,
+  "exact_parent_input_hash_matches": 40,
+  "direct_equal_tensor_pairs": 4,
+  "all_original_videos": 8,
+  "all_frame_budgets": [
+    8,
+    16,
+    32,
+    48,
+    64
+  ],
+  "model_invocations": 0,
+  "cuda_initialized": false,
+  "elapsed_seconds": 351.3130000000001,
+  "raw_evidence_sha256": "79e134a3319a3b413e55b66c03c94dc18da3672f4d7be8f18078560fe5061742",
+  "prepare_evidence_sha256": "f23ac514a593664ae6e694d8781ae4024fdbd37def232b4aa93be60580e4b172"
+}

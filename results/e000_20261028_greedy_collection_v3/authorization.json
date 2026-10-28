@@ -1,0 +1,13 @@
+{
+  "id": "user_20261028_5h20m",
+  "authorized_at": "2026-10-28T06:47:12.283524+00:00",
+  "source": "Direct human reply to the cumulative-limit question",
+  "answer": "Authorize a 5h20m cumulative time limit",
+  "previous_limit_seconds": 14400,
+  "authorized_limit_seconds": 19200,
+  "storage_limit_gib": 20,
+  "video_limit_gib": 1,
+  "one_cuda_worker": true,
+  "local_only": true,
+  "git_mutations_authorized": false
+}

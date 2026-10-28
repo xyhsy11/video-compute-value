@@ -1,0 +1,67 @@
+{
+  "planned_primary_video": 360,
+  "planned_primary_text": 24,
+  "warmups": 42,
+  "fit_integrity_and_profile_calls": 15,
+  "planned_model_invocations_before_retries": 441,
+  "fresh_model_workers": 21,
+  "video_call_seconds": 2214.4264244999995,
+  "text_call_seconds": 29.118007880000025,
+  "worker_startup_seconds": 835.3824352025986,
+  "cpu_probe_seconds": 30.1632244,
+  "verification_seconds": 180,
+  "setup_seconds": 90,
+  "bounded_retry_reserve_seconds": 600,
+  "raw_projected_seconds": 3979.090091982598,
+  "safety_factor": 1.5,
+  "projected_seconds": 5968.635137973897,
+  "remaining_seconds": 1558.445944561442,
+  "fits_remaining_budget": false,
+  "additional_seconds_required": 4410.189193412455,
+  "forecast_only": true,
+  "full_gpu_policy_verified": false,
+  "inputs": {
+    "cpu_seconds": {
+      "8": 2.6531164891566266,
+      "16": 2.8843477590361446,
+      "32": 3.197074495180723,
+      "48": 3.0088614674698797,
+      "64": 3.1358048289156626
+    },
+    "remainder_seconds": {
+      "8": 0.9373040000000006,
+      "16": 2.715831849999999,
+      "32": 2.715831849999999,
+      "48": 2.715831849999999,
+      "64": 2.715831849999999
+    },
+    "startup_seconds": 39.7801159620285,
+    "text_seconds": 1.119923380000001,
+    "cpu_probe_seconds": 30.1632244,
+    "remaining_seconds": 1558.445944561442
+  },
+  "zero_cpu_scenario_seconds": 4116.174110523898,
+  "startup_observations_seconds": [
+    33.5980064868927,
+    45.945040702819824,
+    36.52772521972656,
+    41.83044075965881,
+    42.00603365898132,
+    40.00995326042175,
+    34.300079345703125,
+    36.025848627090454,
+    40.13355898857117,
+    39.550278663635254,
+    41.72468090057373,
+    33.11781668663025
+  ],
+  "assumptions": [
+    "CPU costs measured on all original sources, all budgets; first-question processor lengths are proxies for the other two questions",
+    "Primary CPU weighting is 9 requests per source/budget; 11 extra per-budget calls use the fixed first source",
+    "Intermediate 16/32/48-frame GPU-related remainders are unverified proxies from corrected-greedy trim-64 medians",
+    "Text-only cost is an unverified proxy from native-8 remainder p90, lower-bounded by one second",
+    "21 fresh-worker startups use the median of 12 observed corrected-diagnostic startups",
+    "One 600-second worker contingency, 180-second verification and 90-second setup, then 1.5 safety factor",
+    "Model hashing, environment/startup work, warmups, probes, profiles and final verification are included; these estimates are not primary measurements"
+  ]
+}

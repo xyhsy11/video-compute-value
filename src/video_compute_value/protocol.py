@@ -50,12 +50,25 @@ def validate_config(config):
         "frame_budgets": [8, 16, 32, 48, 64], "reference_budget": 64, "repetitions": 3,
         "batch_size": 1, "seed": 20261027, "max_new_tokens": 8, "do_sample": False,
         "num_beams": 1, "max_pixels_per_frame": 65536, "attention_backend": "sdpa",
-        "cumulative_execution_limit_hours": 4, "additional_disk_limit_gib": 20,
+        "additional_disk_limit_gib": 20,
         "video_acquisition_limit_gib": 1,
     }
     for key, value in expected.items():
         if config.get(key) != value:
             raise Blocked("INPUT_INTEGRITY_FAILED", f"{key} changes Experiment 0; use a new version")
+    allowed_seconds = {None: 14400, "user_20261028_5h20m": 19200}
+    authorization = config.get("resource_authorization_id")
+    limit_seconds = config.get("cumulative_execution_limit_hours", 0) * 3600
+    if authorization not in allowed_seconds or limit_seconds <= 0 or limit_seconds > allowed_seconds[authorization] + 1e-6:
+        raise Blocked("BLOCKED_RESOURCE", "Cumulative time limit exceeds explicit human authorization")
+    decoder = (config.get("decoder_threads", 1), config.get("decoder_thread_type", "NONE"))
+    if decoder not in ((1, "NONE"), (4, "FRAME")):
+        raise Blocked("INPUT_INTEGRITY_FAILED", "Unsupported frozen decoder policy")
+    if config.get("cuda_trim_budgets", []) not in ([], [64]):
+        raise Blocked("INPUT_INTEGRITY_FAILED", "Supported cache policies are native or explicit Uniform-64 trim")
+    changed_execution = decoder != (1, "NONE") or bool(config.get("cuda_trim_budgets"))
+    if changed_execution and config.get("execution_policy_version") != "threaded-decode-trim64-v2":
+        raise Blocked("INPUT_INTEGRITY_FAILED", "Changed execution requires explicit versioned policy")
     return config
 
 

@@ -1,0 +1,21 @@
+{
+  "base_git_revision": "52773383da61f6751ce2f216298f454097b45efa",
+  "source_files_sha256": {
+    "src/video_compute_value/__init__.py": "297e50639b10a6f4af7bf7a66654d2bb7c371ac8a727f0c53c956fdf86d2766b",
+    "src/video_compute_value/acquire.py": "e2fc6847e46167ed0e689ab64a9a8f9a8df4c45c10764b725046543e0c4ae9d4",
+    "src/video_compute_value/analysis.py": "bef0e8295b6068aef9e172418461dc7e6cd89db533f10e372f453cab865284dd",
+    "src/video_compute_value/common.py": "c801b4d8e2f4375e1db84b55532695c6799fcc899fdfe7cd0a5c545c90bb5649",
+    "src/video_compute_value/dataset.py": "8424f1039aadc24ace9c9c24340b12106250d694fb6866d1adeb87457ed2d9e3",
+    "src/video_compute_value/e000.py": "909add1dfc9227adcc8d317859f41b8d9e17dd7a37456aa5bc418ffc5f575412",
+    "src/video_compute_value/generation.py": "8ae62994e456a4d667c9f4597e167625d2c2747cb6f9049837cdf82329b16b25",
+    "src/video_compute_value/measurement.py": "3c3d92a075dc64db174264e3b457ef1f37af5c1d80ff41a6f22b117051a186c5",
+    "src/video_compute_value/model.py": "ca0c52bc90ea9c1cdfe04152d45225a5befc4a6c84d5d2634f859d657beefda8",
+    "src/video_compute_value/protocol.py": "9a153dba39ac186b35129c30b1f274b0616016033595fa50268bcf3f48485a94",
+    "src/video_compute_value/resources.py": "2526d552984474e23bfb8bbbd88da3ea16f9136a373d130fd7d2de47a29b9ca0",
+    "src/video_compute_value/runner.py": "4c5b99890f47cd81adaed2a93a471733e90736ae4a1db5b68899f52fb82f17ab",
+    "src/video_compute_value/video.py": "a1cefb42a9a6effaaf05e56275476172601ce5052f438f30866396e2e0535935"
+  },
+  "working_tree_intentionally_uncommitted": true,
+  "config_sha256": "eaf6d204ecbf401ae2ff1521c577ebb0dfed2b2ead2f551d1159b1cdf06e11cd",
+  "authorization_id": "user_20261028_5h20m"
+}

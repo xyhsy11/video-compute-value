@@ -1,0 +1,9 @@
+{
+  "status": "MEASUREMENT_UNSTABLE",
+  "message": "Timing stability or live allocation growth requires interpretation",
+  "updated_at": "2026-10-28T08:40:02.302071+00:00",
+  "real_inference": true,
+  "completed_model_calls": 441,
+  "planned_video_calls": 360,
+  "planned_text_calls": 24
+}

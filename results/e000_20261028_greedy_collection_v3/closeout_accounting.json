@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-28T07:16:34.457533+00:00",
+  "authorized_limit_seconds": 19200,
+  "inherited_seconds": 13193.571727438557,
+  "new_seconds": 1370.3672500000011,
+  "cumulative_seconds": 14563.938977438558,
+  "remaining_seconds": 4636.061022561442,
+  "storage_gib": 15.86314386036247,
+  "completed_new_model_calls": 0,
+  "unknown_interrupted_new_calls_upper_bound": 1,
+  "historical_calls_upper_bound": 1012,
+  "cumulative_calls_upper_bound": 1013,
+  "no_gpu_worker_active": true,
+  "pending_user_gpu_isolation": true,
+  "git_index_empty": true
+}

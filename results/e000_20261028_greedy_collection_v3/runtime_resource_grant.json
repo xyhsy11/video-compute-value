@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-28T07:56:15.247172+00:00",
+  "human_reply": "Authorize 5h40m cumulative time",
+  "authorized_limit_seconds": 20400,
+  "prior_authorized_limit_seconds": 19200,
+  "resource_only": true,
+  "frozen_experimental_configuration_unchanged": true,
+  "storage_limit_gib": 20,
+  "video_limit_gib": 1,
+  "one_cuda_worker": true,
+  "local_only": true,
+  "git_mutations_forbidden": true
+}

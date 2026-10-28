@@ -5,3 +5,7 @@
 *.jsonl text eol=lf
 *.yaml text eol=lf
 *.ps1 text eol=crlf
+
+# Exact executed bytes are part of the frozen Experiment 0 fingerprints.
+src/video_compute_value/*.py -text
+configs/e000_threaded_authorized_v3.yaml -text

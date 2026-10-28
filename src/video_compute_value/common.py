@@ -7,6 +7,7 @@ import json
 import os
 import subprocess
 import tempfile
+import time
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
@@ -47,7 +48,15 @@ def atomic_text(path, value):
             handle.write(value)
             handle.flush()
             os.fsync(handle.fileno())
-        os.replace(temp, path)
+        for attempt in range(6):
+            try:
+                os.replace(temp, path)
+                break
+            except PermissionError:
+                if attempt == 5:
+                    raise
+                time.sleep(0.02 * 2 ** attempt)  # Bounded retry for transient Windows reader locks.
+
     finally:
         if os.path.exists(temp):
             os.unlink(temp)

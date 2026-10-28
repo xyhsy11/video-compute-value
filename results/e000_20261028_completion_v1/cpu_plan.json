@@ -1,0 +1,37 @@
+{
+  "frozen_at": "2026-10-28T06:20:59.022098+00:00",
+  "sources": {
+    "src/video_compute_value/__init__.py": "297e50639b10a6f4af7bf7a66654d2bb7c371ac8a727f0c53c956fdf86d2766b",
+    "src/video_compute_value/acquire.py": "e2fc6847e46167ed0e689ab64a9a8f9a8df4c45c10764b725046543e0c4ae9d4",
+    "src/video_compute_value/analysis.py": "8171b5d8748109a15422c1433ca54e21ec53a70bb6f393f806fd98d2b8af626d",
+    "src/video_compute_value/common.py": "c801b4d8e2f4375e1db84b55532695c6799fcc899fdfe7cd0a5c545c90bb5649",
+    "src/video_compute_value/dataset.py": "8424f1039aadc24ace9c9c24340b12106250d694fb6866d1adeb87457ed2d9e3",
+    "src/video_compute_value/e000.py": "03e0cdc2f8e480f1b86ee9576c125a008ebc1d72457605bd52c8977d660a77fd",
+    "src/video_compute_value/generation.py": "8ae62994e456a4d667c9f4597e167625d2c2747cb6f9049837cdf82329b16b25",
+    "src/video_compute_value/measurement.py": "3c3d92a075dc64db174264e3b457ef1f37af5c1d80ff41a6f22b117051a186c5",
+    "src/video_compute_value/model.py": "ca0c52bc90ea9c1cdfe04152d45225a5befc4a6c84d5d2634f859d657beefda8",
+    "src/video_compute_value/protocol.py": "985a3cb778809864d6fe8647cdaf842b85244983f9ca01fa8ccaa7e01cc1b45c",
+    "src/video_compute_value/resources.py": "2526d552984474e23bfb8bbbd88da3ea16f9136a373d130fd7d2de47a29b9ca0",
+    "src/video_compute_value/runner.py": "75b6f4da3412ce633c5c047262321ff2232cc680799dc137ab89206399ba67f1",
+    "src/video_compute_value/video.py": "a1cefb42a9a6effaaf05e56275476172601ce5052f438f30866396e2e0535935",
+    "scripts/benchmark_e000_cpu.py": "1bb4f4211279e50382fd604b89e8153b68e117d89ce2c9796ccd3d1bd881c1f0"
+  },
+  "parent_cohort_sha256": "5f823c2fd2b8aae5902d27651c97d6e7a9ecaebf2a1def1876a3c8128561c52c",
+  "candidate_config_sha256": "225c0b89863b5518bcd0517b71eaa963646b8fea550c40eccabbcf3f491bb033",
+  "budgets": [
+    8,
+    16,
+    32,
+    48,
+    64
+  ],
+  "raw_rgb_pairs": 16,
+  "candidate_preparations": 40,
+  "direct_tensor_pairs": 4,
+  "model_calls": 0,
+  "gpu_context": false,
+  "maximum_cpu_audit_seconds": 600,
+  "remaining_before_seconds": 2134.856627561442,
+  "selection": "All 8 original videos, first official question per source, all 5 budgets; direct raw RGB equality at 8 and 64",
+  "boundary": "CPU-only diagnostic; not primary end-to-end latency. Every prepare/decode starts from the compressed video; no cross-request decoded reuse"
+}
