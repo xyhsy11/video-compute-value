@@ -1,0 +1,11 @@
+{
+  "all_cpu_regression_tests_passed": true,
+  "tests_passed": 133,
+  "targeted_E2_tests_passed": 20,
+  "ruff_all_repository_passed": true,
+  "test_file_sha256": "bb8aac948fb83fa7269039b7fcec606aa00530d4509ce168e0b56de9bdcb2ee6",
+  "synthetic_test_fixtures_are_not_experimental_evidence": true,
+  "real_legacy_compatibility_calls_verified": 5,
+  "independent_E0_saved_records_checked": 384,
+  "real_full_cohort_and_live_timing_unexercised": true
+}

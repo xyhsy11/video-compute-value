@@ -1,0 +1,7 @@
+{
+  "status": "NOT_FROZEN",
+  "outer_folds": 5,
+  "planned_groups_per_outer_fold": 8,
+  "inner_folds": 4,
+  "actual_groups_per_fold": null
+}

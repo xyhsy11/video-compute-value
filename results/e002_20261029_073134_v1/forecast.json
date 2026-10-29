@@ -1,0 +1,56 @@
+{
+  "stage": "E2A",
+  "measured_throughput": null,
+  "assumptions_only": false,
+  "primary_model_calls": 960,
+  "repeatability_model_calls": 120,
+  "warmup_and_probe_model_calls": null,
+  "raw_assumed_seconds": {
+    "1080_scientific_plus_4_warmup_calls": 15169.9841252,
+    "two_model_loads": 26.647627999998804,
+    "record_overhead": 108.4,
+    "unmeasured_acquisition_and_eligibility_allowance": 900,
+    "unmeasured_training_verification_reporting_allowance": 600
+  },
+  "safety_factor": 1.5,
+  "failure_allowance_seconds": 180,
+  "closeout_reserve_seconds": 300,
+  "conditional_required_seconds": 25687.547629799996,
+  "remaining_seconds": 209.0346759999993,
+  "admitted": false,
+  "reasons": [
+    "40 new eligible sources unavailable",
+    "remaining grant below conservative stage forecast",
+    "full collection/evaluator orchestration incomplete",
+    "new-source throughput not yet qualified"
+  ],
+  "conditional_additional_seconds": 25479,
+  "E2B": {
+    "planned_pipeline_executions_upper_bound": 1440,
+    "model_invocations_upper_bound": 2520,
+    "timing_screen_and_training_calibration_calls": null,
+    "admitted": false,
+    "note": "Separate frozen timing screen, training-only panel, and full-stage forecast required."
+  },
+  "storage_estimate": {
+    "private_records_and_traces_allowance_bytes": 134217728,
+    "new_video_bytes": null,
+    "additional_weights_bytes": 0
+  },
+  "time_note": "Conditional planning estimate, not measured throughput or an unconditional completion guarantee.",
+  "measured_legacy_probe": {
+    "calls": 5,
+    "worker_wall_seconds": 61.40541200000007,
+    "load_seconds": 13.323813999999402,
+    "request_seconds": [
+      3.6021888,
+      7.9700399,
+      13.9944503,
+      2.2922984,
+      2.3359857
+    ],
+    "maximum_request_seconds": 13.9944503,
+    "timing_repeatability_qualified": false
+  },
+  "forecast_limitation": "Measured legacy maximum plus explicit unmeasured input/CPU allowances; new-source decode times and provenance/eligibility remain unmeasured."
+}

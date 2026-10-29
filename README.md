@@ -11,12 +11,14 @@ current evidence comes from a small, exposed development cohort. We have not
 trained a controller or demonstrated an adaptive policy or validated speedup.
 This repository is separate from `video-refresh-benchmark`.
 
-| Experiment | Question and endpoint | Data and controls | Current result |
-|---|---|---|---|
-| E0: feasibility and measurement | Can we fit, reproduce, score and time requests? Operational gates, descriptive accuracy and memory. | 8 short videos / 24 questions; uniform 8/16/32/48/64 frames; separate text-only diagnostic; 3 video repetitions. | Complete and independently verified; **MEASUREMENT_UNSTABLE**. |
-| E1: additional-clip headroom | Can hindsight choice among four added clips improve accuracy? Primary: oracle − exact expected random. | Same exposed 8 videos / 24 questions; base 8 frames, four quarter additions and uniform addition at 16 frames; 2 passes. | H_choice = 18.75 pp; oracle − best fixed = 12.50 pp. |
+| Experiment | Question | Sources / questions | Model / input controls | Endpoint | Status | Main result | Limitation |
+|---|---|---|---|---|---|---|---|
+| E0 | Can requests fit, repeat, and be measured? | 8 / 24 exposed | Frozen Qwen3-VL; uniform 8–64 | Operational gates | MEASUREMENT_UNSTABLE | 62.50–87.50% accuracy | Timing failed; small development cohort |
+| E0 timing follow-up | Can worker lifecycle stabilize timing? | 8 / 8 planned | Same model; fresh/resident 8/64 | 20% median relative range | BLOCKED_MODEL_RUNTIME | Zero model calls; native loading failure | Timing outcomes unavailable |
+| E1 | Is there hindsight acquisition headroom? | 8 / 24 exposed | Same retained base8; matched augmented16 | Oracle minus expected random | COMPLETE_RETROSPECTIVE | 18.75 pp; oracle minus fixed 12.50 pp | Video-specific fixed quarter matched oracle in all sources |
+| E2 | Can observations predict benefit and realize value after cost? | 40 / 120 planned; 0 collected | Same answerer; V/Q/VQ; source-held-out folds | Delta_fixed; separate E2B cost gate | BLOCKED_INPUT / RESOURCE | No scientific result | Partial CPU implementation; full timing unverified |
 
-Both experiments use **Video-MME v1**, short category, the official annotation
+E0 and E1 use **Video-MME v1**, short category, the official annotation
 **test split**, revision `ead1408f75b618502df9a1d8e0950166bf0a2a0b`.
 We use all three questions per source, unchanged. Because these videos and
 questions have been exposed during development, neither experiment is an
@@ -60,11 +62,7 @@ sampled collection is preserved but excluded from these corrected-greedy results
 checkpoint defaults had backfilled sampling despite a requested `do_sample=False`.
 The corrected adapter records and verifies the effective greedy policy.
 
-Regenerate all six research figures and the E1 report from saved data with:
-
-```powershell
-.venv\Scripts\python.exe scripts/report_e001.py --run-dir results/e001_20261029_132707_v1
-```
+The six saved research figures are preserved below. The historical report writer would overwrite the README and is not run in place.
 
 ![E0 accuracy by uniform frame budget](results/e001_20261029_132707_v1/figures/e0_accuracy.png)
 
@@ -231,7 +229,48 @@ See the [E1 protocol](protocols/e001_additional_clip_headroom_v1.md), [report](r
 A hindsight oracle only shows what was possible inside this four-action menu.
 It cannot show that a practical policy can select the right clip before seeing
 its answer. E1 is accuracy-only: its descriptive times do not validate latency
-or computational efficiency. No controller training or Experiment 2 was started.
+or computational efficiency. E1 did not train a controller. The separately authorized E2 checkpoint follows below.
+
+## Experiment 2: can observations predict acquisition benefit?
+
+E1 establishes hindsight opportunity. E2 asks whether information available before
+acquisition predicts signed correctness change, and then whether a real base-first
+policy delivers value after charging both requests. These are separate E2A and E2B
+questions. The planned E2 development pilot uses 40 new source groups and 120
+questions, with five outer held-out source folds and four inner training folds.
+
+V uses the exact eight base RGB frames; Q hashes only original question text; VQ
+adds fixed query–video interactions. A separate C control uses same-call generation
+scores. Paths, identities, options, labels, candidate outputs/costs and outside-base
+pixels cannot enter the policy observation. Four ridge outputs predict -1/0/+1
+gain. Scalers, regularization, fixed controls and thresholds are training-only.
+
+**Current E2 outcome: blocked checkpoint, no E2 scientific calls.**
+
+| Stage | Current evidence |
+|---|---|
+| Implementation | CPU core tested; full collection/evaluator/cost-panel orchestration incomplete |
+| E2A collection | 0/40 source groups; 0/120 questions; 0/1,080 planned calls |
+| Bounded legacy compatibility | PASSED; 5/5 calls completed |
+| Predictive value / question contribution | Unavailable |
+| E2B practical value | Not evaluable; no complete-pipeline timing |
+
+![E2 evidence progress](results/e002_20261029_073134_v1/figures/e2_progress.png)
+
+Progress only; [exact count data](results/e002_20261029_073134_v1/progress.csv). No accuracy or cost
+curve is available. The inherited grant cannot admit the full collection stage.
+The eight exposed sources cannot substitute for new E2 groups. The runtime attempt
+and all failure evidence are preserved. No GPU compatibility success is inferred
+from passing CPU tests. See the [E2 report](results/e002_20261029_073134_v1/report.md),
+[verification](results/e002_20261029_073134_v1/verification.json), [protocol](protocols/e002_preacquisition_predictability_v1.md)
+and [conditional resource amendment](results/e002_20261029_073134_v1/resource_amendment_request.md).
+
+E2A's primary contrast is VQ minus training-selected fixed quarter; VQ minus V
+tests explicit question contribution. E2B requires positive accuracy and no greater
+mean complete latency against both Direct16 and a training-selected baseline.
+Each adaptive acquisition pays for the initial base and a full 16-frame re-encoding.
+Timing must pass the frozen 20% median relative-range criterion in three sessions.
+Neither headroom nor predictive gain alone establishes an efficiency improvement.
 
 ## What the evidence supports
 
@@ -239,10 +278,9 @@ We can preserve exact visual inputs, execute the frozen model and independently
 score saved outputs. E0 also shows that full video preparation can dominate a
 request, so fewer selected frames need not yield proportional savings. Its timing
 instability remains unresolved. E1 tests only retrospective development headroom
-within a fixed menu. Learning a useful acquisition policy, validating its costs,
-and confirming its behavior on independent data remain future hypotheses.
+within a fixed menu. E2 has begun as a blocked implementation checkpoint; useful predictive selection and validated deployment costs remain unestablished.
 
-## Reproduction and current resources
+## Historical reproduction and resources
 
 Use the existing pinned environment. The [setup and E0 reproduction guide](docs/e0_reproduction.md)
 preserves installation, acquisition and measurement details. Python 3.12.14,
@@ -250,19 +288,7 @@ PyTorch 2.8.0/CUDA 12.8, Transformers 4.57.1, PyAV 16.0.1 and the other exact
 software/source fingerprints are saved with the runs. Original restricted
 videos, annotations and immutable weights are required for local verification.
 
-```powershell
-$run = "results/e001_20261029_132707_v1"
-.venv\Scripts\python.exe -m video_compute_value.e001 account --config configs/e001.yaml --run-dir $run
-.venv\Scripts\python.exe -m pytest -q --basetemp .cache/e001-regression
-.venv\Scripts\ruff.exe check src tests scripts
-.venv\Scripts\python.exe -m video_compute_value.e001 resume --config configs/e001.yaml --run-dir $run
-.venv\Scripts\python.exe -m video_compute_value.e001 analyze --config configs/e001.yaml --run-dir $run
-.venv\Scripts\python.exe -m video_compute_value.e001 verify --config configs/e001.yaml --run-dir $run
-.venv\Scripts\python.exe scripts/report_e001.py --run-dir $run
-.venv\Scripts\python.exe -m video_compute_value.e001 close --config configs/e001.yaml --run-dir $run
-```
-
-The CLI also implements `preflight` and `run` for a fresh named run whose resource
+The historical E1 CLI implements `preflight` and `run` for a fresh named run whose resource
 grant and ledger have first been inherited from the latest closed project ledger.
 It freezes before outcomes, checks actual CPU/native/GPU paths, and admits full
 collection only after a real-probe forecast with a 1.5 factor and explicit reserves.
@@ -282,12 +308,7 @@ The E0 follow-up inherits that entire closed ledger, including prior publication
 charges, without another resource grant. Its [current cumulative accounting](results/e000_20261029_150300_timing_stabilization_v5/resource_accounting.json)
 points to the new local `private/resource_ledger.json`. It accounts for implementation,
 native preparation, the failed loader, tests, verification, reporting and publication.
-Use the follow-up report's commands for this new run; historical run directories
-remain immutable. Read-only failure closeout can be reproduced with:
-
-```powershell
-.venv\Scripts\python.exe scripts/verify_e000_timing_closeout_v5.py --run-dir results/e000_20261029_150300_timing_stabilization_v5
-```
+The follow-up commands are preserved in its report. Historical result directories remain immutable; current E2 audits write only under E2.
 
 ## Data access and references
 
@@ -304,3 +325,22 @@ The official annotation file is `videomme/test-00000-of-00001.parquet` in the
 - Shuai Bai et al. (2025). *Qwen3-VL Technical Report*. arXiv:2511.21631.
   [Paper](https://arxiv.org/abs/2511.21631), [official model card](https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct),
   [official code and citation metadata](https://github.com/QwenLM/Qwen3-VL).
+
+## Current E2 reproduction and resource lineage
+
+The latest cumulative ledger is under [E2 accounting](results/e002_20261029_073134_v1/resource_accounting.json),
+inheriting every closed E0/E1/v5 charge. No grant was renewed. Private records,
+annotations, feature matrices and trained artifacts remain excluded from Git.
+All historical result directories remain immutable; the new assembler reads them.
+
+```powershell
+.venv\Scripts\python.exe -m pytest tests/test_e002.py -q
+.venv\Scripts\ruff.exe check src tests scripts
+.venv\Scripts\python.exe scripts/report_e002.py --run-dir results/e002_20261029_073134_v1
+.venv\Scripts\python.exe scripts/audit_e002_publication.py --run-dir results/e002_20261029_073134_v1
+.venv\Scripts\python.exe -m video_compute_value.e002 resume --run-dir results/e002_20261029_073134_v1
+```
+
+Resume rechecks the checkpoint; a preserved failed compatibility attempt stops it.
+It does not start the unimplemented scientific collection. New resource authority
+and valid input/runtime gates are necessary before that stage can be completed.

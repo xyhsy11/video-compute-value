@@ -16,3 +16,7 @@ results/e001_20261029_132707_v1/*.csv text eol=lf
 
 # Keep sanitized timing-follow-up CSV bytes stable across Windows staging.
 results/e000_20261029_150300_timing_stabilization_v5/*.csv text eol=lf
+
+# Keep the E2 checkpoint's data and rendered SVG hashes stable on Windows.
+results/e002_20261029_073134_v1/*.csv text eol=lf
+results/e002_20261029_073134_v1/figures/*.svg text eol=lf

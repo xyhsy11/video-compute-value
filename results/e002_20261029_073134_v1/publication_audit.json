@@ -1,0 +1,9 @@
+{
+  "checks_passed": true,
+  "allowlisted_files_checked": 41,
+  "local_links_checked": 46,
+  "restricted_annotation_strings_checked": 8351,
+  "figure_sources_checked": 2,
+  "git_revision_checked": null,
+  "scientific_success": false
+}

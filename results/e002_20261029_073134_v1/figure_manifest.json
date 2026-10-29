@@ -1,0 +1,12 @@
+{
+  "e2_progress.png": {
+    "sha256": "a23d73e82c0e2cc29e9d5acb9b64a031fac73982ffe09db9c0a17cd9ba0cb520",
+    "data": "progress.csv",
+    "data_sha256": "54ab097da2af09126d5aa59928d5c47c32fdb1048d1aa482a5d78968fc8283c7"
+  },
+  "e2_progress.svg": {
+    "sha256": "72a6cf51242c3a2be89970b84601f61cf393057731596209d31bd672bf8010b9",
+    "data": "progress.csv",
+    "data_sha256": "54ab097da2af09126d5aa59928d5c47c32fdb1048d1aa482a5d78968fc8283c7"
+  }
+}

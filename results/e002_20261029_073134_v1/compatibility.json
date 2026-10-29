@@ -1,0 +1,16 @@
+{
+  "status": "PASSED",
+  "at": "2026-10-29T07:46:09.090423+00:00",
+  "returncode": 0,
+  "windows_exit_hex": "0x00000000",
+  "timed_out": false,
+  "wall_seconds": 61.40541200000007,
+  "planned_compatibility_calls": 5,
+  "completed_model_calls": 5,
+  "unknown_model_calls_upper_bound": 0,
+  "feature_integrity_passed": true,
+  "native_8_16_passed": true,
+  "worker_reaped": true,
+  "automatic_retries": 0,
+  "log_sha256": "5bb5ab83586ae7948214f4f005401f0db71962acd2dbbbc0485472cfdc23921b"
+}

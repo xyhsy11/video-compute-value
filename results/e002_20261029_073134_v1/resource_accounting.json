@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-29T07:50:28.139728+00:00",
+  "authorized_limit_seconds": 27600,
+  "inherited_seconds": 25562.825596000002,
+  "cumulative_seconds": 27390.965324,
+  "remaining_seconds": 209.0346759999993,
+  "storage_current_bytes": 17049375913,
+  "storage_peak_bytes": 17049375913,
+  "storage_limit_bytes": 21474836480,
+  "video_transfer_bytes": 81653854,
+  "video_transfer_and_interruption_upper_bound_bytes": 82702430,
+  "video_limit_bytes": 1073741824,
+  "authoritative_resource_ledger": "private/resource_ledger.json",
+  "all_sessions_closed": true,
+  "precharged_closeout_seconds": 300,
+  "new_video_transfer_bytes": 0
+}

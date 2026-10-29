@@ -1,0 +1,99 @@
+{
+  "experiment_id": "e002_preacquisition_predictability_v1",
+  "source_files": {
+    "src/video_compute_value/e002.py": "d2c777b2d098daf9ffb30059dd86fb5506de86cf8a1b7a3c182061a494d4b650",
+    "src/video_compute_value/e002_accounting.py": "cd179c6fc600f87f926889cb74da1bbaa518d63a081fd35729f76f828f40ef70",
+    "src/video_compute_value/e002_analysis.py": "a19a6b1633531a1a6a7c77d80227b8e50852ac1888a5f035de4d908512692f75",
+    "src/video_compute_value/e002_features.py": "e878d2f6ea38b90c0d643c3755c651220680948c66a2a44819e9f768698f3009",
+    "src/video_compute_value/e002_input.py": "1f0710a3bb0508b0237889547cb6a739a18eb124d1148371be13501f2a282387",
+    "src/video_compute_value/e002_model.py": "a9a8de0b497e53e14657403a0a439e0983a9d6edbf4a7121a50bfe0445e4bb00",
+    "src/video_compute_value/e002_runtime.py": "ae6c43878bfbfea5a0eb693651dfff3b6ef4cbde94d875c88a58a7fd772157d0",
+    "src/video_compute_value/e002_verify.py": "433d7b12519f05176d04a5974458629054b2d715449551596435d64850622df7",
+    "configs/e002.yaml": "71fa14453773c9ce3d7b2d054078b4dbeee50db947b30118d7f7b82670649c3d",
+    "protocols/e002_preacquisition_predictability_v1.md": "6738f72e0785c1b1d26d7fcbbb830b7526caaff0e10850b1bceb85aea00aba3c",
+    "src/video_compute_value/model.py": "ca0c52bc90ea9c1cdfe04152d45225a5befc4a6c84d5d2634f859d657beefda8",
+    "src/video_compute_value/generation.py": "8ae62994e456a4d667c9f4597e167625d2c2747cb6f9049837cdf82329b16b25",
+    "src/video_compute_value/video.py": "a1cefb42a9a6effaaf05e56275476172601ce5052f438f30866396e2e0535935",
+    "src/video_compute_value/protocol.py": "9a153dba39ac186b35129c30b1f274b0616016033595fa50268bcf3f48485a94",
+    "src/video_compute_value/measurement.py": "3c3d92a075dc64db174264e3b457ef1f37af5c1d80ff41a6f22b117051a186c5",
+    "src/video_compute_value/e001_input.py": "f79ecac380e3a00e4c874be82095dede60df08ad22aace03e7cb78b7bde97ff9",
+    "src/video_compute_value/common.py": "c801b4d8e2f4375e1db84b55532695c6799fcc899fdfe7cd0a5c545c90bb5649",
+    "src/video_compute_value/resources.py": "2526d552984474e23bfb8bbbd88da3ea16f9136a373d130fd7d2de47a29b9ca0"
+  },
+  "config": {
+    "experiment_id": "e002_preacquisition_predictability_v1",
+    "annotation_revision": "ead1408f75b618502df9a1d8e0950166bf0a2a0b",
+    "model_revision": "ebb281ec70b05090aa6165b016eac8ec08e71b17",
+    "source_groups": 40,
+    "questions_per_source": 3,
+    "outer_folds": 5,
+    "inner_folds": 4,
+    "seed": 2026102902,
+    "base_frames": 8,
+    "augmented_frames": 16,
+    "primary_calls": 960,
+    "repeatability_calls": 120,
+    "bootstrap_resamples": 10000,
+    "ridge_alphas": [
+      1,
+      10,
+      100
+    ],
+    "gain_thresholds": [
+      "always_acquire",
+      0,
+      0.025,
+      0.05,
+      0.1,
+      0.2,
+      0.4,
+      0.8,
+      "always_stop"
+    ],
+    "timing_relative_range_threshold": 0.2,
+    "cheapness_fraction": 0.1,
+    "compatibility_timeout_seconds": 90,
+    "safety_factor": 1.5,
+    "closeout_reserve_seconds": 300,
+    "cumulative_limit_seconds": 27600,
+    "storage_limit_bytes": 21474836480,
+    "video_limit_bytes": 1073741824
+  },
+  "feature_schema": {
+    "version": "e002-observations-v1",
+    "V": 19,
+    "Q": 66,
+    "VQ": 341,
+    "pixels": "exact eight retained uint8 RGB canvases; remove frozen letterbox rectangle",
+    "gray": "Pillow RGB.convert(L), resize 32x32 BILINEAR, float64 / 255",
+    "quarters": "floor(4*original_PTS/duration); exactly two base observations per quarter",
+    "visual": [
+      "mean spatial population std",
+      "mean of horizontal/vertical mean abs differences",
+      "between-image mean abs difference",
+      "fraction abs difference > 0.10"
+    ],
+    "global": [
+      "log1p duration seconds",
+      "log1p frame count",
+      "original width/height"
+    ],
+    "question_recipe": "NFKC then casefold; Unicode regex [^\\W_]+; SHA256 UTF8 token; bucket=int.from_bytes(digest[:8],big)%64; sign=+1 if byte8 even else -1; L2",
+    "question_sizes": "log1p unigram count and normalized character count",
+    "projection": "each Q[0:64] hashes seed:projection:index to one of 16 buckets using the same bucket/sign rule; no fitted projection",
+    "interactions": "quarter-major visual[0:16] outer projected_query[0:16], flattened C order",
+    "C": [
+      "first-token top1 probability",
+      "top1 minus top2",
+      "entropy/log(vocabulary size)"
+    ],
+    "C_limitation": "generation-score summaries, not calibrated answer correctness",
+    "response_shape": [
+      "valid parsed base answer",
+      "generated token count"
+    ],
+    "repeat_atol": 1e-12,
+    "repeat_rtol": 0
+  },
+  "fingerprint": "0fed76d4aa008b9aeea597564401909f39eca7bdf769d1c65bbb04fadf52f6c4"
+}

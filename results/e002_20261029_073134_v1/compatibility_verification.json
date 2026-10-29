@@ -1,0 +1,10 @@
+{
+  "checks_passed": true,
+  "real_saved_calls_checked": 5,
+  "plain_observed_token_agreement": true,
+  "native_8_16_checked": true,
+  "same_call_generation_scores_present": true,
+  "first_token_full_scores_retained": false,
+  "limitation": "One legacy input compatibility check; not 120-question integrity or timing repeatability.",
+  "compatibility_receipt_sha256": "c21197d4df4fb9919936c3606cfaf69fa5697628884637a8065639140a620f64"
+}

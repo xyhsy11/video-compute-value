@@ -1,0 +1,10 @@
+{
+  "implementation": "PARTIAL_CPU_CORE",
+  "collection": "BLOCKED_INPUT_AND_RESOURCE",
+  "model_runtime": "PASSED",
+  "predictive_value": "UNAVAILABLE_NO_E2_OUTCOMES",
+  "explicit_question_contribution": "UNAVAILABLE_NO_E2_OUTCOMES",
+  "timing_validity": "UNMEASURED",
+  "practical_value": "PRACTICAL_VALUE_NOT_EVALUABLE_MEASUREMENT",
+  "publication": "PENDING_GIT_VERIFICATION"
+}

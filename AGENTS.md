@@ -1,4 +1,4 @@
-# Experiments 0 and 1
+# Experiments 0, 1, and 2
 
 - Preserve Experiment 0 as frozen visual-only Video-MME feasibility and measurement. On 2026-10-29 the user explicitly authorized the full attached Experiment 1 plan: `e001_additional_clip_headroom_v1`, a separate exposed-development-data, accuracy-only, retrospective four-clip headroom diagnostic. E1 may report its limited hindsight oracle; no controller training, practical adaptive-policy claim, or efficiency claim is authorized. E0's `MEASUREMENT_UNSTABLE` verdict remains unchanged.
 - Preserve raw trials, failed attempts, configuration snapshots, source hashes, and resource ledgers. Never substitute synthetic predictions for model results.
@@ -8,4 +8,5 @@
 - Keep videos, weights, environments, credentials, annotation text, labels, and private manifests out of Git. Commit acquisition instructions, identifiers/hashes, code, and nonrestricted summaries.
 - Run targeted CPU tests and saved-record verification. Real processor and GPU paths must be identified as unverified until exercised.
 - The user explicitly authorized committing and pushing the verified code and public-safe reports on 2026-10-28. Use the existing Git identity and repository; do not force-push or publish restricted artifacts. Earlier local-only/no-staging instructions remain historical and are superseded for this publication. No pull request is requested.
-- The user reaffirmed public-safe E1 publication in the full plan on 2026-10-29. Keep raw generated answers and all restricted E1 manifests local. Do not start Experiment 2.
+- The user reaffirmed public-safe E1 publication in the full plan on 2026-10-29. Keep raw generated answers and all restricted E1 manifests local.
+- On 2026-10-29 the user requested Experiment 2 using the attached `experiment_2_codex_prompt.md`: `e002_preacquisition_predictability_v1`. This narrowly supersedes the earlier E2 prohibition. E2 permits the specified small predictor and public-safe publication, with separate E2A predictive and E2B practical gates. It grants no additional resources, VLM fine-tuning, paid compute, system repair campaign, or Experiment 3. Preserve all E0/E1/timing evidence byte-for-byte. Block collection when input, runtime, integrity, or complete-stage resource gates fail; publish an honest checkpoint.

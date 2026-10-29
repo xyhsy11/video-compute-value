@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-29T07:50:31.155683+00:00",
+  "checkpoint_checks_passed": true,
+  "scientific_completeness_passed": false,
+  "historical_files_preserved": 2235,
+  "historical_preservation_passed": true,
+  "e1_real_saved_records_independently_rescored": 288,
+  "resource_lineage_reconciled": true,
+  "e2_scientific_records": 0,
+  "compatibility_receipt_checked": true,
+  "predictive_result_available": false,
+  "practical_result_available": false,
+  "unverified": [
+    "full E2 cohort/provenance",
+    "full scientific record verifier",
+    "complete collection orchestration",
+    "nested artifacts/evaluator integration",
+    "cost panel and B* integration",
+    "real deployed timing"
+  ],
+  "scope": "Validates blocked checkpoint and preserved evidence, not a successful E2 scientific experiment."
+}

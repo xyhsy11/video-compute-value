@@ -1,0 +1,19 @@
+{
+  "annotation_revision": "ead1408f75b618502df9a1d8e0950166bf0a2a0b",
+  "annotation_sha256": "7fffab8ed38ecc2f9f0eca4c44d8a11636f0ee96116ede83580c8b9ae0faf986",
+  "official_archive_index_sha256": "185824cb787e19110eeccce110fc92a623df5b032276191b2b4358893d0ec68c",
+  "short_source_identifiers": 300,
+  "excluded_exposed_sources": 8,
+  "ordered_candidate_identifiers": 292,
+  "local_legacy_sources": 8,
+  "local_unexposed_candidates": 0,
+  "eligible_verified_new_source_groups": 0,
+  "frozen_source_groups": 0,
+  "planned_source_groups": 40,
+  "planned_questions": 120,
+  "first_40_metadata_members": 40,
+  "first_40_compressed_payload_bytes": 392351143,
+  "traffic_caveat": "Metadata payload estimate excludes HTTP range overhead, retries, and eligibility replacements.",
+  "provenance": "Source identifiers and asset hashes do not exclude all alternate encodings or reuploads.",
+  "status": "BLOCKED_INPUT"
+}

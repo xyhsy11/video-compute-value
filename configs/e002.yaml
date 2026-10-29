@@ -1,0 +1,23 @@
+experiment_id: e002_preacquisition_predictability_v1
+annotation_revision: ead1408f75b618502df9a1d8e0950166bf0a2a0b
+model_revision: ebb281ec70b05090aa6165b016eac8ec08e71b17
+source_groups: 40
+questions_per_source: 3
+outer_folds: 5
+inner_folds: 4
+seed: 2026102902
+base_frames: 8
+augmented_frames: 16
+primary_calls: 960
+repeatability_calls: 120
+bootstrap_resamples: 10000
+ridge_alphas: [1, 10, 100]
+gain_thresholds: [always_acquire, 0, 0.025, 0.05, 0.10, 0.20, 0.40, 0.80, always_stop]
+timing_relative_range_threshold: 0.20
+cheapness_fraction: 0.10
+compatibility_timeout_seconds: 90
+safety_factor: 1.5
+closeout_reserve_seconds: 300
+cumulative_limit_seconds: 27600
+storage_limit_bytes: 21474836480
+video_limit_bytes: 1073741824

@@ -1,0 +1,43 @@
+{
+  "experiment_id": "e002_preacquisition_predictability_v1",
+  "statuses": {
+    "implementation": "PARTIAL_CPU_CORE",
+    "collection": "BLOCKED_INPUT_AND_RESOURCE",
+    "model_runtime": "PASSED",
+    "predictive_value": "UNAVAILABLE_NO_E2_OUTCOMES",
+    "explicit_question_contribution": "UNAVAILABLE_NO_E2_OUTCOMES",
+    "timing_validity": "UNMEASURED",
+    "practical_value": "PRACTICAL_VALUE_NOT_EVALUABLE_MEASUREMENT",
+    "publication": "PENDING_GIT_VERIFICATION"
+  },
+  "planned_sources": 40,
+  "actual_frozen_sources": 0,
+  "planned_questions": 120,
+  "actual_questions": 0,
+  "planned_primary_calls": 960,
+  "planned_repeatability_calls": 120,
+  "completed_scientific_calls": 0,
+  "completed_compatibility_calls": 5,
+  "delta_fixed": null,
+  "delta_question": null,
+  "accuracy": null,
+  "complete_pipeline_latency_seconds": null,
+  "practical_latency_ratio": null,
+  "compatibility": {
+    "status": "PASSED",
+    "at": "2026-10-29T07:46:09.090423+00:00",
+    "returncode": 0,
+    "windows_exit_hex": "0x00000000",
+    "timed_out": false,
+    "wall_seconds": 61.40541200000007,
+    "planned_compatibility_calls": 5,
+    "completed_model_calls": 5,
+    "unknown_model_calls_upper_bound": 0,
+    "feature_integrity_passed": true,
+    "native_8_16_passed": true,
+    "worker_reaped": true,
+    "automatic_retries": 0,
+    "log_sha256": "5bb5ab83586ae7948214f4f005401f0db71962acd2dbbbc0485472cfdc23921b"
+  },
+  "historical_e0_verdict": "MEASUREMENT_UNSTABLE"
+}
