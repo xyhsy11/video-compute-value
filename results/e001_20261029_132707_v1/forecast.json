@@ -1,0 +1,18 @@
+{
+  "fingerprint": "4495c533c43f47ee2051b18c322fd77ea476267690682c02f33faa1a7a7eee4c",
+  "at": "2026-10-29T04:44:55.911808+00:00",
+  "request_seconds": 957.912630599986,
+  "two_startups_with_warmups_seconds": 93.38523539999967,
+  "record_overhead_seconds": 29.200000000000003,
+  "verification_reserve_seconds": 300,
+  "retry_reserve_seconds": 180,
+  "publication_reserve_seconds": 240,
+  "raw_estimate_seconds": 1800.4978659999856,
+  "safety_factor": 1.5,
+  "projection_seconds": 2700.7467989999786,
+  "all_input_fit_greedy_repeatability_checks_passed": true,
+  "remaining_seconds_at_forecast": 6131.1096130000005,
+  "planned_collection_requests": 288,
+  "planned_collection_warmups": 4,
+  "completed_probe_and_warmup_calls": 16
+}

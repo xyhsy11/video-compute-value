@@ -1,0 +1,31 @@
+{
+  "experiment_id": "e001_additional_clip_headroom_v1",
+  "run_id": "e001_20261029_132707_v1",
+  "frozen_at": "2026-10-29T04:39:08.744963+00:00",
+  "fingerprint": "4495c533c43f47ee2051b18c322fd77ea476267690682c02f33faa1a7a7eee4c",
+  "config_input_hash": "6b78a7c55191608838caf9e5c3ae1d9274adec3de2ad5ac443208dffd4c1f32b",
+  "cohort_hash": "285a97fa9bcc4f37af442e5f426db6547da82b53c1a71ea12509a460584a9b01",
+  "actions_hash": "eb85905da9d0b4a9af8549bf5e69b958b42dd6640237ab641d8ef70fc6f235fe",
+  "order_hash": "0279979c3c79a518ffb23a4c66b7d4f470d51d64d3f02b689d140ba3c8ffb2a3",
+  "source_files": {
+    "src/video_compute_value/common.py": "c801b4d8e2f4375e1db84b55532695c6799fcc899fdfe7cd0a5c545c90bb5649",
+    "src/video_compute_value/resources.py": "2526d552984474e23bfb8bbbd88da3ea16f9136a373d130fd7d2de47a29b9ca0",
+    "src/video_compute_value/video.py": "a1cefb42a9a6effaaf05e56275476172601ce5052f438f30866396e2e0535935",
+    "src/video_compute_value/model.py": "ca0c52bc90ea9c1cdfe04152d45225a5befc4a6c84d5d2634f859d657beefda8",
+    "src/video_compute_value/measurement.py": "3c3d92a075dc64db174264e3b457ef1f37af5c1d80ff41a6f22b117051a186c5",
+    "src/video_compute_value/protocol.py": "9a153dba39ac186b35129c30b1f274b0616016033595fa50268bcf3f48485a94",
+    "src/video_compute_value/generation.py": "8ae62994e456a4d667c9f4597e167625d2c2747cb6f9049837cdf82329b16b25",
+    "src/video_compute_value/e001_input.py": "f79ecac380e3a00e4c874be82095dede60df08ad22aace03e7cb78b7bde97ff9",
+    "src/video_compute_value/e001_analysis.py": "467d5d99d1addfe7facf1fd39106a154d7b4acab8c324f9abfb9bb9dda3e9771",
+    "src/video_compute_value/e001.py": "3beb310ad1a49575ebe75419cb87ddf1f07c5d7fa8a2833b60497cc3e99c0a75",
+    "src/video_compute_value/e001_verify.py": "b048d9cb360df2b48e937e5b1073f85c49e5da12a64f21a32029ca79f54051f0",
+    "configs/e001.yaml": "76b4274d7e88a01922ac86c644ee6a0867ff30f4f2e216235cf48d469b85e765",
+    "protocols/e001_additional_clip_headroom_v1.md": "188dfc8e8738cf4d113e60274daaa592959e042c0c0ba2eccabe3af12291cba6"
+  },
+  "source_git_revision": "0dc0ca49c1bfce12a3b175b102564243e18fddeb",
+  "revision": "ebb281ec70b05090aa6165b016eac8ec08e71b17",
+  "processor_revision": "ebb281ec70b05090aa6165b016eac8ec08e71b17",
+  "tokenizer_revision": "ebb281ec70b05090aa6165b016eac8ec08e71b17",
+  "dtype": "bfloat16",
+  "attention_backend": "sdpa"
+}

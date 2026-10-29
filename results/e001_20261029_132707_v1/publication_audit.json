@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "independently_recounted_e0_records": 384,
+  "local_markdown_links_checked": 47,
+  "figures_checked": 6,
+  "figure_values_agree_with_saved_sources": true,
+  "e1_saved_record_verification_passed": true,
+  "actions_independently_regenerated_from_label_free_metadata": true,
+  "cumulative_resources_independently_reconciled": true,
+  "e0_historical_files_rehashed": 1719,
+  "scientific_git_bytes_checked": true,
+  "git_revision_or_index": "index",
+  "explicit_task_paths_audited": 37,
+  "raw_data_and_outputs_remain_private": true
+}

@@ -9,3 +9,7 @@
 # Exact executed bytes are part of the frozen Experiment 0 fingerprints.
 src/video_compute_value/*.py -text
 configs/e000_threaded_authorized_v3.yaml -text
+
+# Preserve E1 public CSV hashes on Windows checkouts.
+.gitattributes text eol=lf
+results/e001_20261029_132707_v1/*.csv text eol=lf

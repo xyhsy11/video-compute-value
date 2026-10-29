@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-29T04:29:14.672970+00:00",
+  "human_reply": "Authorize +2 hours; cumulative cap 27,600 seconds",
+  "additional_seconds": 7200,
+  "prior_cap_seconds": 20400,
+  "authorized_limit_seconds": 27600,
+  "resource_only": true,
+  "storage_limit_bytes": 21474836480,
+  "video_limit_bytes": 1073741824
+}

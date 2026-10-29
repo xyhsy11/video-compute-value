@@ -1,0 +1,24 @@
+experiment_id: e001_additional_clip_headroom_v1
+parent_run: results/e000_20261028_greedy_collection_v3
+cohort_videos: 8
+questions_per_video: 3
+conditions: [base, quarter1, quarter2, quarter3, quarter4, uniform_addition]
+base_frames: 8
+additional_frames: 8
+passes: 2
+order_seed: 20261029
+bootstrap_seed: 20261029
+bootstrap_resamples: 10000
+worker_timeout_seconds: 900
+probe_timeout_seconds: 180
+retry_processes_per_pass: 1
+max_attempts_per_identity: 2
+max_failed_trial_attempts: 6
+verification_reserve_seconds: 300
+retry_reserve_seconds: 180
+publication_reserve_seconds: 240
+safety_factor: 1.5
+advancement:
+  oracle_minus_random_min: 0.10
+  oracle_minus_best_fixed_min: 0.10
+  mixed_choice_min_videos: 3

@@ -1,0 +1,17 @@
+{
+  "synthetic_cpu_fixtures_are_not_experimental_results": true,
+  "targeted_cpu_and_generation": {
+    "passed": 28,
+    "pytest_seconds": 53.81,
+    "command": ".venv/Scripts/python.exe -m pytest -q tests/test_e001.py tests/test_generation.py --basetemp .cache/e001-targeted-tests"
+  },
+  "full_cpu_regression": {
+    "passed": 97,
+    "pytest_seconds": 35.05,
+    "command": ".venv/Scripts/python.exe -m pytest -q --basetemp .cache/e001-regression"
+  },
+  "ruff_passed": true,
+  "ruff_command": ".venv/Scripts/ruff.exe check src tests scripts",
+  "tests_sha256": "39b3e54fb40cc2f9c9245e01dfe89dea361a1c85d81ade3ba89d5662a42e9555",
+  "actual_real_processor_and_gpu_preflight_exercised": true
+}

@@ -1,0 +1,51 @@
+{
+  "scientific_fingerprint": "4495c533c43f47ee2051b18c322fd77ea476267690682c02f33faa1a7a7eee4c",
+  "source_files_sha256": {
+    "src/video_compute_value/common.py": "c801b4d8e2f4375e1db84b55532695c6799fcc899fdfe7cd0a5c545c90bb5649",
+    "src/video_compute_value/resources.py": "2526d552984474e23bfb8bbbd88da3ea16f9136a373d130fd7d2de47a29b9ca0",
+    "src/video_compute_value/video.py": "a1cefb42a9a6effaaf05e56275476172601ce5052f438f30866396e2e0535935",
+    "src/video_compute_value/model.py": "ca0c52bc90ea9c1cdfe04152d45225a5befc4a6c84d5d2634f859d657beefda8",
+    "src/video_compute_value/measurement.py": "3c3d92a075dc64db174264e3b457ef1f37af5c1d80ff41a6f22b117051a186c5",
+    "src/video_compute_value/protocol.py": "9a153dba39ac186b35129c30b1f274b0616016033595fa50268bcf3f48485a94",
+    "src/video_compute_value/generation.py": "8ae62994e456a4d667c9f4597e167625d2c2747cb6f9049837cdf82329b16b25",
+    "src/video_compute_value/e001_input.py": "f79ecac380e3a00e4c874be82095dede60df08ad22aace03e7cb78b7bde97ff9",
+    "src/video_compute_value/e001_analysis.py": "467d5d99d1addfe7facf1fd39106a154d7b4acab8c324f9abfb9bb9dda3e9771",
+    "src/video_compute_value/e001.py": "3beb310ad1a49575ebe75419cb87ddf1f07c5d7fa8a2833b60497cc3e99c0a75",
+    "src/video_compute_value/e001_verify.py": "b048d9cb360df2b48e937e5b1073f85c49e5da12a64f21a32029ca79f54051f0",
+    "configs/e001.yaml": "76b4274d7e88a01922ac86c644ee6a0867ff30f4f2e216235cf48d469b85e765",
+    "protocols/e001_additional_clip_headroom_v1.md": "188dfc8e8738cf4d113e60274daaa592959e042c0c0ba2eccabe3af12291cba6",
+    "AGENTS.md": "80015896d9a61269b9e07af0c242786f544bd22daa5612f963e46e162a9bea94",
+    "README.md": "ce552bc7b347a08f562640cdad121b950df2eaab6471d8a6e616f6031e60311a",
+    "docs/e0_reproduction.md": "788ccc65f8f30981f4ef13ecad30abf6891bddccdb2267c207e3a214aa82815c",
+    "scripts/report_e001.py": "509393d97efc01ce27ee568aa3118b69e0621e5f1ec3eda12fd435ec14786372",
+    "scripts/audit_e001_publication.py": "be875d62f48d15baf8366d882764e53093ea026a6d7a4ef878f3bf8ff028e4cb",
+    "tests/test_e001.py": "39b3e54fb40cc2f9c9245e01dfe89dea361a1c85d81ade3ba89d5662a42e9555",
+    ".gitattributes": "85e36b2b1115b692102fa864b68833545ba5f883fa72468b975132977e6a37c0"
+  },
+  "public_data_files_sha256": {
+    "summary.json": "4b96966636e366de17ebe5863cda099d6775d254a9b7589cb3483ebf0ed7cc2e",
+    "metrics.csv": "32b28d07e9896a4a1d66836830bc4b9211019342f3e52abb987796b8e5b101ae",
+    "correctness.csv": "7f575f297ae77e0fab45ab7e633e4698c18a595e79d90e1d2aade39f6f571c4c",
+    "per_video_effects.csv": "27d1c090e1936a0835a6b7c0e804fc342a43384e5932c401268668c055d2c770",
+    "e0_plot_data.csv": "39189d803158d50c5fd4aaf892eb79d9d0d96f1eecb49bf054cb5bfad266e1df",
+    "augmented_text_token_differences.csv": "15143f456ce6854d3692c1748b315f17a93889e91c1de85365006f59987ba807",
+    "verification.json": "db15c7f72e70c102b4d24e3b46d8e2d20c2f87cd07c8cb2b3277beddc16fe36c",
+    "preflight_verification.json": "7856f34a31831bdc205e75e7062061f9e845d64847cbf9f074053a76af24c484",
+    "validation.json": "0367eff91e05e4aea6972a40cfe2f2215bff6a7b0a500924990aff0a46304dc6",
+    "figure_manifest.json": "24fc8bf12f0279c7a949d6dbcc80889b66a55989d192d389fddc971c6c8274ac",
+    "freeze.json": "4a8688391a03004f8e6675b8df0468f01fba6893f1b31404675446c18f6df397",
+    "forecast.json": "de62b31ed1cbb3b2aa4151f02c411d72d3fba24f160bcd1c2e87a02b3f2a5606",
+    "runtime_resource_grant.json": "1354f54fa64fca1eb480ab8aeba44a3d260b863fe8cb4cbe9f335bd39f39304e",
+    "resource_accounting.json": "ab542914ee947501331180defcb106e42e54cc51bb7a2c3d60ef448f96b5524d",
+    "status.json": "9c41568a2e76f9d103d8dc8ddb7b9bbe9843acfd451bb71916f90092a62409f6",
+    "report.md": "d19db271edbf8c62f542cd1622fabd6b0198130665ab5d136322816763feb13a"
+  },
+  "figure_files_sha256": {
+    "e0_accuracy.png": "2122e2901a6442aeae9da5e96fb4149952922ab5ed1b011d1a4a96e0cdd99aca",
+    "e0_latency.png": "a4dd7d00b0f4d4b1a44ba42507d692eacf7a55a950aca35a8bcd991edb46881e",
+    "e0_memory.png": "93def1ec0139060fcce1829f2f28f874972f3a16d76d04a31d2f312b002a80c0",
+    "e1_accuracy.png": "5c3ec573c9e5986dd2a4581fe381df837ebc48587f9d08a820058ae3722c224f",
+    "e1_correctness.png": "8f9d41fd6e11cb4b7acff5035732f924d4ed85afe497bedb87c902f8f9f1f73c",
+    "e1_per_video.png": "744f11884b58d5c84c4b57c27acad86c150c9034949871ace5ae264aea60a632"
+  }
+}

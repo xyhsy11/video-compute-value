@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-29T05:11:00.363286+00:00",
+  "authoritative_resource_ledger": "private/resource_ledger.json",
+  "cumulative_seconds": 23333.318352,
+  "authorized_limit_seconds": 27600,
+  "remaining_seconds": 4266.681648000002,
+  "storage_current_bytes": 17041716314,
+  "storage_peak_bytes": 17041716314,
+  "storage_limit_bytes": 21474836480,
+  "video_transfer_bytes": 81653854,
+  "video_limit_bytes": 1073741824,
+  "new_downloads": 0,
+  "all_sessions_closed": true,
+  "final_publication_and_handoff_conservative_charge_seconds": 300,
+  "measured_post_close_work_before_publication_charge_seconds": 129.615498,
+  "final_publication_storage_reserve_bytes": 33554432,
+  "completed_e1_model_invocations": 308,
+  "unknown_e1_model_invocations_upper_bound": 0,
+  "inherited_model_invocations_upper_bound": 1454,
+  "cumulative_model_invocations_upper_bound": 1762,
+  "video_transfer_and_interruption_upper_bound_bytes": 82702430,
+  "accounting_note": "Includes continuous engineering, tests, preparation, all workers, analysis and verification, plus the fully charged 300-second publication reserve; storage is the last observed checkpoint with a separate final-Git reserve."
+}

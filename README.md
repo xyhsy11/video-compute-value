@@ -1,249 +1,255 @@
 # video-compute-value
 
-Can inexpensive observations predict the task value of additional visual computation
-in a frozen video-language model? Experiment 0 establishes the measurement foundation:
-whether Qwen3-VL-4B-Instruct fits, exact inputs can be reproduced, multiple-choice
-answers can be scored, and request latency/memory can be measured across uniform
-frame budgets. It does not establish adaptive sampling, oracle headroom, or the
-project's main scientific claim.
+Processing more video can improve an answer, but it also adds computational cost.
+We study whether inexpensive observations can help decide when additional visual
+evidence is worth acquiring. Before building a decision policy, we first check
+whether our measurements are reliable and whether choosing a different clip can
+meaningfully change an answer.
 
-The original specification is in
-[`protocols/e000_frozen_videoqa_feasibility_v1.md`](protocols/e000_frozen_videoqa_feasibility_v1.md).
-The user authorized publishing the verified code and public-safe reports on 2026-10-28. Restricted artifacts remain local and ignored.
+We use a frozen video-language model and multiple-choice video questions. Our
+current evidence comes from a small, exposed development cohort. We have not
+trained a controller or demonstrated an adaptive policy or validated speedup.
 This repository is separate from `video-refresh-benchmark`.
 
-## Diagnostic correction (2026-10-28)
+| Experiment | Question and endpoint | Data and controls | Current result |
+|---|---|---|---|
+| E0: feasibility and measurement | Can we fit, reproduce, score and time requests? Operational gates, descriptive accuracy and memory. | 8 short videos / 24 questions; uniform 8/16/32/48/64 frames; separate text-only diagnostic; 3 video repetitions. | Complete and independently verified; **MEASUREMENT_UNSTABLE**. |
+| E1: additional-clip headroom | Can hindsight choice among four added clips improve accuracy? Primary: oracle − exact expected random. | Same exposed 8 videos / 24 questions; base 8 frames, four quarter additions and uniform addition at 16 frames; 2 passes. | H_choice = 18.75 pp; oracle − best fixed = 12.50 pp. |
 
-The original `e000_20261027_collection_v2` files remain unchanged. Its requested
-`do_sample=False` was silently replaced by checkpoint sampling defaults in
-Transformers 4.57.1. Treat that run's accuracy/latency curves as historical sampled
-outputs, not protocol-valid greedy results. The production adapter now applies
-explicit call-level controls and checks/records the effective generation policy.
+Both experiments use **Video-MME v1**, short category, the official annotation
+**test split**, revision `ead1408f75b618502df9a1d8e0950166bf0a2a0b`.
+We use all three questions per source, unchanged. Because these videos and
+questions have been exposed during development, neither experiment is an
+untouched confirmation study. The eight videos are the independent clusters;
+questions, candidate clips and repetitions are not independent additional videos.
 
-The [diagnostic report](results/e000_20261028_diagnostic_v2/report.md) records the
-forensic replication, corrected answer validation and paired timing investigation.
-Its targeted subset does not replace the full five-budget quality curve. Frozen
-historical runs require their original source revision; current code deliberately
-rejects resuming them after a source change. A new directory does not renew the resource allowance;
-inherit the latest cumulative ledger before starting another named run.
+The shared model, processor and tokenizer are **Qwen/Qwen3-VL-4B-Instruct**,
+revision `ebb281ec70b05090aa6165b016eac8ec08e71b17`, BF16 and SDPA, with frozen
+weights. Inputs are visual-only at the unchanged 192 × 320 canvas: no audio,
+external subtitles, transcripts or generated captions. We keep the original
+question and option order, prompt, strict answer parser and explicit greedy
+generation controls fixed. One CUDA worker runs at a time, with no quantization
+or offloading.
 
-## Local completion audit
+## Experiment 0: establish the measurement foundation
 
-The [completion report](results/e000_20261028_completion_v1/report.md) records the
-new CPU equivalence audit and the cumulative-budget decision. The candidate
-[execution addendum v2](protocols/e000_execution_v2.md) uses four decoder threads
-and explicit Uniform-64-only cache trimming, with every added operation inside the
-full-request boundary. It requires a fresh named collection and real GPU validation.
-CPU equivalence and unit tests alone never establish `FEASIBILITY_CONFIRMED`.
-No historical sampled measurements are reused as corrected-greedy accuracy.
+A frame-count comparison is useful only if it measures reproducible inputs and
+real model requests. We varied the uniformly sampled frame budget while keeping
+the cohort, model, spatial preprocessing and question fixed. Uniform-64 is a
+sampled reference, not every frame or an accuracy upper bound. Uniform sets are
+not necessarily nested.
 
-The user explicitly authorized cumulative caps of 5h20m and then **5h40m
-(20,400 seconds)** on 2026-10-28 for `e000_20261028_greedy_collection_v3`; storage
-and video limits remain unchanged. The second, resource-only grant is saved in
-`runtime_resource_grant.json`, separately from unchanged experimental fingerprints.
-Use `scripts/collect_e000_authorized_v3.py` for the authorized collection and
-`scripts/finalize_e000_v3.py` for independent closeout. The [initial preflight report](results/e000_20261028_greedy_collection_v3/authorized_preflight_report.md)
-preserves the earlier stall and blocked decision; the final completion report is
-created only after all 384 primary requests complete and are independently checked.
+The corrected greedy collection completed **360 video requests and 24 separate
+text-only requests**, with 32 collection warmups and 25 preflight calls counted
+separately. The first repetition determines accuracy; three repetitions measure
+video-request repeatability. All inputs and generated tokens repeated exactly.
+Only the 48-frame setting met the proposed 20% median timing-range criterion.
+The operational verdict therefore remains **MEASUREMENT_UNSTABLE**.
 
-The [completed corrected collection](results/e000_20261028_greedy_collection_v3/completion_report.md)
-finished all 360 video and 24 text-only requests. Its verdict is
-**MEASUREMENT_UNSTABLE**: inputs and generated tokens repeat exactly, all budgets
-fit, and saved-record verification passes, but only Uniform-48 meets the proposed
-20% timing-range criterion. The [separate CPU stage diagnostic](results/e000_20261028_cpu_stage_v4/report.md)
-localizes most preparation cost to full video decoding/selection/RGB/resize/stacking;
-it does not replace the failed end-to-end timing measurements. The latest
-cumulative ledger is now in `results/e000_20261028_cpu_stage_v4/`, inherited from
-the completed collection. Further work must inherit that latest closed ledger.
+| Uniform frames | Correct / 24 | Accuracy | Descriptive median request (s) | Median repetition range |
+|---:|---:|---:|---:|---:|
+| 8 | 15/24 | 62.50% | 2.528 | 65.11% |
+| 16 | 18/24 | 75.00% | 2.859 | 29.33% |
+| 32 | 19/24 | 79.17% | 3.954 | 24.27% |
+| 48 | 18/24 | 75.00% | 4.317 | 18.48% |
+| 64 | 21/24 | 87.50% | 5.718 | 26.66% |
 
-## Installation on Windows (PowerShell)
+The text-only diagnostic answered 14/24 correctly (58.33%). It is a separate
+language-prior diagnostic, not a zero-cost adaptive choice. The historical
+sampled collection is preserved but excluded from these corrected-greedy results:
+checkpoint defaults had backfilled sampling despite a requested `do_sample=False`.
+The corrected adapter records and verifies the effective greedy policy.
 
-Use an isolated Python 3.11/3.12 environment. The bootstrap detects Python on PATH
-or Codex's bundled runtime; pass `-Python 'C:\path with spaces\python.exe'` if needed.
-No environment activation is required.
-
-```powershell
-Set-Location -LiteralPath 'C:\video-compute-value'
-.\scripts\bootstrap.ps1 -Model
-.\scripts\validate.ps1
-$run = 'results/e000_new_named_collection'
-$python = '.\.venv\Scripts\python.exe'
-& $python -m video_compute_value.e000 preflight --config configs/e000.yaml --run-dir $run
-```
-
-Pinned inference stack: PyTorch 2.8.0/CUDA 12.8, torchvision 0.23.0,
-Transformers 4.57.1, Accelerate 1.10.1. CUDA is required for measured inference.
-BF16 is selected when the actual GPU supports it, otherwise FP16; the choice is
-frozen before probing. One GPU, SDPA, eval/inference mode, frozen weights, no
-offload/quantization. Model/software changes require a new named run.
-`requirements-validated.txt`, when present, captures the actual transitive environment.
-Some installed versions may have local CUDA suffixes.
-
-On Linux use `python3 -m venv .venv`, then `.venv/bin/python -m pip install -e '.[dev]'`,
-install the pinned CUDA wheels from the official PyTorch index, and
-`.venv/bin/python -m pip install -e '.[dev,model]'`. The CLI is cross-platform;
-the supplied helper scripts and actual local validation target Windows.
-Account external setup/test time with the `account` command described below.
-
-## Prepare the original data
-
-Use academic research access through the
-[official Video-MME project](https://github.com/MME-Benchmarks/Video-MME#-dataset).
-Its linked Hugging Face dataset now redirects to `lmms-eval/Video-MME`.
-Restricted videos, questions and labels remain local and ignored by Git.
-No audio, external subtitles, ASR or generated captions are used.
-
-The automatic path downloads the small official annotation parquet, inspects archive
-sizes and ZIP directories, and fetches only pilot members using verified HTTP 206
-ranges. It aborts if an exact range is not honored. It never downloads the full
-~101 GB collection. Cumulative video transfer is capped at 1 GiB, included in
-the overall 20 GiB storage limit.
+Regenerate all six research figures and the E1 report from saved data with:
 
 ```powershell
-& $python -m video_compute_value.e000 prepare --config configs/e000.yaml --run-dir $run --acquire
+.venv\Scripts\python.exe scripts/report_e001.py --run-dir results/e001_20261029_132707_v1
 ```
 
-For existing complete original videos, name files by original `videoID` (for example,
-`<videoID>.mp4`) and use a directory containing those files:
+![E0 accuracy by uniform frame budget](results/e001_20261029_132707_v1/figures/e0_accuracy.png)
+
+E0 accuracy uses the first pass over 24 questions from eight videos. More frames
+did not improve every answer monotonically. Source:
+[results/e001_20261029_132707_v1/e0_plot_data.csv](results/e001_20261029_132707_v1/e0_plot_data.csv), exported from the
+[corrected E0 aggregates](results/e000_20261028_greedy_collection_v3/public_summary.json).
+
+![E0 descriptive request latency with instability warning](results/e001_20261029_132707_v1/figures/e0_latency.png)
+
+E0 latency first takes the median of three repetitions per question, then the
+median over 24 questions. The timer includes complete video decoding and full
+inference. **Timing stability failed; these values do not validate efficiency.**
+Source: [e0_plot_data.csv](results/e001_20261029_132707_v1/e0_plot_data.csv).
+
+![E0 allocated and reserved GPU memory](results/e001_20261029_132707_v1/figures/e0_memory.png)
+
+Absolute PyTorch peaks over 360 video requests include resident weights.
+Reserved allocator memory differs from live allocated memory and total device
+usage. Uniform-64 alone uses the frozen in-timer cache-trim policy.
+Source: [e0_plot_data.csv](results/e001_20261029_132707_v1/e0_plot_data.csv).
+
+A separate CPU stage diagnostic completed 48 preparations and reproduced the
+saved input hashes. It attributed about 98–99% of preparation time to the combined
+decode/selection/RGB/resize/stacking span. It did not identify one unique OS or
+driver cause, and does not repair the failed full-request timing gate. This is an
+[E0 diagnostic](results/e000_20261028_cpu_stage_v4/report.md), not another scientific experiment.
+
+The [corrected collection report](results/e000_20261028_greedy_collection_v3/completion_report.md)
+and [independent verification](results/e000_20261028_greedy_collection_v3/independent_final_verification.json)
+preserve the detailed gates, failures and resource history. E0 is limited by eight
+development videos and unstable timing; its frame ratios do not demonstrate
+proportional latency savings or an adaptive method.
+
+## Experiment 1: does choosing an additional clip matter?
+
+E0 changes a uniform frame budget, which does not isolate the choice of added
+evidence. E1 starts from the **same exact Uniform-8 frames** and adds eight
+distinct frames from one of four equal-duration quarters. A uniform-addition
+control retains the same starting frames and distributes eight new frames across
+the original timeline. Historical Uniform-16 is not this nested control.
+
+Uniform addition shares the base target times, so its new frames are the nearest
+unused neighbors of base frames. Comparisons apply to this specific nested control.
+All sources meet the inherited CFR-only eligibility rules; VFR handling is untested.
+
+The independent variable is the acquisition action: base only, quarter 1,
+quarter 2, quarter 3, quarter 4, or uniform addition. All five augmented conditions
+use 16 distinct frames, equal visual-token budgets and unchanged spatial dimensions.
+Timestamp formatting can change text-token counts: [per-video differences](results/e001_20261029_132707_v1/augmented_text_token_differences.csv).
+Matched visual budgets do not guarantee identical FLOPs or latency.
+Original timestamps are retained. Adding frames can change native temporal
+pairing, timestamp tags, token positions and contextual representations. This is
+retained visual evidence followed by full re-encoding, not cached incremental inference.
+
+The primary endpoint is **H_choice = A_oracle − A_random**. The forced-acquisition
+oracle chooses the best of the four quarter actions afterward using labels.
+A_random is the exact average over every question/action pair. Best fixed is the
+strongest single quarter for the entire development cohort, selected afterward.
+The primary oracle excludes stopping and uniform addition. We separately report
+oracle plus stop, whose gain over base is nonnegative by construction.
+
+**E1 verdict: Promising development headroom; larger independent evaluation is justified.**
+
+Collection completed **288/288 requests**: 144 primary requests and all 144
+repeated in a fresh process. The first pass supplies accuracy; repetition is
+only a strict input/output repeatability check. No favorable pass was selected.
+
+| Quantity | First-pass accuracy |
+|---|---:|
+| Base | 62.50% |
+| Exact expected random | 64.58% |
+| Best fixed quarter | 70.83% |
+| Uniform addition | 66.67% |
+| Forced-acquisition oracle | 83.33% |
+| Oracle plus stop | 83.33% |
+
+**H_choice = 18.75 pp** (descriptive 95% cluster-bootstrap
+interval [7.29, 31.25] pp). Oracle minus best fixed is
+12.50 pp; oracle minus uniform addition is
+16.67 pp; oracle minus base is 20.83 pp.
+
+![E1 accuracy by condition and retrospective comparator](results/e001_20261029_132707_v1/figures/e1_accuracy.png)
+
+E1 first-pass accuracy on all 24 questions from eight exposed videos. Orange
+bars are retrospective quantities. The expected random result enumerates all
+four quarters; oracle enumeration requires the additional real model calls.
+Sources: [metrics.csv](results/e001_20261029_132707_v1/metrics.csv) and [summary.json](results/e001_20261029_132707_v1/summary.json).
+
+![E1 anonymous question correctness matrix](results/e001_20261029_132707_v1/figures/e1_correctness.png)
+
+Every question remains in the denominator, including always-correct, always-wrong
+and invalid answers. Rows are anonymous and grouped into eight sources; no
+question text, ground-truth labels or generated answers are published.
+Source: [correctness.csv](results/e001_20261029_132707_v1/correctness.csv).
+
+![E1 paired effects for every source video](results/e001_20261029_132707_v1/figures/e1_per_video.png)
+
+Paired effects for all eight videos (three questions each). The best-fixed
+comparator uses the same globally selected quarter for every video. The report
+also supplies leave-one-video-out sensitivity and explicitly labeled local maxima.
+Source: [per_video_effects.csv](results/e001_20261029_132707_v1/per_video_effects.csv).
+
+Mixed successful/unsuccessful choices occurred in 7 questions
+across 5 videos. The frozen exploratory advancement rule
+**passed**. It required both oracle-minus-random
+and oracle-minus-best-fixed ≥10 pp, oracle above base and uniform addition,
+mixed choices in ≥3 videos, and every integrity/collection/greedy/repeatability/
+independent-verification check. These thresholds are development judgments.
+
+Intervals use 10,000 resamples of complete video clusters, seed 20261029,
+retaining all questions/actions and recomputing best fixed in every resample.
+Eight clusters give weak uncertainty estimates; we make no significance claim.
+
+The hindsight best fixed quarter selected separately for each video matches
+the oracle in 8/8 sources. We therefore have not shown question-specific
+selection beyond source-specific quarter preferences. Leave-one-video-out
+oracle-minus-best-fixed ranges from 4.76 to 14.29 pp and falls below
+the 10 pp threshold in 3/8 omissions. The frozen rule passes on
+the full cohort; this sensitivity limits how strongly we can generalize it.
+
+See the [E1 protocol](protocols/e001_additional_clip_headroom_v1.md), [report](results/e001_20261029_132707_v1/report.md),
+[verification](results/e001_20261029_132707_v1/verification.json) and [timestamped freeze](results/e001_20261029_132707_v1/freeze.json).
+A hindsight oracle only shows what was possible inside this four-action menu.
+It cannot show that a practical policy can select the right clip before seeing
+its answer. E1 is accuracy-only: its descriptive times do not validate latency
+or computational efficiency. No controller training or Experiment 2 was started.
+
+## What the evidence supports
+
+We can preserve exact visual inputs, execute the frozen model and independently
+score saved outputs. E0 also shows that full video preparation can dominate a
+request, so fewer selected frames need not yield proportional savings. Its timing
+instability remains unresolved. E1 tests only retrospective development headroom
+within a fixed menu. Learning a useful acquisition policy, validating its costs,
+and confirming its behavior on independent data remain future hypotheses.
+
+## Reproduction and current resources
+
+Use the existing pinned environment. The [setup and E0 reproduction guide](docs/e0_reproduction.md)
+preserves installation, acquisition and measurement details. Python 3.12.14,
+PyTorch 2.8.0/CUDA 12.8, Transformers 4.57.1, PyAV 16.0.1 and the other exact
+software/source fingerprints are saved with the runs. Original restricted
+videos, annotations and immutable weights are required for local verification.
 
 ```powershell
-& $python -m video_compute_value.e000 prepare --config configs/e000.yaml --run-dir $run --video-dir 'C:\datasets\Video MME\videos'
+$run = "results/e001_20261029_132707_v1"
+.venv\Scripts\python.exe -m video_compute_value.e001 account --config configs/e001.yaml --run-dir $run
+.venv\Scripts\python.exe -m pytest -q --basetemp .cache/e001-regression
+.venv\Scripts\ruff.exe check src tests scripts
+.venv\Scripts\python.exe -m video_compute_value.e001 resume --config configs/e001.yaml --run-dir $run
+.venv\Scripts\python.exe -m video_compute_value.e001 analyze --config configs/e001.yaml --run-dir $run
+.venv\Scripts\python.exe -m video_compute_value.e001 verify --config configs/e001.yaml --run-dir $run
+.venv\Scripts\python.exe scripts/report_e001.py --run-dir $run
+.venv\Scripts\python.exe -m video_compute_value.e001 close --config configs/e001.yaml --run-dir $run
 ```
 
-To use an existing official annotation file too:
+The CLI also implements `preflight` and `run` for a fresh named run whose resource
+grant and ledger have first been inherited from the latest closed project ledger.
+It freezes before outcomes, checks actual CPU/native/GPU paths, and admits full
+collection only after a real-probe forecast with a 1.5 factor and explicit reserves.
+Resume checks fingerprints and skips only valid completed identities; it never
+retries a completed wrong or invalid answer. Source/configuration changes require
+a new named version. Reports and resource amendments do not change scientific fingerprints.
 
-```powershell
-& $python -m video_compute_value.e000 prepare --config configs/e000.yaml --run-dir $run --annotations 'C:\datasets\Video MME\annotations.parquet' --annotation-revision '<40-character upstream commit SHA>' --video-dir 'C:\datasets\Video MME\videos'
-```
+The user explicitly increased cumulative runtime by 7,200 seconds on 2026-10-29,
+from 20,400 to **27,600 seconds (7h40m)**, including all prior experiments, failures,
+setup, tests, analysis and publication. A new directory does not renew the budget.
+The [current cumulative accounting](results/e001_20261029_132707_v1/resource_accounting.json) points to the
+latest local ledger. Limits remain **20 GiB** additional project storage, including
+environment/caches/Git, and **1 GiB** video acquisition. E1 reuses existing assets;
+no paid service, new acquisition, model substitution or background-app termination.
 
-Sources are ranked by SHA-256 of canonical `{seed, source_id}`; select the first
-eight eligible distinct sources, retaining all three official questions unchanged.
-Selection never reads predictions, accuracy or perceived difficulty. Every skipped
-candidate receives a reason. Inputs must decode completely and supply distinct
-frames at every budget. This adapter excludes VFR, missing/nonmonotonic timestamps,
-nonzero starting PTS, changing dimensions and inconsistent full durations before
-cohort freeze. These are explicit pilot limitations.
+## Data access and references
 
-Uniform-B divides the full timeline into B intervals and chooses the nearest source
-PTS to each center; exact ties choose the earlier PTS. Sequential full-clip decoding
-retains only selected resized frames. RGB conversion is PyAV `rgb24`; Pillow bicubic
-resizing preserves the content's aspect ratio (up to integer pixel rounding), then
-centers it with fixed black RGB padding on a 32-pixel patch/merge canvas. Content
-dimensions and padding are frozen per video; grid rounding never stretches content. The fixed
-per-video dimensions stay identical across budgets and within 65,536 pixels/frame.
-The native video processor has second sampling/resizing explicitly disabled.
-Native temporal pairs use source-index/source-FPS timestamps and one-decimal text
-time tags; all selected PTS, represented pair times, grids, counts and tokens are checked.
+Video-MME is restricted to academic research, and its source videos retain their
+owners’ copyrights. Obtain the data through the [official project and access terms](https://github.com/MME-Benchmarks/Video-MME#-dataset).
+We publish identifiers/hashes and derived sanitized statistics, not benchmark
+questions/options/labels, raw generated answers, videos, weights or private manifests.
+The official annotation file is `videomme/test-00000-of-00001.parquet` in the
+`lmms-eval/Video-MME` dataset repository at the frozen revision above.
 
-## Fit, freeze, collect and resume
-
-```powershell
-& $python -m video_compute_value.e000 smoke --config configs/e000.yaml --run-dir $run
-& $python -m video_compute_value.e000 run --config configs/e000.yaml --run-dir $run
-# After interrupted collection, use the identical configuration and run directory:
-& $python -m video_compute_value.e000 resume --config configs/e000.yaml --run-dir $run
-& $python -m video_compute_value.e000 analyze --config configs/e000.yaml --run-dir $run
-& $python -m video_compute_value.e000 verify --config configs/e000.yaml --run-dir $run
-# After a complete verified collection, reproduce the descriptive quality addendum:
-& $python scripts/report_quality.py --config configs/e000.yaml --run-dir $run
-```
-
-`smoke` resolves immutable revisions and explicit generation settings, hashes model
-files, environment, implementation and cohort, and saves seed-determined execution
-order. Each of five fresh probe workers runs two warmups, two integrity/fit requests,
-and one separate component profile (25 additional model calls). Uniform-64 must fit.
-The remaining-run projection includes all 16 collection workers, two warmups each,
-384 measured requests, final verification and a 1.5 safety factor. Collection starts
-only after CPU-only Uniform-64 preparation probes on all eight clips account for
-decoding cost differences from the prespecified model-probe clip. It starts
-only if projected cost fits the remaining cumulative budget. Probe outputs are not
-used to select a model, precision, resolution, cohort or prompt.
-
-Collection is 360 measured video requests (8 × 3 × 5 × 3) and 24 separate text-only
-requests. Two warmups per collection worker add 32 calls. Each budget/repetition
-block gets a fresh process; only one GPU worker is active. Every question reopens,
-fully decodes and prepares its video. No cross-request frame/features/prefix/KV cache.
-OS file caching is allowed. Greedy generation uses at most eight new tokens, fixed
-EOS/padding and a fixed prompt; no history or requested chain of thought.
-Strict parsing accepts one A–D letter, optional `Answer:` and optional `.`/`!`.
-Invalid/empty outputs are incorrect and remain completed records; no retries to
-improve accuracy or parseability. Labels never enter an inference request.
-
-Atomic records carry experiment/run, configuration, source/question, budget and
-repetition identities. Resume validates provenance, skips completed identities,
-retains failed attempts, and continues the same resource ledger. Retries of failures
-remain separately counted. Configuration/source changes require a new named run.
-Unclosed resource sessions after a crash are conservatively charged elapsed wall
-time (capped at the full budget); closed idle gaps are excluded.
-
-## Measurements and interpretation
-
-Primary latency is synchronized monotonic host time for a resident-model,
-local-file, single-question request. It starts before opening compressed video and
-includes read/decode/selection/resize, prompt and processor/tokenizer work, GPU
-transfer, vision encoding, LM prefill, generation, output transfer, text decoding,
-parsing and final CUDA synchronization. Scoring, serialization and diagnostic hashes
-are outside that interval and inside the overall ledger. Startup/loading, preparation,
-warmups, probes, failures and validation are accounted separately. Component profiles
-are separate intrusive measurements, never added to primary-pass timings.
-
-GPU metrics include baseline allocated/reserved, absolute peak allocated/reserved
-including resident weights, and separately labeled increments. Optional NVML device/
-process and process RAM maxima are sampled every 50 ms, and unavailable values are
-null. PyTorch memory is not total device usage. Live allocated growth is flagged;
-retained allocator reservations alone are not called a leak.
-
-Primary accuracy uses repetition 1 only, out of fixed 24 questions. Timing first
-takes a median over three repetitions per question/configuration, then reports the
-distribution over 24 question medians and per-video medians. Measured speedup is
-reference median latency / condition median latency; frame ratio is budget / 64.
-Relative timing range is `(max - min) / median`, with a proposed per-budget median
-target <=20% and individual cells >50% flagged. Repeated input hashes, parsed
-answers and raw outputs/tokens are checked. Incomplete collection reports planned,
-attempted, successful, failed and unattempted counts and withholds complete curves.
-
-Uniform-64 is the operational dense sampled reference, not all-frame processing,
-an oracle, or an accuracy upper bound. Uniform sets need not be nested. Quality need
-not improve monotonically with frame count. Text-only is a separate diagnostic,
-never a zero-cost point. There are only eight videos/24 clustered questions;
-repetitions do not create independent examples or support significance claims.
-
-## Saved evidence and resource limits
-
-Each unique `results/<run>/` holds environment/model manifests, resolved configuration,
-cohort/exposure/order, atomic trial records, `raw_trials.jsonl`, failed attempts,
-worker/call diagnostics, `resource_ledger.json`, `summary.csv/json`, `verification.json`,
-`status.json`, `report.md`, and figures when complete real results exist. Public-safe
-reports and source identifiers/hashes are committed; restricted raw artifacts remain
-ignored locally. No synthetic predictions, latencies or memory figures are saved as
-real experiment results. Tests explicitly use synthetic fixtures.
-
-The resource ledger counts the complete new project, including `.venv`, caches,
-temporary files and Git, against 20 GiB. Model weights are downloaded once to the
-local HF cache or reused from an existing complete immutable cache. The 4-hour active
-limit spans resumptions; the explicitly authorized v3 coordinator/finalizer applies
-the recorded runtime grant up to 5h40m. All operations inherit the same ledger; externally launched
-setup/validation costs can be recorded explicitly:
-
-```powershell
-& $python -m video_compute_value.e000 account --config configs/e000.yaml --run-dir $run --event-name 'external validation, including failures' --event-seconds 12.34
-```
-
-Use measured elapsed seconds, not the illustrative value above. The PowerShell
-helpers do this automatically. Network transfer is recorded for annotations/ranges;
-model download logical bytes and actual project storage are separately recorded.
-Storage peaks are observations at checkpoints, not continuous filesystem sampling.
-No paid API, cloud rental, unrelated-file deletion, implicit fallback or silent
-configuration relaxation is permitted.
-
-Final statuses include `FEASIBILITY_CONFIRMED`, `BLOCKED_ENVIRONMENT`,
-`BLOCKED_MODEL_ACCESS`, `BLOCKED_INPUT`, `BLOCKED_RESOURCE`, `INPUT_INTEGRITY_FAILED`,
-`MEASUREMENT_UNSTABLE`, `REPEATABILITY_UNRESOLVED`, and `PARTIAL`.
-Confirmation requires complete collection and all implemented verification gates.
-See the current run report for actual executed commands and any unverified real paths.
-
-Implementation references and exact installed processor source hashes are recorded
-in `manifests/implementation_references.json` and the frozen model manifest. The
-[Transformers 4.57.1 source](https://github.com/huggingface/transformers/tree/v4.57.1/src/transformers/models/qwen3_vl)
-and [PyTorch 2.8 CUDA documentation](https://docs.pytorch.org/docs/2.8/notes/cuda.html)
-define the native APIs used here.
+- Chaoyou Fu et al. (2025). *Video-MME: The First-Ever Comprehensive Evaluation
+  Benchmark of Multi-modal LLMs in Video Analysis*. CVPR.
+  [Official paper](https://openaccess.thecvf.com/content/CVPR2025/papers/Fu_Video-MME_The_First-Ever_Comprehensive_Evaluation_Benchmark_of_Multi-modal_LLMs_in_CVPR_2025_paper.pdf).
+- Shuai Bai et al. (2025). *Qwen3-VL Technical Report*. arXiv:2511.21631.
+  [Paper](https://arxiv.org/abs/2511.21631), [official model card](https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct),
+  [official code and citation metadata](https://github.com/QwenLM/Qwen3-VL).

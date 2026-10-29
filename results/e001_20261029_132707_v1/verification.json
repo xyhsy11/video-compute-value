@@ -1,0 +1,30 @@
+{
+  "complete_288_identities": true,
+  "native_input_integrity": true,
+  "exact_base_retention": true,
+  "matched_augmented_visual_budgets": true,
+  "effective_greedy_generation": true,
+  "independent_token_decoding_and_scoring": true,
+  "fresh_process_repeatability": true,
+  "repeatable_cells": 144,
+  "planned_repeatability_cells": 144,
+  "e0_historical_preservation": true,
+  "e0_preserved_files": 1719,
+  "preflight_passed": true,
+  "completed_calls_by_kind": {
+    "trial": 288,
+    "probe": 12,
+    "warmup": 8
+  },
+  "started_calls": 308,
+  "completed_calls": 308,
+  "failed_calls": 0,
+  "interrupted_calls_upper_bound": 0,
+  "e0_base_prediction_discrepancies": 0,
+  "e0_base_discrepancy_anonymous_ids": [],
+  "all_checks_passed": true,
+  "statistics_independently_verified": true,
+  "at": "2026-10-29T05:02:01.333915+00:00",
+  "summary_sha256": "4b96966636e366de17ebe5863cda099d6775d254a9b7589cb3483ebf0ed7cc2e",
+  "matrix_sha256": "7f575f297ae77e0fab45ab7e633e4698c18a595e79d90e1d2aade39f6f571c4c"
+}
