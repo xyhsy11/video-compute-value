@@ -1,0 +1,18 @@
+[
+  {
+    "budget": 8,
+    "native_preparations": 8,
+    "median_native_preparation_seconds": 2.031517000000008,
+    "minimum_seconds": 1.1777663000000302,
+    "maximum_seconds": 3.969149000000016,
+    "scope": "Single CPU-only pass over eight source questions; validation decodes excluded"
+  },
+  {
+    "budget": 64,
+    "native_preparations": 8,
+    "median_native_preparation_seconds": 3.18320639999979,
+    "minimum_seconds": 2.160623300000225,
+    "maximum_seconds": 4.848988600000212,
+    "scope": "Single CPU-only pass over eight source questions; validation decodes excluded"
+  }
+]

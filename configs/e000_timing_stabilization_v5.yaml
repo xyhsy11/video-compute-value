@@ -1,0 +1,11 @@
+version: e000_timing_stabilization_v5
+parent_run: results/e000_20261028_greedy_collection_v3
+diagnostic_seed: 20261029
+confirmation_seed: 20261030
+threshold: 0.20
+safety_factor: 1.5
+closeout_reserve_seconds: 600
+interruption_contingency_seconds: 120
+cumulative_limit_seconds: 27600
+additional_disk_limit_gib: 20
+video_acquisition_limit_gib: 1

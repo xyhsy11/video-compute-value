@@ -1,0 +1,5 @@
+arm,budget,complete,primary_requests,source_questions,independent_repetitions,S,absolute_range_seconds,median_request_seconds,median_prepare_seconds,median_remainder_seconds,peak_allocated_bytes,peak_reserved_bytes,sampled_device_gpu_peak_bytes,live_allocated_after_bytes,reserved_after_bytes,individual_over_50_percent
+A,8,False,0,8,3,,,,,,,,,,,
+A,64,False,0,8,3,,,,,,,,,,,
+B,8,False,0,8,3,,,,,,,,,,,
+B,64,False,0,8,3,,,,,,,,,,,

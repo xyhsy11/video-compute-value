@@ -13,3 +13,6 @@ configs/e000_threaded_authorized_v3.yaml -text
 # Preserve E1 public CSV hashes on Windows checkouts.
 .gitattributes text eol=lf
 results/e001_20261029_132707_v1/*.csv text eol=lf
+
+# Keep sanitized timing-follow-up CSV bytes stable across Windows staging.
+results/e000_20261029_150300_timing_stabilization_v5/*.csv text eol=lf

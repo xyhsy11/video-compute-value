@@ -1,0 +1,19 @@
+{
+  "separate_reviewer_used": true,
+  "scope": "Read-only design and verifier review before freeze; no inference or historical writes",
+  "resolved_before_freeze": [
+    "CPU admission and owned deadline",
+    "Confirmation CPU forecast and invocation accounting",
+    "Sealed CPU evidence and reuse provenance",
+    "Per-worker workload deadlines",
+    "Independent lifecycle, memory, lineage and metric verification",
+    "Verification failure exit status"
+  ],
+  "frozen_measurement_sources_unchanged_after_freeze": true,
+  "separate_saved_evidence_closeout_review": true,
+  "closeout_corrections_verified": [
+    "No nonexistent full-confirmation forecast claimed",
+    "Zero new token sequences explicitly stated",
+    "Exactly four incomplete summary cells required"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "action": "Separately named bounded model-initialization crash diagnostic before any new timing collection",
+  "basis": "Preserved native 0xC0000005 exit and contemporaneous torch_cpu.dll event during checkpoint loading",
+  "additional_cumulative_allowance_required_seconds": null,
+  "resource_estimate_status": "Not established without successful native initialization and real GPU probes",
+  "no_budget_increase_requested": true,
+  "no_additional_inference_authorized_or_started_in_this_failed_phase": true
+}

@@ -1,0 +1,31 @@
+{
+  "os": "Windows-11-10.0.22631-SP0",
+  "python": "3.12.14",
+  "packages": {
+    "torch": "2.8.0+cu128",
+    "torchvision": "0.23.0+cu128",
+    "transformers": "4.57.1",
+    "accelerate": "1.10.1",
+    "av": "16.0.1",
+    "numpy": "2.2.6",
+    "Pillow": "11.3.0",
+    "PyYAML": "6.0.2",
+    "psutil": "6.1.1",
+    "huggingface-hub": "0.35.3",
+    "pyarrow": "21.0.0",
+    "tokenizers": "0.22.2",
+    "safetensors": "0.8.0",
+    "nvidia-ml-py": "12.560.30"
+  },
+  "nvidia_driver_version": "621.01",
+  "power": {
+    "plugged_in": true,
+    "battery_percent": 100
+  },
+  "gpu": {
+    "available": true,
+    "runtime": "12.8",
+    "name": "NVIDIA GeForce RTX 3080 Laptop GPU",
+    "total_bytes": 17179344896
+  }
+}

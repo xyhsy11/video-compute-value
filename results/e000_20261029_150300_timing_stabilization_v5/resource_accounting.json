@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-29T06:32:31.547912+00:00",
+  "inherited_seconds": 23333.318352,
+  "cumulative_seconds": 25562.825596000002,
+  "remaining_seconds": 2037.1744039999976,
+  "authorized_limit_seconds": 27600,
+  "storage_current_bytes": 17047987942,
+  "storage_peak_bytes": 17047987942,
+  "storage_limit_bytes": 21474836480,
+  "video_transfer_bytes": 81653854,
+  "video_limit_bytes": 1073741824,
+  "all_sessions_closed": true,
+  "model_calls": {
+    "preflight": {
+      "warmup": 0,
+      "profile": 0
+    },
+    "diagnostic": {
+      "warmup": 0,
+      "primary": 0
+    },
+    "confirmation": {
+      "warmup": 0,
+      "primary": 0
+    }
+  },
+  "completed_model_calls": 0,
+  "unknown_model_invocations_upper_bound": 0,
+  "cumulative_model_invocations_upper_bound": 1762,
+  "new_acquisition_bytes": 0,
+  "publication_reserve_seconds": 300,
+  "authoritative_resource_ledger": "private/resource_ledger.json",
+  "final_publication_storage_reserve_bytes": 33554432,
+  "video_transfer_and_interruption_upper_bound_bytes": 82702430,
+  "failed_GPU_worker_attempts": 1,
+  "accounting_note": "Inherits every historical charge; continuous work since conservative task start plus a fully charged 300-second prospective final publication/handoff reserve. Storage is observed before final Git writes with a separate 32 MiB reserve; no new acquisition."
+}

@@ -1,0 +1,22 @@
+{
+  "CPU_regression_tests_passed": 113,
+  "targeted_CPU_tests_passed": 16,
+  "regression_receipt_sha256": "c0b8bf6005705fc117bd4032e51d19a3ad0ec9a94011d92042fc4e79ca8fdb24",
+  "targeted_receipt_sha256": "0ca41e9fd1cbf2827c96c082487c730fbfa419dd32fa4f69babb7f329ab85d69",
+  "Ruff_passed": true,
+  "whitespace_passed": true,
+  "saved_CPU_hash_corruption_detected": true,
+  "fabricated_zero_timing_detected": true,
+  "empty_missing_summary_cells_detected": true,
+  "real_native_processor_paths_exercised": true,
+  "timed_GPU_generation_paths_verified": false,
+  "full_experiment_verifier_expected_exit_code": 2,
+  "available_evidence_verifier_exit_code": 0,
+  "figures_visually_inspected": true,
+  "measurement_sources_unchanged_after_freeze": true,
+  "reporting_source_sha256": {
+    "scripts/report_e000_timing_v5.py": "242b74d844007521f86d0c2d2b767a85d284c191e1447d034e715a1e3d3a7805",
+    "scripts/audit_e000_timing_v5.py": "b7244c14d16c1b76c46909a99dc53b49a04a72a350a4f526d677daea23255952",
+    "scripts/verify_e000_timing_closeout_v5.py": "1f53c4444d8d41c803c4ac375a64781fe9104ac7a2cf65d8f5e7a3125553db99"
+  }
+}

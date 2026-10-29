@@ -1,0 +1,10 @@
+{
+  "status": "PARTIAL",
+  "operation": "preflight",
+  "detail": "Worker failed; partial session preserved",
+  "historical_E0": "MEASUREMENT_UNSTABLE",
+  "failure_class": "NATIVE_MODEL_INITIALIZATION_CRASH",
+  "diagnostic_timing_result": "NOT_EVALUABLE",
+  "selected_policy": null,
+  "confirmation_status": "CONFIRMATION_NOT_RUN"
+}

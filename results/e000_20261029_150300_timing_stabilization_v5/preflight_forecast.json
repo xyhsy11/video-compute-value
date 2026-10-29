@@ -1,0 +1,17 @@
+{
+  "phase": "preflight",
+  "at": "2026-10-29T06:17:19.010097+00:00",
+  "historical_worst_request_plus_hash_seconds": 13.756923300000375,
+  "conservative_startup_per_worker_seconds": 60,
+  "planned_workers": 2,
+  "planned_calls": 12,
+  "basis": "All corrected E0 records; conservative bound, not a new measured forecast",
+  "raw_execution_and_overhead_seconds": 345.0830796000045,
+  "safety_factor": 1.5,
+  "interruption_contingency_seconds": 120,
+  "closeout_reserve_seconds": 600,
+  "required_seconds": 1237.6246194000068,
+  "remaining_seconds": 3236.1845749999993,
+  "admitted": true,
+  "additional_cumulative_allowance_needed_seconds": 0
+}

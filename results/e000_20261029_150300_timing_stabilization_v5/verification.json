@@ -1,0 +1,23 @@
+{
+  "passed": false,
+  "errors": [
+    "actual arm/worker order",
+    "actual contiguous block/call order",
+    "diagnostic invocation total",
+    "failed/interrupted attempt",
+    "incomplete worker session",
+    "phase schedule/call completeness",
+    "preflight incomplete",
+    "unreaped/incomplete worker"
+  ],
+  "phase": "diagnostic",
+  "records_checked": 0,
+  "native_token_sequences_redecoded": 0,
+  "completed_model_calls": 0,
+  "unknown_model_invocations_upper_bound": 0,
+  "historical_files_unchanged": 2098,
+  "independent_metrics": [],
+  "selected_policy": null,
+  "real_GPU_path_exercised": false,
+  "CPU_tests_are_not_GPU_evidence": true
+}

@@ -99,6 +99,46 @@ preserve the detailed gates, failures and resource history. E0 is limited by eig
 development videos and unstable timing; its frame ratios do not demonstrate
 proportional latency savings or an adaptive method.
 
+### E0 timing follow-up: fresh and resident workers
+
+Can a frozen worker policy make full local-video requests repeatable across
+independent sessions? On 2026-10-29 we froze a paired screen of fresh workers per
+budget/repetition (A) and resident workers across two budget blocks within each
+repetition (B). The same eight development videos, first official question per
+video, 8/64-frame inputs, explicit greedy policy and complete-request timer were
+retained. Three independent repetitions per arm were planned, with a fixed 20%
+median question-level relative-range criterion and A-first selection.
+
+**The screen stopped during preflight model loading.** All **16 native CPU
+preparations** matched historical tensors and temporal metadata; direct serial
+versus four-thread RGB comparisons also passed. The first GPU worker then exited
+with Windows code `0xC0000005` before generation began. A contemporaneous error
+event named `torch_cpu.dll`; this does not establish the underlying cause.
+The owned worker was reaped and no automatic retry was made.
+
+**Completed model calls: 0/132 planned diagnostic calls.** A/B stability at both
+8 and 64 frames is unavailable. Neither policy qualified; full confirmation was
+not run. This is an incomplete initialization failure, not a measured negative
+timing result. Historical E0 remains **MEASUREMENT_UNSTABLE**, and all **2,098
+historical evidence files** in the preservation inventory remain unchanged.
+
+The [follow-up report](results/e000_20261029_150300_timing_stabilization_v5/report.md),
+[prospective protocol](protocols/e000_timing_stabilization_v5.md),
+[safe aggregates](results/e000_20261029_150300_timing_stabilization_v5/summary.json) and
+[available-evidence verification](results/e000_20261029_150300_timing_stabilization_v5/closeout_verification.json)
+retain the design, failed attempt, missing outcomes and resource accounting.
+The full experimental verifier correctly fails completeness; the separate
+closeout audit checks the valid CPU evidence, failure preservation, cleanup and
+accounting. New timed GPU generation paths remain unverified.
+
+![E0 follow-up: missing A/B timing observations and fixed criterion](results/e000_20261029_150300_timing_stabilization_v5/figures/diagnostic_stability.png)
+
+![E0 follow-up: absolute request-time observations were not collected](results/e000_20261029_150300_timing_stabilization_v5/figures/request_times.png)
+
+The next single diagnostic should address model initialization using the preserved
+native crash evidence before another prospectively frozen timing screen. These
+results establish neither a stable execution policy nor an efficiency improvement.
+
 ## Experiment 1: does choosing an additional clip matter?
 
 E0 changes a uniform frame budget, which does not isolate the choice of added
@@ -237,6 +277,17 @@ The [current cumulative accounting](results/e001_20261029_132707_v1/resource_acc
 latest local ledger. Limits remain **20 GiB** additional project storage, including
 environment/caches/Git, and **1 GiB** video acquisition. E1 reuses existing assets;
 no paid service, new acquisition, model substitution or background-app termination.
+
+The E0 follow-up inherits that entire closed ledger, including prior publication
+charges, without another resource grant. Its [current cumulative accounting](results/e000_20261029_150300_timing_stabilization_v5/resource_accounting.json)
+points to the new local `private/resource_ledger.json`. It accounts for implementation,
+native preparation, the failed loader, tests, verification, reporting and publication.
+Use the follow-up report's commands for this new run; historical run directories
+remain immutable. Read-only failure closeout can be reproduced with:
+
+```powershell
+.venv\Scripts\python.exe scripts/verify_e000_timing_closeout_v5.py --run-dir results/e000_20261029_150300_timing_stabilization_v5
+```
 
 ## Data access and references
 

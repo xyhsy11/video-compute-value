@@ -1,0 +1,3 @@
+budget,native_preparations,median_native_preparation_seconds,minimum_seconds,maximum_seconds,scope
+8,8,2.031517000000008,1.1777663000000302,3.969149000000016,Single CPU-only pass over eight source questions; validation decodes excluded
+64,8,3.18320639999979,2.160623300000225,4.848988600000212,Single CPU-only pass over eight source questions; validation decodes excluded

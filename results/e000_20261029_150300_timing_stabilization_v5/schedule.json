@@ -1,0 +1,230 @@
+[
+  {
+    "worker_id": "diagnostic_1_A_8",
+    "phase": "diagnostic",
+    "arm": "A",
+    "repetition": 1,
+    "blocks": [
+      {
+        "budget": 8,
+        "pairs": [
+          "V08Q1",
+          "V02Q1",
+          "V06Q1",
+          "V03Q1",
+          "V04Q1",
+          "V07Q1",
+          "V01Q1",
+          "V05Q1"
+        ]
+      }
+    ]
+  },
+  {
+    "worker_id": "diagnostic_1_A_64",
+    "phase": "diagnostic",
+    "arm": "A",
+    "repetition": 1,
+    "blocks": [
+      {
+        "budget": 64,
+        "pairs": [
+          "V08Q1",
+          "V02Q1",
+          "V06Q1",
+          "V03Q1",
+          "V04Q1",
+          "V07Q1",
+          "V01Q1",
+          "V05Q1"
+        ]
+      }
+    ]
+  },
+  {
+    "worker_id": "diagnostic_1_B_8",
+    "phase": "diagnostic",
+    "arm": "B",
+    "repetition": 1,
+    "blocks": [
+      {
+        "budget": 8,
+        "pairs": [
+          "V08Q1",
+          "V02Q1",
+          "V06Q1",
+          "V03Q1",
+          "V04Q1",
+          "V07Q1",
+          "V01Q1",
+          "V05Q1"
+        ]
+      },
+      {
+        "budget": 64,
+        "pairs": [
+          "V08Q1",
+          "V02Q1",
+          "V06Q1",
+          "V03Q1",
+          "V04Q1",
+          "V07Q1",
+          "V01Q1",
+          "V05Q1"
+        ]
+      }
+    ]
+  },
+  {
+    "worker_id": "diagnostic_2_B_64",
+    "phase": "diagnostic",
+    "arm": "B",
+    "repetition": 2,
+    "blocks": [
+      {
+        "budget": 64,
+        "pairs": [
+          "V07Q1",
+          "V01Q1",
+          "V03Q1",
+          "V06Q1",
+          "V02Q1",
+          "V04Q1",
+          "V08Q1",
+          "V05Q1"
+        ]
+      },
+      {
+        "budget": 8,
+        "pairs": [
+          "V07Q1",
+          "V01Q1",
+          "V03Q1",
+          "V06Q1",
+          "V02Q1",
+          "V04Q1",
+          "V08Q1",
+          "V05Q1"
+        ]
+      }
+    ]
+  },
+  {
+    "worker_id": "diagnostic_2_A_64",
+    "phase": "diagnostic",
+    "arm": "A",
+    "repetition": 2,
+    "blocks": [
+      {
+        "budget": 64,
+        "pairs": [
+          "V07Q1",
+          "V01Q1",
+          "V03Q1",
+          "V06Q1",
+          "V02Q1",
+          "V04Q1",
+          "V08Q1",
+          "V05Q1"
+        ]
+      }
+    ]
+  },
+  {
+    "worker_id": "diagnostic_2_A_8",
+    "phase": "diagnostic",
+    "arm": "A",
+    "repetition": 2,
+    "blocks": [
+      {
+        "budget": 8,
+        "pairs": [
+          "V07Q1",
+          "V01Q1",
+          "V03Q1",
+          "V06Q1",
+          "V02Q1",
+          "V04Q1",
+          "V08Q1",
+          "V05Q1"
+        ]
+      }
+    ]
+  },
+  {
+    "worker_id": "diagnostic_3_B_8",
+    "phase": "diagnostic",
+    "arm": "B",
+    "repetition": 3,
+    "blocks": [
+      {
+        "budget": 8,
+        "pairs": [
+          "V02Q1",
+          "V03Q1",
+          "V06Q1",
+          "V07Q1",
+          "V08Q1",
+          "V04Q1",
+          "V05Q1",
+          "V01Q1"
+        ]
+      },
+      {
+        "budget": 64,
+        "pairs": [
+          "V02Q1",
+          "V03Q1",
+          "V06Q1",
+          "V07Q1",
+          "V08Q1",
+          "V04Q1",
+          "V05Q1",
+          "V01Q1"
+        ]
+      }
+    ]
+  },
+  {
+    "worker_id": "diagnostic_3_A_8",
+    "phase": "diagnostic",
+    "arm": "A",
+    "repetition": 3,
+    "blocks": [
+      {
+        "budget": 8,
+        "pairs": [
+          "V02Q1",
+          "V03Q1",
+          "V06Q1",
+          "V07Q1",
+          "V08Q1",
+          "V04Q1",
+          "V05Q1",
+          "V01Q1"
+        ]
+      }
+    ]
+  },
+  {
+    "worker_id": "diagnostic_3_A_64",
+    "phase": "diagnostic",
+    "arm": "A",
+    "repetition": 3,
+    "blocks": [
+      {
+        "budget": 64,
+        "pairs": [
+          "V02Q1",
+          "V03Q1",
+          "V06Q1",
+          "V07Q1",
+          "V08Q1",
+          "V04Q1",
+          "V05Q1",
+          "V01Q1"
+        ]
+      }
+    ]
+  }
+]
