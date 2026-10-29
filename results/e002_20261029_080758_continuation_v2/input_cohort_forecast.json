@@ -1,0 +1,22 @@
+{
+  "stage": "input_cohort",
+  "at": "2026-10-29T08:17:37.942201+00:00",
+  "raw_seconds": 4750.730899068767,
+  "safety_factor": 1.5,
+  "failure_reserve_seconds": 600,
+  "verification_reporting_reserve_seconds": 1200,
+  "closeout_reserve_seconds": 600,
+  "required_seconds": 9526.09634860315,
+  "remaining_seconds": 144651.092475,
+  "projected_additional_bytes": 707332784,
+  "projected_traffic_bytes": 914042023,
+  "additional_seconds_needed": 0,
+  "detail": {
+    "bounded_candidate_window": 60,
+    "required_eligible": 40,
+    "measured_probe_bytes_per_second": 190596.6617709401,
+    "remaining_candidates": 59,
+    "full_window_payload_bytes": 568117359
+  },
+  "admitted": true
+}

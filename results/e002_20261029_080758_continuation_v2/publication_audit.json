@@ -1,0 +1,11 @@
+{
+  "all_publication_checks_passed": true,
+  "files_checked": 59,
+  "local_links_checked": 91,
+  "restricted_annotation_strings_checked": 8351,
+  "historical_files_preserved": 2290,
+  "git_revision_checked": "index",
+  "scientific_success_is_separate": true,
+  "final_resource_lineage_and_cap_checks_passed": true,
+  "all_executed_scientific_source_hashes_match": true
+}

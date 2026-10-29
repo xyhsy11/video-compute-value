@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-29T11:32:26.980079+00:00",
+  "authorized_limit_seconds": 172800,
+  "inherited_seconds": 27390.965324,
+  "cumulative_seconds": 40437.94540300001,
+  "remaining_seconds": 132362.05459699998,
+  "storage_current_bytes": 17469961688,
+  "storage_peak_bytes": 17469961688,
+  "storage_limit_bytes": 21474836480,
+  "video_transfer_bytes": 477874213,
+  "video_transfer_and_interruption_upper_bound_bytes": 478922789,
+  "video_limit_bytes": 1073741824,
+  "authoritative_resource_ledger": "private/resource_ledger.json",
+  "precharged_closeout_seconds": 600
+}

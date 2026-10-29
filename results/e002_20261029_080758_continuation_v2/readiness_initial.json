@@ -1,0 +1,21 @@
+{
+  "parent_checkpoint": "results/e002_20261029_073134_v1",
+  "inherited_implementation": "PARTIAL_CPU_CORE",
+  "inherited_collection": "BLOCKED_INPUT_AND_RESOURCE",
+  "inherited_sources": 0,
+  "inherited_questions": 0,
+  "inherited_scientific_calls": 0,
+  "legacy_compatibility_calls": 5,
+  "scientific_protocol_unchanged": true,
+  "resource_authority": "Direct human approval: Authorize 48 hours total",
+  "implemented_now": [
+    "cumulative continuation ledger",
+    "journaled bounded exact-range acquisition",
+    "outcome-independent source inspection"
+  ],
+  "pending": [
+    "full native collection",
+    "nested OOF sealing and independent verification",
+    "E2B conditional stage integration"
+  ]
+}

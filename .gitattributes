@@ -20,3 +20,8 @@ results/e000_20261029_150300_timing_stabilization_v5/*.csv text eol=lf
 # Keep the E2 checkpoint's data and rendered SVG hashes stable on Windows.
 results/e002_20261029_073134_v1/*.csv text eol=lf
 results/e002_20261029_073134_v1/figures/*.svg text eol=lf
+
+# Preserve the continuation's public table and figure hashes on Windows.
+.gitignore text eol=lf
+results/e002_*_continuation_v2/*.csv text eol=lf
+results/e002_*_continuation_v2/figures/*.svg text eol=lf

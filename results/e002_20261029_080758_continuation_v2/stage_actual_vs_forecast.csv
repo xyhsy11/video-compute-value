@@ -1,0 +1,4 @@
+stage,protected_forecast_seconds,observed_seconds,observed_scope
+input_cohort,9526.09634860315,2601.050693,complete_stage_wall_clock
+cpu_preflight,5100.0,918.77263,complete_stage_wall_clock
+E2A_collection,22036.975028699075,6918.994279999999,owned_worker_wall_clock_including_loads_and_warmups

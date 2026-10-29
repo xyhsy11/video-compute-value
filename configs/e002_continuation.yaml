@@ -1,0 +1,12 @@
+implementation_version: e002_continuation_v2
+scientific_protocol: protocols/e002_preacquisition_predictability_v1.md
+scientific_config: configs/e002.yaml
+parent_checkpoint: results/e002_20261029_073134_v1
+candidate_window: 60
+input_probe_timeout_seconds: 300
+input_stage_max_seconds: 7200
+worker_timeout_seconds: 14400
+safety_factor: 1.5
+failure_reserve_seconds: 600
+verification_reporting_reserve_seconds: 1200
+closeout_reserve_seconds: 600

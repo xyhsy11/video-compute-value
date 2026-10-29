@@ -1,0 +1,7 @@
+{
+  "folds": 5,
+  "heldout_questions": 120,
+  "decisions_sealed": true,
+  "seal_manifest_sha256": "48d1fb44153a058e01b367fa60c4165bb6e0193c6d03b72223dc6169a7436444",
+  "training_only_fitting": true
+}

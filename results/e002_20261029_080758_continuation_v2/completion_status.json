@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-29T11:28:40.908348+00:00",
+  "implementation": "E2A_ORCHESTRATION_COMPLETED_AND_EXERCISED; E2B_GPU_PATH_UNEXERCISED",
+  "E2A_collection": "COMPLETE_VERIFIED",
+  "source_groups": 40,
+  "questions": 120,
+  "primary_model_calls": 960,
+  "repeatability_model_calls": 120,
+  "warmup_model_calls": 4,
+  "failed_requests": 0,
+  "predictive_value": "PREDICTIVE_VALUE_NOT_DEMONSTRATED_FOR_THIS_OBSERVATION_FAMILY",
+  "precision": "INCONCLUSIVE_LOW_PRECISION",
+  "explicit_question_contribution": "NOT_DEMONSTRATED",
+  "E2B": "NOT_ADMITTED_E2A_ADVANCEMENT",
+  "timing_validity": "UNMEASURED",
+  "practical_value": "PRACTICAL_VALUE_NOT_EVALUABLE_MEASUREMENT",
+  "publication_readiness": "PUBLIC_SAFE_ARTIFACTS_READY_FOR_EXACT_INDEX_AUDIT_AND_AUTHORIZED_COMMIT_PUSH",
+  "publication_is_not_scientific_success": true,
+  "resource_cap_seconds": 172800,
+  "required_scientific_work_remaining": false,
+  "future_scientific_work_requires_new_authorization": true,
+  "canonical_resume_command": ".venv/Scripts/python.exe scripts/resume_e002_continuation.py --run-dir results/e002_20261029_080758_continuation_v2"
+}

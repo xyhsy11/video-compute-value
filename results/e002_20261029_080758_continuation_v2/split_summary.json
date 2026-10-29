@@ -1,0 +1,19 @@
+{
+  "outer_groups": [
+    8,
+    8,
+    8,
+    8,
+    8
+  ],
+  "inner_training_groups": [
+    32,
+    32,
+    32,
+    32,
+    32
+  ],
+  "inner_folds": 4,
+  "repeat_groups": 5,
+  "manifest_sha256": "7b2773decc746f3f2402cd12312976ef6ed333112813a94b99a32fdfd1d4f681"
+}

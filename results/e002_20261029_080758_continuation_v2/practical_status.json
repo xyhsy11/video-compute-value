@@ -1,0 +1,6 @@
+{
+  "status": "NOT_ADMITTED_E2A_ADVANCEMENT",
+  "reason": "E2A failed its frozen advancement rule; expensive E2B was not run.",
+  "timing_validity": "UNMEASURED",
+  "practical_value": "PRACTICAL_VALUE_NOT_EVALUABLE_MEASUREMENT"
+}

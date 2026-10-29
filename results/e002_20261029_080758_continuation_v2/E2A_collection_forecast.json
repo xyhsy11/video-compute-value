@@ -1,0 +1,28 @@
+{
+  "stage": "E2A_collection",
+  "at": "2026-10-29T09:20:06.440045+00:00",
+  "raw_seconds": 13091.316685799382,
+  "safety_factor": 1.5,
+  "failure_reserve_seconds": 600,
+  "verification_reporting_reserve_seconds": 1200,
+  "closeout_reserve_seconds": 600,
+  "required_seconds": 22036.975028699075,
+  "remaining_seconds": 140902.59463099999,
+  "projected_additional_bytes": 134217728,
+  "projected_traffic_bytes": 0,
+  "additional_seconds_needed": 0,
+  "detail": {
+    "planned_scientific_calls": 1080,
+    "completed_scientific_calls": 0,
+    "primary_calls": 960,
+    "repeatability_calls": 120,
+    "base_warmups": 4,
+    "recovery_warmup_allowance": 2,
+    "measured_legacy_max_model_residual_seconds": 2.6061736,
+    "measured_all_source_max_native_prepare_seconds": 9.311639699999432,
+    "measured_legacy_startup_seconds": 13.323813999999402,
+    "three_startups_including_recovery": true,
+    "legacy_probe_calls_excluded_from_scientific_evidence": 5
+  },
+  "admitted": true
+}

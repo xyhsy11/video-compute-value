@@ -6,9 +6,9 @@ evidence is worth acquiring. Before building a decision policy, we first check
 whether our measurements are reliable and whether choosing a different clip can
 meaningfully change an answer.
 
-We use a frozen video-language model and multiple-choice video questions. Our
-current evidence comes from a small, exposed development cohort. We have not
-trained a controller or demonstrated an adaptive policy or validated speedup.
+We use a frozen video-language model and multiple-choice video questions. E0 and E1 use eight exposed development sources. E2A adds 40 new official
+source groups for held-out development and trains small ridge selectors. The
+practical compute result is evaluated separately below.
 This repository is separate from `video-refresh-benchmark`.
 
 | Experiment | Question | Sources / questions | Model / input controls | Endpoint | Status | Main result | Limitation |
@@ -16,7 +16,7 @@ This repository is separate from `video-refresh-benchmark`.
 | E0 | Can requests fit, repeat, and be measured? | 8 / 24 exposed | Frozen Qwen3-VL; uniform 8–64 | Operational gates | MEASUREMENT_UNSTABLE | 62.50–87.50% accuracy | Timing failed; small development cohort |
 | E0 timing follow-up | Can worker lifecycle stabilize timing? | 8 / 8 planned | Same model; fresh/resident 8/64 | 20% median relative range | BLOCKED_MODEL_RUNTIME | Zero model calls; native loading failure | Timing outcomes unavailable |
 | E1 | Is there hindsight acquisition headroom? | 8 / 24 exposed | Same retained base8; matched augmented16 | Oracle minus expected random | COMPLETE_RETROSPECTIVE | 18.75 pp; oracle minus fixed 12.50 pp | Video-specific fixed quarter matched oracle in all sources |
-| E2 | Can observations predict benefit and realize value after cost? | 40 / 120 planned; 0 collected | Same answerer; V/Q/VQ; source-held-out folds | Delta_fixed; separate E2B cost gate | BLOCKED_INPUT / RESOURCE | No scientific result | Partial CPU implementation; full timing unverified |
+| E2A | Can observations predict acquisition gain? | 40 / 120 new | Same frozen answerer; V/Q/VQ ridge | Delta_fixed | PREDICTIVE_VALUE_NOT_DEMONSTRATED_FOR_THIS_OBSERVATION_FAMILY | +1.67 pp versus train-fixed | Development pilot; conditional intervals; E2B NOT_ADMITTED_E2A_ADVANCEMENT |
 
 E0 and E1 use **Video-MME v1**, short category, the official annotation
 **test split**, revision `ead1408f75b618502df9a1d8e0950166bf0a2a0b`.
@@ -229,48 +229,149 @@ See the [E1 protocol](protocols/e001_additional_clip_headroom_v1.md), [report](r
 A hindsight oracle only shows what was possible inside this four-action menu.
 It cannot show that a practical policy can select the right clip before seeing
 its answer. E1 is accuracy-only: its descriptive times do not validate latency
-or computational efficiency. E1 did not train a controller. The separately authorized E2 checkpoint follows below.
+or computational efficiency. E1 did not train a controller. The separately authorized E2 study follows below.
 
-## Experiment 2: can observations predict acquisition benefit?
+## E2A: pre-acquisition predictability
 
-E1 establishes hindsight opportunity. E2 asks whether information available before
-acquisition predicts signed correctness change, and then whether a real base-first
-policy delivers value after charging both requests. These are separate E2A and E2B
-questions. The planned E2 development pilot uses 40 new source groups and 120
-questions, with five outer held-out source folds and four inner training folds.
+**Verdict: PREDICTIVE_VALUE_NOT_DEMONSTRATED_FOR_THIS_OBSERVATION_FAMILY.** Precision flag: INCONCLUSIVE_LOW_PRECISION.
+Explicit question contribution: **NOT_DEMONSTRATED**.
 
-V uses the exact eight base RGB frames; Q hashes only original question text; VQ
-adds fixed query–video interactions. A separate C control uses same-call generation
-scores. Paths, identities, options, labels, candidate outputs/costs and outside-base
-pixels cannot enter the policy observation. Four ridge outputs predict -1/0/+1
-gain. Scalers, regularization, fixed controls and thresholds are training-only.
+E1 found opportunity by choosing an added quarter after seeing the answers. E2A
+asks whether observations available before acquisition can predict signed
+correctness change on held-out sources. V uses only the eight retained base RGB
+frames and permitted geometry/timing metadata; Q hashes only original question
+text; VQ adds the frozen deterministic interactions. Options, identities, paths,
+labels, candidate outputs/costs and outside-base pixels cannot enter the policy.
+The separate C diagnostic captures scores in the same paid base generation;
+plain/observed token agreement passed for all 120 questions. VQ does not use C.
 
-**Current E2 outcome: blocked checkpoint, no E2 scientific calls.**
+The development pilot collected 40 new official source groups and all 120 original
+questions, with 960 primary and 120 fresh-process repeatability calls, plus
+4 separate warmups. The earlier
+five legacy compatibility calls are excluded. Five outer folds each held out eight
+sources; four inner training folds selected regularization. V/Q/VQ use the unchanged
+frozen cheap observation family and four independent ridge outputs. All held-out
+predictions/actions were sealed before the evaluator joined outcomes.
 
-| Stage | Current evidence |
-|---|---|
-| Implementation | CPU core tested; full collection/evaluator/cost-panel orchestration incomplete |
-| E2A collection | 0/40 source groups; 0/120 questions; 0/1,080 planned calls |
-| Bounded legacy compatibility | PASSED; 5/5 calls completed |
-| Predictive value / question contribution | Unavailable |
-| E2B practical value | Not evaluable; no complete-pipeline timing |
+Each quarter action retains the exact Uniform-8 base and adds eight distinct
+frames, followed by a fresh complete 16-frame re-encoding. Nested uniform retains
+the same base; Direct16 is sampled independently. Inputs use the shared frozen
+Qwen3-VL-4B-Instruct model/processor/tokenizer revision
+`ebb281ec70b05090aa6165b016eac8ec08e71b17`, BF16/SDPA, 192 x 320 canvases,
+original timestamps and unchanged greedy prompt/parser settings. This is
+recorded-video QA with a base spanning the timeline, not future-blind streaming.
 
-![E2 evidence progress](results/e002_20261029_073134_v1/figures/e2_progress.png)
+| Method | Correct or exact expected correct | First-pass accuracy |
+|---|---:|---:|
+| base | 71.00/120 | 59.17% |
+| random | 76.75/120 | 63.96% |
+| uniform_addition | 79.00/120 | 65.83% |
+| direct16 | 80.00/120 | 66.67% |
+| oracle | 98.00/120 | 81.67% |
+| oracle_stop | 98.00/120 | 81.67% |
+| fixed | 77.00/120 | 64.17% |
+| V | 78.00/120 | 65.00% |
+| Q | 75.00/120 | 62.50% |
+| VQ | 79.00/120 | 65.83% |
 
-Progress only; [exact count data](results/e002_20261029_073134_v1/progress.csv). No accuracy or cost
-curve is available. The inherited grant cannot admit the full collection stage.
-The eight exposed sources cannot substitute for new E2 groups. The runtime attempt
-and all failure evidence are preserved. No GPU compatibility success is inferred
-from passing CPU tests. See the [E2 report](results/e002_20261029_073134_v1/report.md),
-[verification](results/e002_20261029_073134_v1/verification.json), [protocol](protocols/e002_preacquisition_predictability_v1.md)
-and [conditional resource amendment](results/e002_20261029_073134_v1/resource_amendment_request.md).
+Delta_fixed = **1.67 pp**, descriptive conditional 95% source-bootstrap
+interval **[-5.00, 8.33] pp**.
+Delta_question = **0.83 pp**,
+interval **[-4.17, 5.83] pp**.
+Positive Delta_fixed folds: 2/5.
+Advancement required >=5 pp, >=4 positive folds and a positive interval lower bound.
 
-E2A's primary contrast is VQ minus training-selected fixed quarter; VQ minus V
-tests explicit question contribution. E2B requires positive accuracy and no greater
-mean complete latency against both Direct16 and a training-selected baseline.
-Each adaptive acquisition pays for the initial base and a full 16-frame re-encoding.
-Timing must pass the frozen 20% median relative-range criterion in three sessions.
-Neither headroom nor predictive gain alone establishes an efficiency improvement.
+| VQ minus comparator | Effect (pp) | Descriptive conditional 95% interval (pp) |
+|---|---:|---:|
+| fixed | +1.67 | [-5.00, 8.33] |
+| V | +0.83 | [-4.17, 5.83] |
+| Q | +3.33 | [-2.50, 9.17] |
+| random | +1.88 | [-3.54, 6.88] |
+| uniform_addition | +0.00 | [-9.17, 9.17] |
+| direct16 | -0.83 | [-10.00, 8.33] |
+
+![Held-out policy accuracy](results/e002_20261029_080758_continuation_v2/figures/e2a_accuracy.png)
+
+All 120 questions remain in every denominator. Expected random averages four actions;
+orange hindsight oracles are nondeployable. Source: [metrics.csv](results/e002_20261029_080758_continuation_v2/metrics.csv).
+
+![All source effects](results/e002_20261029_080758_continuation_v2/figures/e2a_source_effects.png)
+
+Every source contributes all three questions; color identifies its outer fold.
+Source: [per_video_effects.csv](results/e002_20261029_080758_continuation_v2/per_video_effects.csv); [fold_effects.csv](results/e002_20261029_080758_continuation_v2/fold_effects.csv).
+
+![Gain prediction bins](results/e002_20261029_080758_continuation_v2/figures/e2a_gain_calibration.png)
+
+Signed-gain predictions are not answer correctness probabilities. Bin sizes range
+from 1 to 449 action pairs; sparse bins are labeled on the figure.
+Source: [gain_calibration.csv](results/e002_20261029_080758_continuation_v2/gain_calibration.csv).
+
+![Action distributions](results/e002_20261029_080758_continuation_v2/figures/e2a_actions.png)
+
+These E2A policies always acquire. Stop/acquire frequencies are unavailable unless
+the separately gated practical stage runs. Source: [action_frequencies.csv](results/e002_20261029_080758_continuation_v2/action_frequencies.csv).
+
+VQ rescued 14 base-wrong questions and harmed
+6 base-correct questions. Oracle regret:
+15.83 pp. Action-gain MAE: V: 0.2021; Q: 0.2006; VQ: 0.2024.
+
+Intervals use 10,000 paired source-cluster resamples, seed 2026102902. They condition
+on the fitted OOF outputs and omit some split/training uncertainty; folds share
+training sources. This is cross-fitted development from the official annotation
+test split, not untouched confirmation or an official leaderboard result. Distinct
+official source/parent IDs and asset hashes cannot exclude every unknown reupload.
+A negative result concerns this observation family/model/action menu, not all cheap observers.
+The [saved-record and model verification](results/e002_20261029_080758_continuation_v2/verification.json),
+[independent integer-contribution bootstrap](results/e002_20261029_080758_continuation_v2/statistics_verification.json),
+[decision seal](results/e002_20261029_080758_continuation_v2/decision_seal_summary.json) and [feature schema](results/e002_20261029_080758_continuation_v2/feature_schema.json)
+support these estimates.
+
+## E2B: practical compute value
+
+E2B status: **NOT_ADMITTED_E2A_ADVANCEMENT**. Timing: **UNMEASURED**.
+Practical value: **PRACTICAL_VALUE_NOT_EVALUABLE_MEASUREMENT**. E2A gains alone establish no
+efficiency. E0 remains **MEASUREMENT_UNSTABLE**. See [practical_status.json](results/e002_20261029_080758_continuation_v2/practical_status.json).
+
+The E2A point estimate is below the 5 pp threshold, only 2 folds improve, and the primary interval includes zero. The frozen rule therefore stops E2B before its timing screen, training cost panels or live stop/acquire evaluation. E2B latency, overhead, memory and practical accuracy/cost contrasts are unavailable. The unexercised E2B GPU path is not validated by E2A collection or CPU tests.
+There is no speedup claim. Any further observation family or confirmation study
+would require a separately authorized, prospectively frozen experiment.
+
+The resource-only grant was directly approved as 172,800 seconds total; all earlier
+charges are retained. Current cumulative charge: **40437.945403/172800 seconds**.
+This charge includes 600 seconds prepaid for final verification, Git publication and handoff; the charge is retained.
+Storage at the accounting checkpoint: 17,469,961,688/21,474,836,480 bytes. Video traffic plus
+interruption upper bound: 478,922,789/1,073,741,824 bytes.
+Exact accounting: [resource_accounting.json](results/e002_20261029_080758_continuation_v2/resource_accounting.json).
+Actual versus protected stage forecasts: [stage_actual_vs_forecast.csv](results/e002_20261029_080758_continuation_v2/stage_actual_vs_forecast.csv).
+Protected forecasts include the 1.5 safety factor and explicit failure,
+verification/reporting and closeout reserves. All completed stages fit them.
+
+| Stage | Protected forecast (s) | Observed scope (s) | Observed minus protected (s) |
+|---|---:|---:|---:|
+| input_cohort | 9526.10 | 2601.05 | -6925.05 |
+| cpu_preflight | 5100.00 | 918.77 | -4181.23 |
+| E2A_collection | 22036.98 | 6918.99 | -15117.98 |
+
+Input/CPU observations span their completed stages. Collection reports owned
+worker wall time including loads and warmups; coordinator, analysis and report
+work remains charged in the cumulative ledger.
+These project resource spans are not validated deployed-policy latency measurements.
+Historical protocol: [E2 v1](protocols/e002_preacquisition_predictability_v1.md);
+implementation/resource history: [continuation v2](protocols/e002_continuation_v2.md).
+All earlier run directories and historical scientific sources remain byte-for-byte preserved.
+The original [blocked checkpoint](results/e002_20261029_080758_continuation_v2/../e002_20261029_073134_v1/report.md) remains
+immutable. The new [readiness report](results/e002_20261029_080758_continuation_v2/readiness_initial.json) records this continuation separately.
+
+```powershell
+.venv\Scripts\python.exe scripts/resume_e002_continuation.py --run-dir results/e002_20261029_080758_continuation_v2
+.venv\Scripts\python.exe -m video_compute_value.e002_continuation verify --run-dir results/e002_20261029_080758_continuation_v2
+.venv\Scripts\python.exe scripts/report_e002_continuation.py --run-dir results/e002_20261029_080758_continuation_v2
+```
+
+Resume validates fingerprints and completed identities; it cannot retry native loading
+failures, alter completed wrong/invalid answers, or evade a failed full-stage budget.
+Restricted text, labels, raw generated answers, features, selector artifacts, traces,
+videos and weights remain local. Publication is checked separately from scientific success.
 
 ## What the evidence supports
 
@@ -278,7 +379,7 @@ We can preserve exact visual inputs, execute the frozen model and independently
 score saved outputs. E0 also shows that full video preparation can dominate a
 request, so fewer selected frames need not yield proportional savings. Its timing
 instability remains unresolved. E1 tests only retrospective development headroom
-within a fixed menu. E2 has begun as a blocked implementation checkpoint; useful predictive selection and validated deployment costs remain unestablished.
+within a fixed menu. E2A now tests held-out acquisition prediction. Its reported result and the separately gated practical stage constrain what can be claimed.
 
 ## Historical reproduction and resources
 
@@ -299,13 +400,13 @@ a new named version. Reports and resource amendments do not change scientific fi
 The user explicitly increased cumulative runtime by 7,200 seconds on 2026-10-29,
 from 20,400 to **27,600 seconds (7h40m)**, including all prior experiments, failures,
 setup, tests, analysis and publication. A new directory does not renew the budget.
-The [current cumulative accounting](results/e001_20261029_132707_v1/resource_accounting.json) points to the
-latest local ledger. Limits remain **20 GiB** additional project storage, including
+The [historical E1 accounting](results/e001_20261029_132707_v1/resource_accounting.json) points to the
+then-current local ledger. Limits remain **20 GiB** additional project storage, including
 environment/caches/Git, and **1 GiB** video acquisition. E1 reuses existing assets;
 no paid service, new acquisition, model substitution or background-app termination.
 
 The E0 follow-up inherits that entire closed ledger, including prior publication
-charges, without another resource grant. Its [current cumulative accounting](results/e000_20261029_150300_timing_stabilization_v5/resource_accounting.json)
+charges, without another resource grant. Its [historical cumulative accounting](results/e000_20261029_150300_timing_stabilization_v5/resource_accounting.json)
 points to the new local `private/resource_ledger.json`. It accounts for implementation,
 native preparation, the failed loader, tests, verification, reporting and publication.
 The follow-up commands are preserved in its report. Historical result directories remain immutable; current E2 audits write only under E2.
@@ -325,22 +426,3 @@ The official annotation file is `videomme/test-00000-of-00001.parquet` in the
 - Shuai Bai et al. (2025). *Qwen3-VL Technical Report*. arXiv:2511.21631.
   [Paper](https://arxiv.org/abs/2511.21631), [official model card](https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct),
   [official code and citation metadata](https://github.com/QwenLM/Qwen3-VL).
-
-## Current E2 reproduction and resource lineage
-
-The latest cumulative ledger is under [E2 accounting](results/e002_20261029_073134_v1/resource_accounting.json),
-inheriting every closed E0/E1/v5 charge. No grant was renewed. Private records,
-annotations, feature matrices and trained artifacts remain excluded from Git.
-All historical result directories remain immutable; the new assembler reads them.
-
-```powershell
-.venv\Scripts\python.exe -m pytest tests/test_e002.py -q
-.venv\Scripts\ruff.exe check src tests scripts
-.venv\Scripts\python.exe scripts/report_e002.py --run-dir results/e002_20261029_073134_v1
-.venv\Scripts\python.exe scripts/audit_e002_publication.py --run-dir results/e002_20261029_073134_v1
-.venv\Scripts\python.exe -m video_compute_value.e002 resume --run-dir results/e002_20261029_073134_v1
-```
-
-Resume rechecks the checkpoint; a preserved failed compatibility attempt stops it.
-It does not start the unimplemented scientific collection. New resource authority
-and valid input/runtime gates are necessary before that stage can be completed.

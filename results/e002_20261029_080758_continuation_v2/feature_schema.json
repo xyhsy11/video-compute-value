@@ -1,0 +1,36 @@
+{
+  "version": "e002-observations-v1",
+  "V": 19,
+  "Q": 66,
+  "VQ": 341,
+  "pixels": "exact eight retained uint8 RGB canvases; remove frozen letterbox rectangle",
+  "gray": "Pillow RGB.convert(L), resize 32x32 BILINEAR, float64 / 255",
+  "quarters": "floor(4*original_PTS/duration); exactly two base observations per quarter",
+  "visual": [
+    "mean spatial population std",
+    "mean of horizontal/vertical mean abs differences",
+    "between-image mean abs difference",
+    "fraction abs difference > 0.10"
+  ],
+  "global": [
+    "log1p duration seconds",
+    "log1p frame count",
+    "original width/height"
+  ],
+  "question_recipe": "NFKC then casefold; Unicode regex [^\\W_]+; SHA256 UTF8 token; bucket=int.from_bytes(digest[:8],big)%64; sign=+1 if byte8 even else -1; L2",
+  "question_sizes": "log1p unigram count and normalized character count",
+  "projection": "each Q[0:64] hashes seed:projection:index to one of 16 buckets using the same bucket/sign rule; no fitted projection",
+  "interactions": "quarter-major visual[0:16] outer projected_query[0:16], flattened C order",
+  "C": [
+    "first-token top1 probability",
+    "top1 minus top2",
+    "entropy/log(vocabulary size)"
+  ],
+  "C_limitation": "generation-score summaries, not calibrated answer correctness",
+  "response_shape": [
+    "valid parsed base answer",
+    "generated token count"
+  ],
+  "repeat_atol": 1e-12,
+  "repeat_rtol": 0
+}

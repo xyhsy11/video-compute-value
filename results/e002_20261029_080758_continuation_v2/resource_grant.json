@@ -1,0 +1,10 @@
+{
+  "authorized_at": "2026-10-29T08:07:58.003605+00:00",
+  "authorized_limit_seconds": 172800,
+  "previous_limit_seconds": 27600,
+  "resource_only": true,
+  "authority": "Direct human reply in this chat",
+  "human_reply": "Authorize 48 hours total",
+  "storage_limit_bytes": 21474836480,
+  "video_limit_bytes": 1073741824
+}

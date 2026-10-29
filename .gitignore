@@ -63,3 +63,7 @@ results/**/private_execution.log
 
 # Retain per-question raw repetition timings locally; publish aggregate summaries.
 results/e000_20261028_greedy_collection_v3/summary.json
+
+# E2 continuation preparation contains the detailed private candidate manifest.
+results/e002_*_continuation_v2/preparation_freeze.json
+results/e002_*_continuation_v2/input_blocker.json

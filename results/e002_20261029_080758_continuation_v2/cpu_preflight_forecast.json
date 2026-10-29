@@ -1,0 +1,16 @@
+{
+  "stage": "cpu_preflight",
+  "at": "2026-10-29T09:03:59.251640+00:00",
+  "raw_seconds": 1800,
+  "safety_factor": 1.5,
+  "failure_reserve_seconds": 600,
+  "verification_reporting_reserve_seconds": 1200,
+  "closeout_reserve_seconds": 600,
+  "required_seconds": 5100.0,
+  "remaining_seconds": 141869.78303599998,
+  "projected_additional_bytes": 67108864,
+  "projected_traffic_bytes": 0,
+  "additional_seconds_needed": 0,
+  "detail": {},
+  "admitted": true
+}

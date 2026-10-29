@@ -1,0 +1,389 @@
+{
+  "metrics": {
+    "base": 0.5916666666666667,
+    "random": 0.6395833333333333,
+    "uniform_addition": 0.6583333333333333,
+    "direct16": 0.6666666666666666,
+    "oracle": 0.8166666666666667,
+    "oracle_stop": 0.8166666666666667,
+    "fixed": 0.6416666666666667,
+    "V": 0.65,
+    "Q": 0.625,
+    "VQ": 0.6583333333333333
+  },
+  "delta_fixed": 0.016666666666666666,
+  "delta_question": 0.008333333333333333,
+  "descriptive_conditional_95pct_intervals": {
+    "fixed": [
+      -0.05,
+      0.08333333333333333
+    ],
+    "V": [
+      -0.04166666666666667,
+      0.058333333333333334
+    ],
+    "Q": [
+      -0.025,
+      0.09166666666666666
+    ],
+    "random": [
+      -0.035416666666666666,
+      0.06875
+    ],
+    "uniform_addition": [
+      -0.09166666666666665,
+      0.09166666666666665
+    ],
+    "direct16": [
+      -0.1,
+      0.08333333333333333
+    ]
+  },
+  "fold_effects": [
+    {
+      "fold": 0,
+      "delta_fixed": -0.041666666666666664,
+      "delta_question": -0.041666666666666664
+    },
+    {
+      "fold": 1,
+      "delta_fixed": 0.08333333333333333,
+      "delta_question": 0.08333333333333333
+    },
+    {
+      "fold": 2,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "fold": 3,
+      "delta_fixed": -0.041666666666666664,
+      "delta_question": -0.08333333333333333
+    },
+    {
+      "fold": 4,
+      "delta_fixed": 0.08333333333333333,
+      "delta_question": 0.08333333333333333
+    }
+  ],
+  "per_source_effects": [
+    {
+      "source": "S01",
+      "fold": 2,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S02",
+      "fold": 0,
+      "delta_fixed": -0.3333333333333333,
+      "delta_question": -0.3333333333333333
+    },
+    {
+      "source": "S03",
+      "fold": 4,
+      "delta_fixed": 0.3333333333333333,
+      "delta_question": 0.3333333333333333
+    },
+    {
+      "source": "S04",
+      "fold": 3,
+      "delta_fixed": 0.3333333333333333,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S05",
+      "fold": 2,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S06",
+      "fold": 1,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S07",
+      "fold": 3,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S08",
+      "fold": 2,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S09",
+      "fold": 0,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S10",
+      "fold": 0,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S11",
+      "fold": 0,
+      "delta_fixed": 0.3333333333333333,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S12",
+      "fold": 4,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S13",
+      "fold": 0,
+      "delta_fixed": -0.3333333333333333,
+      "delta_question": -0.3333333333333333
+    },
+    {
+      "source": "S14",
+      "fold": 2,
+      "delta_fixed": -0.3333333333333333,
+      "delta_question": -0.3333333333333333
+    },
+    {
+      "source": "S15",
+      "fold": 1,
+      "delta_fixed": 0.3333333333333333,
+      "delta_question": 0.3333333333333333
+    },
+    {
+      "source": "S16",
+      "fold": 3,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S17",
+      "fold": 1,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S18",
+      "fold": 3,
+      "delta_fixed": 0.3333333333333333,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S19",
+      "fold": 2,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S20",
+      "fold": 2,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S21",
+      "fold": 1,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S22",
+      "fold": 4,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S23",
+      "fold": 4,
+      "delta_fixed": 0.3333333333333333,
+      "delta_question": 0.3333333333333333
+    },
+    {
+      "source": "S24",
+      "fold": 1,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S25",
+      "fold": 0,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S26",
+      "fold": 1,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S27",
+      "fold": 0,
+      "delta_fixed": 0.0,
+      "delta_question": 0.3333333333333333
+    },
+    {
+      "source": "S28",
+      "fold": 3,
+      "delta_fixed": -0.3333333333333333,
+      "delta_question": -0.3333333333333333
+    },
+    {
+      "source": "S29",
+      "fold": 4,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S30",
+      "fold": 1,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S31",
+      "fold": 2,
+      "delta_fixed": 0.3333333333333333,
+      "delta_question": 0.3333333333333333
+    },
+    {
+      "source": "S32",
+      "fold": 4,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S33",
+      "fold": 3,
+      "delta_fixed": -0.6666666666666666,
+      "delta_question": -0.3333333333333333
+    },
+    {
+      "source": "S34",
+      "fold": 2,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S35",
+      "fold": 3,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S36",
+      "fold": 3,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S37",
+      "fold": 1,
+      "delta_fixed": 0.3333333333333333,
+      "delta_question": 0.3333333333333333
+    },
+    {
+      "source": "S38",
+      "fold": 4,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S39",
+      "fold": 0,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    },
+    {
+      "source": "S40",
+      "fold": 4,
+      "delta_fixed": 0.0,
+      "delta_question": 0.0
+    }
+  ],
+  "acquisition_counts": {
+    "fixed": [
+      96,
+      0,
+      0,
+      24
+    ],
+    "V": [
+      72,
+      0,
+      0,
+      48
+    ],
+    "Q": [
+      73,
+      0,
+      0,
+      47
+    ],
+    "VQ": [
+      52,
+      0,
+      4,
+      64
+    ]
+  },
+  "base_wrong_rescues": 14,
+  "base_correct_harms": 6,
+  "oracle_regret": 0.15833333333333333,
+  "predictive_value": "PREDICTIVE_VALUE_NOT_DEMONSTRATED_FOR_THIS_OBSERVATION_FAMILY",
+  "precision": "INCONCLUSIVE_LOW_PRECISION",
+  "question_contribution": "NOT_DEMONSTRATED",
+  "bootstrap_resamples": 10000,
+  "bootstrap_seed": 2026102902,
+  "source_groups": 40,
+  "questions": 120,
+  "primary_model_calls": 960,
+  "repeatability_model_calls": 120,
+  "invalid_primary_answers": {
+    "base_plain": 0,
+    "base_observed": 0,
+    "quarter1": 0,
+    "quarter2": 0,
+    "quarter3": 0,
+    "quarter4": 0,
+    "uniform_addition": 0,
+    "direct16": 0
+  },
+  "integrity": {
+    "complete_1080": true,
+    "same_call_equivalence_120": true,
+    "fresh_process_repeat_cells": 120,
+    "native_cpu_gpu_tensors": true,
+    "effective_greedy": true,
+    "saved_token_rescoring": true
+  },
+  "gain_mae": {
+    "V": 0.20211586030282336,
+    "Q": 0.2005523676884747,
+    "VQ": 0.2024266711837587
+  },
+  "scientific_protocol": "e002_preacquisition_predictability_v1",
+  "implementation": "continuation_v2",
+  "E2B_status": "NOT_ADMITTED_E2A_ADVANCEMENT",
+  "timing_validity": "UNQUALIFIED",
+  "practical_value": "PRACTICAL_VALUE_NOT_EVALUABLE_MEASUREMENT",
+  "metrics_correct_counts": {
+    "base": 71.0,
+    "random": 76.75,
+    "uniform_addition": 79.0,
+    "direct16": 80.0,
+    "oracle": 98.0,
+    "oracle_stop": 98.0,
+    "fixed": 77.0,
+    "V": 78.0,
+    "Q": 75.0,
+    "VQ": 79.0
+  }
+}

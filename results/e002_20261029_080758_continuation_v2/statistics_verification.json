@@ -1,0 +1,37 @@
+{
+  "all_statistical_checks_passed": true,
+  "independent_integer_source_bootstrap": true,
+  "bootstrap_seed": 2026102902,
+  "resamples": 10000,
+  "source_groups": 40,
+  "delta_fixed": 0.016666666666666666,
+  "delta_question": 0.008333333333333333,
+  "descriptive_conditional_intervals": {
+    "fixed": [
+      -0.05,
+      0.08333333333333333
+    ],
+    "V": [
+      -0.041666666666666664,
+      0.058333333333333334
+    ],
+    "Q": [
+      -0.025,
+      0.09166666666666666
+    ],
+    "random": [
+      -0.035416666666666666,
+      0.06875
+    ],
+    "uniform_addition": [
+      -0.09166666666666666,
+      0.09166666666666666
+    ],
+    "direct16": [
+      -0.1,
+      0.08333333333333333
+    ]
+  },
+  "advancement_status_agrees": true,
+  "question_contribution_status_agrees": true
+}

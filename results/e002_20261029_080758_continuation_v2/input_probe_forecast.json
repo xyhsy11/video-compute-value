@@ -1,0 +1,18 @@
+{
+  "stage": "input_probe",
+  "at": "2026-10-29T08:14:06.798337+00:00",
+  "raw_seconds": 300,
+  "safety_factor": 1.5,
+  "failure_reserve_seconds": 600,
+  "verification_reporting_reserve_seconds": 1200,
+  "closeout_reserve_seconds": 600,
+  "required_seconds": 2850.0,
+  "remaining_seconds": 144862.236339,
+  "projected_additional_bytes": 42492673,
+  "projected_traffic_bytes": 10972055,
+  "additional_seconds_needed": 0,
+  "detail": {
+    "purpose": "one bounded first-candidate acquisition and eligibility measurement"
+  },
+  "admitted": true
+}
