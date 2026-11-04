@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "errors": [],
+  "phase": "diagnostic",
+  "records_checked": 132,
+  "native_token_sequences_redecoded": 132,
+  "completed_model_calls": 132,
+  "unknown_model_invocations_upper_bound": 0,
+  "historical_files_unchanged": 3556,
+  "independent_metrics": [
+    {
+      "arm": "A",
+      "budget": 8,
+      "S": 0.6336021783344451
+    },
+    {
+      "arm": "A",
+      "budget": 64,
+      "S": 0.4031180910687917
+    },
+    {
+      "arm": "B",
+      "budget": 8,
+      "S": 0.18477122273835322
+    },
+    {
+      "arm": "B",
+      "budget": 64,
+      "S": 0.22530435495260848
+    }
+  ],
+  "selected_policy": null,
+  "real_GPU_path_exercised": true,
+  "CPU_tests_are_not_GPU_evidence": true
+}

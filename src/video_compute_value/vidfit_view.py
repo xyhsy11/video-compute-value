@@ -22,6 +22,7 @@ E0 = "results/e000_20261028_greedy_collection_v3"
 E1 = "results/e001_20261029_132707_v1"
 E2 = "results/e002_20261029_080758_continuation_v2"
 TIMING = "results/e000_20261029_150300_timing_stabilization_v5"
+RECOVERY = "results/e000_20261104_045654_runtime_recovery_v7"
 EVIDENCE_COMMIT = "791f8120b3fddf34c6d987959b2d0241ee16a493"
 REPOSITORY = "https://github.com/xyhsy11/video-compute-value"
 PUBLIC_FILES = (
@@ -38,6 +39,8 @@ PUBLIC_FILES = (
     f"{E2}/resource_accounting.json",
     f"{TIMING}/status.json",
 )
+RECOVERY_FILES = tuple(f"{RECOVERY}/{name}" for name in (
+    "runtime_resolution.json", "summary.json", "verification.json", "freeze.json", "resource_accounting.json"))
 LABELS = {
     "base": "Base · 8 frames",
     "quarter1": "Add quarter 1 · 16 frames",
@@ -109,7 +112,8 @@ def load_evidence(root):
     """Fail closed on missing, changed, incomplete, or inconsistent saved evidence."""
     root = Path(root).resolve()
     data, sources = {}, []
-    for relative in PUBLIC_FILES:
+    selected_files = PUBLIC_FILES + (RECOVERY_FILES if (root / RECOVERY).exists() else ())
+    for relative in selected_files:
         path = (root / relative).resolve()
         _require(path.is_relative_to(root), "Evidence path escapes the project")
         raw = path.read_bytes()
@@ -171,7 +175,7 @@ def load_evidence(root):
                      "storage_limit_bytes", "video_transfer_and_interruption_upper_bound_bytes", "video_limit_bytes")
     resource = {k: data[f"{E2}/resource_accounting.json"][k] for k in resource_keys}
     # Projection is intentional: arbitrary fields, private manifests, answers and labels never enter the export.
-    return {
+    projected = {
         "schema": "video-compute-value.vidfit-view.v1", "evidence_commit": EVIDENCE_COMMIT,
         "e0": e0,
         "e1": {"metrics": {k: e1["metrics"][k] for k in LABELS if k in e1["metrics"]},
@@ -187,6 +191,25 @@ def load_evidence(root):
         "source_fingerprint": hashlib.sha256(json.dumps(sources, sort_keys=True).encode()).hexdigest(),
         "verification": "Saved summary hashes, anonymous correctness and frozen E2A gate checked",
     }
+    if f"{RECOVERY}/runtime_resolution.json" in data:
+        resolution = data[f"{RECOVERY}/runtime_resolution.json"]
+        verification = data[f"{RECOVERY}/verification.json"]
+        summary = data[f"{RECOVERY}/summary.json"]
+        _require(resolution['verified'] == verification['passed'] == summary['integrity_passed'],
+                 'Recovery verification status mismatch')
+        _require(resolution['preflight_completed'] + resolution['diagnostic_completed']
+                 == verification['completed_model_calls'], 'Recovery call accounting mismatch')
+        _require(resolution['selected_policy'] == summary['selected_policy'], 'Recovery policy mismatch')
+        metrics = [{k: row[k] for k in ('arm', 'budget', 'S')} for row in summary['conditions'] if row['S'] is not None]
+        _require(metrics == verification['independent_metrics'], 'Recovery metrics disagree with verification')
+        projected['runtime_recovery'] = {k: resolution[k] for k in (
+            'status', 'successful_model_loads', 'preflight_completed', 'diagnostic_completed',
+            'failed_model_initializations', 'timing_status', 'selected_policy', 'verified',
+            'root_cause', 'confirmation_status')}
+        projected['runtime_recovery']['conditions'] = [
+            {k: row[k] for k in ('arm', 'budget', 'S', 'primary_requests')} for row in summary['conditions']]
+        projected['runtime_recovery']['fingerprint'] = data[f"{RECOVERY}/freeze.json"]['fingerprint']
+    return projected
 
 
 CSS = """
@@ -229,11 +252,14 @@ def esc(value):
 
 
 def link(path, label):
-    return f'<a href="{REPOSITORY}/blob/{EVIDENCE_COMMIT}/{esc(path)}" target="_blank" rel="noopener noreferrer">{esc(label)}</a>'
+    ref = 'main' if path.startswith(RECOVERY + '/') else EVIDENCE_COMMIT
+    return f'<a href="{REPOSITORY}/blob/{ref}/{esc(path)}" target="_blank" rel="noopener noreferrer">{esc(label)}</a>'
 
 
 def source(path, label="Saved evidence"):
-    return f'<p class="source">{link(path, label)} · frozen source commit {EVIDENCE_COMMIT[:7]}</p>'
+    provenance = ('published recovery record; SHA-256 in Evidence' if path.startswith(RECOVERY + '/')
+                  else f'frozen source commit {EVIDENCE_COMMIT[:7]}')
+    return f'<p class="source">{link(path, label)} · {provenance}</p>'
 
 
 def wrap(content):
@@ -259,10 +285,16 @@ def flow(steps):
 
 def overview(evidence):
     e1, e2 = evidence["e1"], evidence["e2"]
+    recovery = evidence.get('runtime_recovery')
+    current_runtime = (f'<div class="notice"><b>Current E0 runtime recovery:</b> {esc(recovery["status"])}. '
+                       f'{recovery["preflight_completed"] + recovery["diagnostic_completed"]}/132 new screen calls; '
+                       f'timing: {esc(recovery["timing_status"])}. See E0 for the new evidence.</div>'
+                       if recovery else '')
     return wrap(
         '<p class="eyebrow">VidFit × video-compute-value</p>'
         '<h1>When is more video worth it?</h1>'
         '<p class="muted">Three experiments, one evidence trail. Saved model results from October 2026.</p>'
+        + current_runtime +
         '<div class="grid">'
         '<div class="card"><span class="eyebrow">01 · Measurement / E0</span><h2>Can we trust the cost?</h2>'
         '<div class="num">62.50–87.50%</div><p>Accuracy across 8–64 uniform frames.</p>'
@@ -304,7 +336,7 @@ def e0_panel(evidence, metric="Accuracy"):
     rows = "".join(f'<tr><td>{r["frames"]}</td><td>{r["correct"]}/24</td><td>{100*r["accuracy"]:.2f}%</td>'
                    f'<td>{r["seconds"]:.3f}</td><td>{100*r["range"]:.2f}%</td>'
                    f'<td>{r["allocated_gib"]:.2f} / {r["reserved_gib"]:.2f}</td></tr>' for r in evidence["e0"])
-    return wrap('<span class="eyebrow">E0 · frozen feasibility and measurement</span><h1>More frames, unstable timing</h1>'
+    return wrap('<span class="eyebrow">E0 · frozen feasibility and measurement</span><h1>Measurement foundation and current recovery</h1>'
                 '<span class="badge amber">MEASUREMENT_UNSTABLE</span>' + flow([
                     ("Input", "8 sources / 24 questions; visual-only."),
                     ("Vary", "Uniform 8, 16, 32, 48 or 64 frames; sets need not be nested."),
@@ -317,11 +349,38 @@ def e0_panel(evidence, metric="Accuracy"):
                 f'<tbody>{rows}</tbody></table></div>'
                 '<p>360 video requests + 24 separate text-only requests; warmups and preflight are separate. '
                 'The text-only diagnostic scored 14/24 (58.33%). Memory is the in-process PyTorch peak including weights.</p>'
-                '<h2>Timing follow-up: unavailable observations</h2><div class="card">'
+                + recovery_panel(evidence) +
+                '<details><summary>Historical failed timing follow-up · 2026-10-29</summary><div class="card">'
                 '<span class="badge rose">BLOCKED_MODEL_RUNTIME</span><p>0/132 planned model calls completed. '
                 'All 16 CPU preparations matched historical inputs. Model initialization crashed before generation; '
-                'fresh/resident worker stability and confirmation remain unavailable.</p></div>'
+                'fresh/resident worker stability and confirmation were unavailable in this historical attempt.</p></div></details>'
                 + source(f"{E0}/public_summary.json") + source(f"{TIMING}/report.md", "Timing follow-up report"))
+
+
+def recovery_panel(evidence):
+    recovery = evidence.get('runtime_recovery')
+    if recovery is None:
+        return ''
+    complete = recovery['preflight_completed'] + recovery['diagnostic_completed']
+    rows = ''.join(f'<tr><td>{esc(c["arm"])}</td><td>{c["budget"]}</td>'
+                   f'<td>{c["primary_requests"]}/24</td><td>'
+                   + (f'{100*c["S"]:.2f}%' if c['S'] is not None else 'Unavailable')
+                   + '</td></tr>' for c in recovery['conditions'])
+    return ('<h2>Current recovery · 2026-11-04</h2><div class="card">'
+            f'<span class="badge">{esc(recovery["status"])}</span>'
+            f'<h3>{complete}/132 new screen calls completed</h3>'
+            f'<p>{recovery["successful_model_loads"]} successful fresh model loads; '
+            f'{recovery["failed_model_initializations"]} failed initializations. '
+            f'{recovery["preflight_completed"]}/12 preflight calls. The original model, packages and driver were retained.</p>'
+            f'<p><b>Timing screen:</b> {esc(recovery["timing_status"])}<br>'
+            f'<b>Selected worker policy:</b> {esc(recovery["selected_policy"] or "None")}<br>'
+            f'<b>Confirmation:</b> {esc(recovery["confirmation_status"])}</p>'
+            '<div class="tablewrap"><table><thead><tr><th>Arm</th><th>Frames</th><th>Primaries</th>'
+            f'<th>Median relative range</th></tr></thead><tbody>{rows}</tbody></table></div>'
+            '<p>The fixed criterion remains ≤20% at both frame budgets with all integrity checks passing. '
+            'Current successful loading does not establish the cause of the old crash. '
+            'Historical E0 remains MEASUREMENT_UNSTABLE.</p></div>'
+            + source(f'{RECOVERY}/report.md', 'New runtime recovery report'))
 
 
 def e1_matrix(evidence):

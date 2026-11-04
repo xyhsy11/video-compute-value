@@ -25,3 +25,8 @@ results/e002_20261029_073134_v1/figures/*.svg text eol=lf
 .gitignore text eol=lf
 results/e002_*_continuation_v2/*.csv text eol=lf
 results/e002_*_continuation_v2/figures/*.svg text eol=lf
+
+# Preserve the exact executed verifier and audited recovery artifact bytes.
+scripts/verify_e000_runtime_v6.py -text whitespace=cr-at-eol
+results/e000_20261104_044416_runtime_recovery_v6/** -text whitespace=cr-at-eol
+results/e000_20261104_045654_runtime_recovery_v7/** -text whitespace=cr-at-eol

@@ -1,0 +1,14 @@
+{
+  "phase": "cpu_preparation",
+  "at": "2026-11-04T04:58:22.370902+00:00",
+  "planned_native_preparations": 16,
+  "basis": "Historical per-source/budget maximum native span, three decodes per new preparation, 30 s startup",
+  "raw_execution_and_overhead_seconds": 30,
+  "safety_factor": 1.5,
+  "interruption_contingency_seconds": 120,
+  "closeout_reserve_seconds": 600,
+  "required_seconds": 765.0,
+  "remaining_seconds": 127107.679843,
+  "admitted": true,
+  "additional_cumulative_allowance_needed_seconds": 0
+}

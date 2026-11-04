@@ -1,0 +1,9 @@
+{
+  "aggregate_sha256": "9c6d109fa8c26c84481614a6354d904c30f082d38fcb1af8acc57bdf675ed446",
+  "figures": {
+    "diagnostic_stability.png": "d406d6a4fd00060815aba21d07e3f247c597f89c69bcaa46c4db34e55ce1b63a",
+    "request_times.png": "220371e86f7a7e21bbc3274b5c5297544b77c7ebfd58ebf2974cb6324ce2d165"
+  },
+  "plotted_condition_data_sha256": "d7b134683b5711d7745d250e46427cf314628c1aa32801ba750f1e305516f070",
+  "plotted_question_data_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+}

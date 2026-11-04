@@ -1,0 +1,10 @@
+{
+  "aggregate_sha256": "ce74e222c0a2a8650bad2e673b70296d79b78eb5e139d370a43a885a4ded387e",
+  "figures": {
+    "absolute_spread.png": "0971a6647bc3dc53d53003aa88929d2d2d0967c81a4838ebe5dc7ddd9818f9f7",
+    "diagnostic_stability.png": "6c96d5311071aa38c0388d8bface002604b44bd74807a741994eb02898ff95d8",
+    "request_times.png": "b68f9622102e9f8e4c2c4844e454e22a0071cf8c66fc44c04ef075597fb951e9"
+  },
+  "plotted_condition_data_sha256": "5984195b173d5ace4361f9ccd32f58f022f2b48e2abc8c57ced161f400db79f5",
+  "plotted_question_data_sha256": "d4913908c75302d4ff829792ca01926476da4257f79a52a5443184bf478d2412"
+}

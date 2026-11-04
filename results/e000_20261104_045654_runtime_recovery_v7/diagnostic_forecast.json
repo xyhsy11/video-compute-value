@@ -1,0 +1,18 @@
+{
+  "phase": "diagnostic",
+  "at": "2026-11-04T05:04:51.196280+00:00",
+  "planned_workers": 9,
+  "planned_calls": 120,
+  "measured_max_worker_nontimed_overhead_seconds": 40.435462099999675,
+  "all_source_preparations": 16,
+  "profile_calls": 4,
+  "basis": "Real profiles in both transition directions + every source CPU preparation; no frame ratios",
+  "raw_execution_and_overhead_seconds": 1062.2436518999973,
+  "safety_factor": 1.5,
+  "interruption_contingency_seconds": 120,
+  "closeout_reserve_seconds": 600,
+  "required_seconds": 2313.365477849996,
+  "remaining_seconds": 126713.82582,
+  "admitted": true,
+  "additional_cumulative_allowance_needed_seconds": 0
+}

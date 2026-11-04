@@ -1,0 +1,20 @@
+{
+  "passed": false,
+  "errors": [
+    "actual arm/worker order",
+    "actual contiguous block/call order",
+    "diagnostic invocation total",
+    "incomplete worker session",
+    "phase schedule/call completeness"
+  ],
+  "phase": "diagnostic",
+  "records_checked": 12,
+  "native_token_sequences_redecoded": 12,
+  "completed_model_calls": 12,
+  "unknown_model_invocations_upper_bound": 0,
+  "historical_files_unchanged": 3484,
+  "independent_metrics": [],
+  "selected_policy": null,
+  "real_GPU_path_exercised": true,
+  "CPU_tests_are_not_GPU_evidence": true
+}

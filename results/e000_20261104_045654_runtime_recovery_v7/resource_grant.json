@@ -1,0 +1,7 @@
+{
+  "human_reply": "Authorize 48 hours total",
+  "authorized_limit_seconds": 172800,
+  "kind": "Inherited resource-only grant; no additional allowance",
+  "recovery_authority_date": "2026-11-04",
+  "new_model_or_system_repair": false
+}

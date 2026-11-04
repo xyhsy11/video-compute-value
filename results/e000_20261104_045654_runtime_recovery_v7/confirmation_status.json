@@ -1,0 +1,6 @@
+{
+  "status": "CONFIRMATION_NOT_RUN",
+  "reason": "NO_POLICY_PASSED_FROZEN_20_PERCENT_RULE_AT_BOTH_BUDGETS",
+  "new_confirmation_model_calls": 0,
+  "E2B_status": "NOT_ADMITTED_E2A_ADVANCEMENT"
+}

@@ -1,0 +1,6 @@
+{
+  "status": "INPUT_INTEGRITY_FAILED",
+  "operation": "preflight",
+  "detail": "Independent preflight verification failed",
+  "historical_E0": "MEASUREMENT_UNSTABLE"
+}

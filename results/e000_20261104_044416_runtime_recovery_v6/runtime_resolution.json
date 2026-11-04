@@ -1,0 +1,17 @@
+{
+  "run_id": "e000_20261104_044416_runtime_recovery_v6",
+  "status": "AVAILABLE_CURRENT_RUN",
+  "historical_failure_preserved": true,
+  "successful_model_loads": 2,
+  "preflight_completed": 12,
+  "failed_model_initializations": 0,
+  "diagnostic_completed": 0,
+  "planned_diagnostic_total": 132,
+  "timing_status": "INCOMPLETE_OR_INTEGRITY_FAILED",
+  "selected_policy": null,
+  "verified": false,
+  "root_cause": "NOT_ESTABLISHED",
+  "packages_or_driver_changed": false,
+  "historical_E0": "MEASUREMENT_UNSTABLE",
+  "confirmation_status": "CONFIRMATION_NOT_RUN"
+}

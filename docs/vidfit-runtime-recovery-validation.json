@@ -1,0 +1,75 @@
+{
+  "kind": "vidfit_runtime_recovery_view",
+  "validated_on": "2026-11-04",
+  "runtime_record": "results/e000_20261104_045654_runtime_recovery_v7/runtime_resolution.json",
+  "source_fingerprint": "699a490aca2c66166bfa978ba4e2b6380cd18d938b40d2287dd8431f2416af39",
+  "targeted_cpu_tests": {
+    "passed": 34,
+    "skipped_optional_ui": 2
+  },
+  "vidfit_environment_tests": {
+    "passed": 15
+  },
+  "browser_checks": [
+    "current 132/132 recovery panel",
+    "historical failure collapsed separately",
+    "E0 metric change",
+    "E1 anonymous matrix",
+    "E2 fold control",
+    "H264 upload/playback",
+    "real CPU frame preview",
+    "input-change invalidation",
+    "both exports",
+    "390px layout without horizontal overflow"
+  ],
+  "browser_qa_uses_synthetic_video_only": true,
+  "real_scientific_gpu_evidence": {
+    "calls": 132,
+    "successful_model_loads": 11,
+    "initializer_failures": 0,
+    "budgets": [
+      8,
+      64
+    ]
+  },
+  "historical_files_verified_unchanged": 3556,
+  "timing_status": "STABILIZATION_NOT_DEMONSTRATED",
+  "confirmation_status": "CONFIRMATION_NOT_RUN",
+  "E0_historical_verdict": "MEASUREMENT_UNSTABLE",
+  "E2B_status": "NOT_ADMITTED_E2A_ADVANCEMENT",
+  "screenshots": {
+    "docs/assets/vidfit-experiments.png": "6bc9fe681c6d5a0e739a719345b65a1db652eba4fc4754e2eb725ed05101ecd0",
+    "docs/assets/vidfit-runtime-recovery.png": "2c8822846b1bf05e44c3c1143b06cc9fd2ddb7acb11a3c5c3af242c61a21059f"
+  },
+  "resource_snapshot": {
+    "at": "2026-11-04T05:51:14.201890+00:00",
+    "inherited_seconds": 45625.140996,
+    "cumulative_seconds": 49562.08576699999,
+    "remaining_seconds": 123237.91423300002,
+    "authorized_limit_seconds": 172800,
+    "storage_current_bytes": 17619914075,
+    "storage_peak_bytes": 17619914075,
+    "storage_limit_bytes": 21474836480,
+    "video_transfer_bytes": 477874213,
+    "video_limit_bytes": 1073741824,
+    "all_sessions_closed": true,
+    "model_calls": {
+      "preflight": {
+        "warmup": 8,
+        "profile": 4
+      },
+      "diagnostic": {
+        "warmup": 24,
+        "primary": 96
+      }
+    },
+    "completed_model_calls": 132,
+    "unknown_model_invocations_upper_bound": 0,
+    "cumulative_model_invocations_upper_bound": 2995,
+    "new_acquisition_bytes": 0,
+    "publication_reserve_seconds": 180,
+    "video_transfer_upper_bound_bytes": 478922789,
+    "additional_precharged_publication_seconds": 600,
+    "total_precharged_publication_seconds": 780
+  }
+}

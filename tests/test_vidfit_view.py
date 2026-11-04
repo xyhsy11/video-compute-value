@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from video_compute_value.vidfit_view import (
-    E0, E1, E2, PUBLIC_FILES, build_app, e0_panel, e2_panel,
+    E0, E1, E2, PUBLIC_FILES, RECOVERY, RECOVERY_FILES, build_app, e0_panel, e2_panel,
     export_dashboard, load_evidence, main, preview_frames,
 )
 
@@ -30,7 +30,8 @@ def test_saved_observations_and_gate():
     assert evidence['e2']['delta_fixed'] == pytest.approx(2/120)
     assert evidence['e2']['positive_folds'] == 2
     assert evidence['e2']['advancement'] is False
-    assert len(evidence['sources']) == len(PUBLIC_FILES)
+    expected_sources = len(PUBLIC_FILES) + (len(RECOVERY_FILES) if (ROOT / RECOVERY).exists() else 0)
+    assert len(evidence['sources']) == expected_sources
 
 
 @pytest.mark.parametrize('relative', [f'{E1}/summary.json', f'{E1}/correctness.csv', f'{E2}/summary.json'])
@@ -94,6 +95,45 @@ def test_chart_controls_show_actual_observations():
     assert '-4.17 pp' in e2_panel(evidence, 'Outer-fold gains')
     with pytest.raises(ValueError, match='Unknown E0'):
         e0_panel(evidence, 'invented')
+
+
+def test_completed_recovery_is_separate_from_historical_failure():
+    evidence = load_evidence(ROOT)
+    recovery = evidence['runtime_recovery']
+    assert recovery['preflight_completed'] + recovery['diagnostic_completed'] == 132
+    assert recovery['successful_model_loads'] == 11
+    assert recovery['failed_model_initializations'] == 0
+    assert recovery['verified'] is True
+    assert recovery['selected_policy'] is None
+    resident = [c for c in recovery['conditions'] if c['arm'] == 'B']
+    assert resident[0]['S'] <= .2 < resident[1]['S']
+    text = e0_panel(evidence)
+    assert '132/132 new screen calls completed' in text
+    assert 'Historical failed timing follow-up' in text
+    assert '0/132 planned model calls completed' in text
+
+
+def test_missing_recovery_record_blocks_view(tmp_path):
+    for relative in (*PUBLIC_FILES, *RECOVERY_FILES):
+        destination = tmp_path / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, destination)
+    (tmp_path / RECOVERY / 'runtime_resolution.json').unlink()
+    with pytest.raises(FileNotFoundError):
+        load_evidence(tmp_path)
+
+
+def test_recovery_metric_tampering_is_detected(tmp_path):
+    for relative in (*PUBLIC_FILES, *RECOVERY_FILES):
+        destination = tmp_path / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, destination)
+    path = tmp_path / RECOVERY / 'summary.json'
+    value = json.loads(path.read_text(encoding='utf-8'))
+    value['conditions'][0]['S'] = 0
+    path.write_text(json.dumps(value), encoding='utf-8')
+    with pytest.raises(ValueError, match='Recovery metrics disagree'):
+        load_evidence(tmp_path)
 
 
 def test_optional_gradio_app_builds(tmp_path):

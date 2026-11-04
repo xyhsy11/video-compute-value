@@ -7,6 +7,11 @@ source hashes, and the historical resource snapshot. No new scientific collectio
 is performed. E0 remains `MEASUREMENT_UNSTABLE`; E2B remains
 `NOT_ADMITTED_E2A_ADVANCEMENT`.
 
+The E0 tab also shows the separately named
+[2026-11-04 runtime recovery](e000-runtime-recovery.md). The historical 0/132
+initialization failure remains available in a collapsed details panel; it is not
+overwritten by subsequent successful model calls.
+
 From this repository on the existing Windows installation:
 
 ```powershell

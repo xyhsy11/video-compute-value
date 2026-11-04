@@ -1,0 +1,34 @@
+{
+  "validated_on": "2026-11-04",
+  "all_saved_record_checks_passed": true,
+  "targeted_cpu_tests": {
+    "passed": 34,
+    "skipped_optional_ui": 2
+  },
+  "vidfit_runtime_tests": {
+    "passed": 15
+  },
+  "static_checks_passed": true,
+  "real_processor_gpu_budgets": [
+    8,
+    64
+  ],
+  "new_confirmation_budgets_exercised": false,
+  "real_calls_current_run": 132,
+  "successful_model_loads_current_run": 11,
+  "failed_model_initializations_current_run": 0,
+  "real_calls_prior_preserved_v6_attempt": 12,
+  "native_cpu_preparation_reuse": {
+    "count": 16,
+    "new_measurements_in_v7": 0,
+    "source_run": "e000_20261104_044416_runtime_recovery_v6"
+  },
+  "historical_files_verified_unchanged": 3556,
+  "fingerprint": "4d4ffdad3a79f83c0f84649b204ad7631ca09dd0fb899cf6ac001fb0d86f8826",
+  "historical_native_crash_cause": "NOT_ESTABLISHED",
+  "current_runtime": "AVAILABLE_CURRENT_RUN",
+  "timing_status": "STABILIZATION_NOT_DEMONSTRATED",
+  "confirmation_status": "CONFIRMATION_NOT_RUN",
+  "scientific_E0_verdict_unchanged": "MEASUREMENT_UNSTABLE",
+  "E2B_status_unchanged": "NOT_ADMITTED_E2A_ADVANCEMENT"
+}

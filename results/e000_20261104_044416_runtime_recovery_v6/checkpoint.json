@@ -1,0 +1,10 @@
+{
+  "status": "PARTIAL_LEGACY_RESOURCE_VERIFIER",
+  "successful_model_loads": 2,
+  "completed_preflight_calls": 12,
+  "native_initialization_failed": false,
+  "primary_timing_calls": 0,
+  "cause_of_stop": "Inherited preflight verifier still enforced the superseded 27600-second cap",
+  "historical_failure_root_cause": "NOT_ESTABLISHED",
+  "next_implementation": "runtime_recovery_v7"
+}

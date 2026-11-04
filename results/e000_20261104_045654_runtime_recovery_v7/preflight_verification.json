@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "errors": [],
+  "phase": "preflight",
+  "records_checked": 12,
+  "native_token_sequences_redecoded": 12,
+  "completed_model_calls": 12,
+  "unknown_model_invocations_upper_bound": 0,
+  "historical_files_unchanged": 3556,
+  "independent_metrics": [],
+  "selected_policy": null,
+  "real_GPU_path_exercised": true,
+  "CPU_tests_are_not_GPU_evidence": true
+}

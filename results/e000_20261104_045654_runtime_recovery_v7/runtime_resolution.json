@@ -1,0 +1,19 @@
+{
+  "run_id": "e000_20261104_045654_runtime_recovery_v7",
+  "status": "AVAILABLE_CURRENT_RUN",
+  "historical_failure_preserved": true,
+  "successful_model_loads": 11,
+  "preflight_completed": 12,
+  "failed_model_initializations": 0,
+  "diagnostic_completed": 120,
+  "planned_diagnostic_total": 132,
+  "timing_status": "STABILIZATION_NOT_DEMONSTRATED",
+  "selected_policy": null,
+  "verified": true,
+  "root_cause": "NOT_ESTABLISHED",
+  "packages_or_driver_changed": false,
+  "historical_E0": "MEASUREMENT_UNSTABLE",
+  "confirmation_status": "CONFIRMATION_NOT_RUN",
+  "implementation_version": "runtime_recovery_v7",
+  "prior_bounded_attempt": "e000_20261104_044416_runtime_recovery_v6"
+}

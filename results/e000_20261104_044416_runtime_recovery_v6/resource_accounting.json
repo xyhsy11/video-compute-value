@@ -1,0 +1,25 @@
+{
+  "at": "2026-11-04T04:56:17.032481+00:00",
+  "inherited_seconds": 43561.08551400001,
+  "cumulative_seconds": 45625.140996,
+  "remaining_seconds": 127174.859004,
+  "authorized_limit_seconds": 172800,
+  "storage_current_bytes": 17616298651,
+  "storage_peak_bytes": 17616298651,
+  "storage_limit_bytes": 21474836480,
+  "video_transfer_bytes": 477874213,
+  "video_limit_bytes": 1073741824,
+  "all_sessions_closed": true,
+  "model_calls": {
+    "preflight": {
+      "warmup": 8,
+      "profile": 4
+    }
+  },
+  "completed_model_calls": 12,
+  "unknown_model_invocations_upper_bound": 0,
+  "cumulative_model_invocations_upper_bound": 2863,
+  "new_acquisition_bytes": 0,
+  "publication_reserve_seconds": 180,
+  "video_transfer_upper_bound_bytes": 478922789
+}
