@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from video_compute_value.vidfit_view import (
-    E0, E1, E2, PUBLIC_FILES, RECOVERY, RECOVERY_FILES, build_app, e0_panel, e2_panel,
+    ACCEPTANCE, ACCEPTANCE_FILES, E0, E1, E2, PUBLIC_FILES, RECOVERY, RECOVERY_FILES, build_app, e0_panel, e2_panel,
     export_dashboard, load_evidence, main, preview_frames,
 )
 
@@ -31,6 +31,7 @@ def test_saved_observations_and_gate():
     assert evidence['e2']['positive_folds'] == 2
     assert evidence['e2']['advancement'] is False
     expected_sources = len(PUBLIC_FILES) + (len(RECOVERY_FILES) if (ROOT / RECOVERY).exists() else 0)
+    expected_sources += len(ACCEPTANCE_FILES) if (ROOT / ACCEPTANCE).exists() else 0
     assert len(evidence['sources']) == expected_sources
 
 
@@ -134,6 +135,17 @@ def test_recovery_metric_tampering_is_detected(tmp_path):
     path.write_text(json.dumps(value), encoding='utf-8')
     with pytest.raises(ValueError, match='Recovery metrics disagree'):
         load_evidence(tmp_path)
+
+
+def test_amended_acceptance_is_current_without_changing_original_decision():
+    evidence = load_evidence(ROOT)
+    assert evidence['e0_acceptance']['selected_policy'] == 'B'
+    assert evidence['e0_acceptance']['good'] is True
+    assert evidence['runtime_recovery']['selected_policy'] is None
+    text = e0_panel(evidence)
+    assert 'GOOD · RESIDENT POLICY B ACCEPTED' in text
+    assert 'User-amended after observation' in text
+    assert 'Original recovery decision · frozen ≤20% rule' in text
 
 
 def test_optional_gradio_app_builds(tmp_path):

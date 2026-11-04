@@ -1,0 +1,36 @@
+{
+  "version": "e000_acceptance25_v1",
+  "config": {
+    "version": "e000_acceptance25_v1",
+    "source_run": "results/e000_20261104_045654_runtime_recovery_v7",
+    "original_threshold": 0.2,
+    "acceptance_threshold": 0.25,
+    "inclusive": true,
+    "required_budgets": [
+      8,
+      64
+    ],
+    "selection_order": [
+      "A",
+      "B"
+    ],
+    "decision_timing": "USER_AMENDED_AFTER_OBSERVATION",
+    "new_model_calls": 0
+  },
+  "source_files": {
+    "results/e000_20261104_045654_runtime_recovery_v7/freeze.json": "011da2e871a9ad75b4eece96a3cf711d1a074770002ebb3649806354333f16df",
+    "results/e000_20261104_045654_runtime_recovery_v7/summary.json": "ce74e222c0a2a8650bad2e673b70296d79b78eb5e139d370a43a885a4ded387e",
+    "results/e000_20261104_045654_runtime_recovery_v7/verification.json": "6ee8b2b77ae3026e06ea9edc88a7e4f46d2a67ba9d6f106237a32a25280a2360",
+    "results/e000_20261104_045654_runtime_recovery_v7/runtime_resolution.json": "8ca99e97423a537026aa00ccfcb4830d29bcca4564aa83c0b4ec53e396ccb5ec"
+  },
+  "implementation_files": {
+    "configs/e000_acceptance25_v1.json": "ce30ed11b7ff1935e6fb0642a03a106464080b017767bee347b1a80a22fb36de",
+    "protocols/e000_acceptance25_v1.md": "1b1ab82b4742af68de79016aeb69b17dd1700542c13c4f97e9d5ab8da631e02b",
+    "src/video_compute_value/e000_acceptance.py": "deff914bc613feca22e6dc3c61b2aa98f347a282f6cbb2b4872ad3ea3786d658"
+  },
+  "source_measurement_fingerprint": "4d4ffdad3a79f83c0f84649b204ad7631ca09dd0fb899cf6ac001fb0d86f8826",
+  "source_record_manifest_sha256": "0fb84de88e0ae48887bdc0d5ff1520bb09d678e38dcd79dfd348d5cfc2776b3f",
+  "decision_timing": "USER_AMENDED_AFTER_OBSERVATION",
+  "authority": "make it under25% as good, and push and submit the new E0 to github",
+  "fingerprint": "9d67d2ef01ee034d1861da5704cbaacc1de203f0e8d7d568110101c8593fd1c0"
+}

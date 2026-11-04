@@ -30,3 +30,6 @@ results/e002_*_continuation_v2/figures/*.svg text eol=lf
 scripts/verify_e000_runtime_v6.py -text whitespace=cr-at-eol
 results/e000_20261104_044416_runtime_recovery_v6/** -text whitespace=cr-at-eol
 results/e000_20261104_045654_runtime_recovery_v7/** -text whitespace=cr-at-eol
+
+# Preserve the amended E0 acceptance record and its audited hashes.
+results/e000_20261104_acceptance25_v1/** -text whitespace=cr-at-eol

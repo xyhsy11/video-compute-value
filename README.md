@@ -18,17 +18,19 @@ On this Windows installation, run `./scripts/open_vidfit_experiments.ps1` and op
 
 ![VidFit browser showing E0 measurement, E1 headroom and E2A predictive results](docs/assets/vidfit-experiments.png)
 
-The [2026-11-04 runtime recovery](docs/e000-runtime-recovery.md) completed **132/132** new calls
-and **11 successful model loads**, with no initialization failure. Independent verification passed.
-Worker timing still did not qualify: resident-worker median relative ranges were **18.48% / 22.53%**
-at 8/64 frames against the fixed ≤20% requirement at both. Full confirmation was not admitted.
-The original 0/132 crash record remains unchanged and is shown separately in the browser.
+**Current E0 acceptance: GOOD under the user-amended ≤25% rule.** Resident policy B
+passes at both tested budgets: **18.48% at 8 frames / 22.53% at 64 frames**.
+The [new E0 report](results/e000_20261104_acceptance25_v1/report.md) records the user's
+criterion change after observing the results. It reuses the verified **132/132** calls
+and **11 successful model loads**, with zero new model calls. The original ≤20%
+decision and 0/132 crash record remain unchanged. Full confirmation has not been run.
 
 | Experiment | Question | Sources / questions | Model / input controls | Endpoint | Status | Main result | Limitation |
 |---|---|---|---|---|---|---|---|
 | E0 | Can requests fit, repeat, and be measured? | 8 / 24 exposed | Frozen Qwen3-VL; uniform 8–64 | Operational gates | MEASUREMENT_UNSTABLE | 62.50–87.50% accuracy | Timing failed; small development cohort |
 | E0 timing follow-up | Can worker lifecycle stabilize timing? | 8 / 8 planned | Same model; fresh/resident 8/64 | 20% median relative range | BLOCKED_MODEL_RUNTIME | Zero model calls; native loading failure | Timing outcomes unavailable |
 | E0 runtime recovery (2026-11-04) | Does current loading work, and do worker policies qualify? | Same 8 / 8 | Same native model and timer; new implementation fingerprint | 20% at both budgets | STABILIZATION_NOT_DEMONSTRATED | 132 calls; 11 successful loads; resident 18.48% / 22.53% | Initialization recovered; no policy qualified; historical crash cause unproven |
+| E0 amended acceptance (2026-11-04) | Is the resident screen good under the user's 25% tolerance? | Same 8 / 8 | Same verified measurements; no new model calls | ≤25% at both budgets | ACCEPTED_UNDER_AMENDED_25_PERCENT_RULE | Resident B passes: 18.48% / 22.53% | Criterion changed after observation; original 20% result retained; no full confirmation |
 | E1 | Is there hindsight acquisition headroom? | 8 / 24 exposed | Same retained base8; matched augmented16 | Oracle minus expected random | COMPLETE_RETROSPECTIVE | 18.75 pp; oracle minus fixed 12.50 pp | Video-specific fixed quarter matched oracle in all sources |
 | E2A | Can observations predict acquisition gain? | 40 / 120 new | Same frozen answerer; V/Q/VQ ridge | Delta_fixed | PREDICTIVE_VALUE_NOT_DEMONSTRATED_FOR_THIS_OBSERVATION_FAMILY | +1.67 pp versus train-fixed | Development pilot; conditional intervals; E2B NOT_ADMITTED_E2A_ADVANCEMENT |
 

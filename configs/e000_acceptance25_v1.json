@@ -1,0 +1,11 @@
+{
+  "version": "e000_acceptance25_v1",
+  "source_run": "results/e000_20261104_045654_runtime_recovery_v7",
+  "original_threshold": 0.2,
+  "acceptance_threshold": 0.25,
+  "inclusive": true,
+  "required_budgets": [8, 64],
+  "selection_order": ["A", "B"],
+  "decision_timing": "USER_AMENDED_AFTER_OBSERVATION",
+  "new_model_calls": 0
+}

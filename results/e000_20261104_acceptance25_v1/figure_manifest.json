@@ -1,0 +1,9 @@
+{
+  "summary_sha256": "733357515ade0df944ba8638d15388d469e8f9a9bdf8e2d4140ab89253400c16",
+  "figures": {
+    "acceptance25.png": "ea5d2968ccbcaec4551abee84e9f25a581f7d1ca6e0df52880fc22300582f75c"
+  },
+  "original_threshold": 0.2,
+  "amended_threshold": 0.25,
+  "decision_timing": "USER_AMENDED_AFTER_OBSERVATION"
+}

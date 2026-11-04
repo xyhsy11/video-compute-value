@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "current_rule": "≤25% at both 8/64-frame budgets",
+  "selected_policy": "B",
+  "current_status": "GOOD",
+  "original_20pct_preserved": true,
+  "decision_timing": "USER_AMENDED_AFTER_OBSERVATION",
+  "checks": [
+    "current E0 acceptance card",
+    "E0 metric changes",
+    "E1 correctness matrix",
+    "E2 fold controls",
+    "H264 playback",
+    "real VidFit CPU preview",
+    "preview invalidation",
+    "HTML and JSON exports",
+    "390px layout without overflow"
+  ],
+  "screenshots": {
+    "docs/assets/vidfit-e0-acceptance25.png": "d0c6aff1cfe6944f0a0d69ad8a72046ee66e14a7e68b52d907537c0b96dd7304",
+    "docs/assets/vidfit-experiments.png": "a02715dc488dcfe2a40ca9bb2bb60bfb0718e653032af2dc1379f5b5700559be"
+  }
+}

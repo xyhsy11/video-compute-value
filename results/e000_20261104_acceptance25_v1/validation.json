@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "targeted_cpu_tests": {
+    "passed": 21,
+    "skipped_optional_ui": 2
+  },
+  "vidfit_environment_tests": {
+    "passed": 16
+  },
+  "new_model_calls": 0,
+  "source_real_model_calls": 132,
+  "primary_timings_recomputed": 96,
+  "historical_files_unchanged": 3804,
+  "original_20pct_preserved": true,
+  "amended_25pct_good": true,
+  "selected_policy": "B",
+  "decision_timing": "USER_AMENDED_AFTER_OBSERVATION"
+}

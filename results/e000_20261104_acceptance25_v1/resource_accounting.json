@@ -1,0 +1,16 @@
+{
+  "at": "2026-11-04T06:24:12.992582+00:00",
+  "inherited_seconds": 49562.08576699999,
+  "cumulative_seconds": 51255.88640799999,
+  "authorized_limit_seconds": 172800,
+  "storage_current_bytes": 17622996358,
+  "storage_limit_bytes": 21474836480,
+  "video_transfer_upper_bound_bytes": 478922789,
+  "video_limit_bytes": 1073741824,
+  "new_model_calls": 0,
+  "new_acquired_video_bytes": 0,
+  "source_model_calls_reused": 132,
+  "publication_reserve_seconds": 600,
+  "inherited_model_invocations_upper_bound": 2995,
+  "cumulative_model_invocations_upper_bound": 2995
+}

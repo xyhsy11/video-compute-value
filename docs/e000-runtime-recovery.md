@@ -1,5 +1,11 @@
 # E0 initialization and timing recovery
 
+**Current E0 decision: resident policy B is GOOD under the user-amended ≤25%
+acceptance rule.** Its 18.48% / 22.53% variation passes at both tested budgets.
+The [new E0 report](../results/e000_20261104_acceptance25_v1/report.md) explicitly
+records that the user changed the criterion after seeing the results. The
+following history and original ≤20% decision are preserved.
+
 The original timing follow-up stopped on 2026-10-29 while loading checkpoint
 shards. Its worker exited with `0xC0000005`, and a contemporaneous Windows event
 named `torch_cpu.dll`. No generation call had started, so its completed-call count

@@ -12,6 +12,10 @@ The E0 tab also shows the separately named
 initialization failure remains available in a collapsed details panel; it is not
 overwritten by subsequent successful model calls.
 
+The current E0 card uses the user's amended **≤25%** operational tolerance and
+marks resident policy B **GOOD** at 18.48% / 22.53%. It labels the after-observation
+criterion change and keeps the original 20% recovery decision in separate details.
+
 From this repository on the existing Windows installation:
 
 ```powershell

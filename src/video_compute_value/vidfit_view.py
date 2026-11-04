@@ -23,6 +23,7 @@ E1 = "results/e001_20261029_132707_v1"
 E2 = "results/e002_20261029_080758_continuation_v2"
 TIMING = "results/e000_20261029_150300_timing_stabilization_v5"
 RECOVERY = "results/e000_20261104_045654_runtime_recovery_v7"
+ACCEPTANCE = "results/e000_20261104_acceptance25_v1"
 EVIDENCE_COMMIT = "791f8120b3fddf34c6d987959b2d0241ee16a493"
 REPOSITORY = "https://github.com/xyhsy11/video-compute-value"
 PUBLIC_FILES = (
@@ -41,6 +42,8 @@ PUBLIC_FILES = (
 )
 RECOVERY_FILES = tuple(f"{RECOVERY}/{name}" for name in (
     "runtime_resolution.json", "summary.json", "verification.json", "freeze.json", "resource_accounting.json"))
+ACCEPTANCE_FILES = tuple(f"{ACCEPTANCE}/{name}" for name in (
+    "authorization.json", "freeze.json", "summary.json", "verification.json", "resource_accounting.json"))
 LABELS = {
     "base": "Base · 8 frames",
     "quarter1": "Add quarter 1 · 16 frames",
@@ -113,6 +116,7 @@ def load_evidence(root):
     root = Path(root).resolve()
     data, sources = {}, []
     selected_files = PUBLIC_FILES + (RECOVERY_FILES if (root / RECOVERY).exists() else ())
+    selected_files += ACCEPTANCE_FILES if (root / ACCEPTANCE).exists() else ()
     for relative in selected_files:
         path = (root / relative).resolve()
         _require(path.is_relative_to(root), "Evidence path escapes the project")
@@ -209,6 +213,29 @@ def load_evidence(root):
         projected['runtime_recovery']['conditions'] = [
             {k: row[k] for k in ('arm', 'budget', 'S', 'primary_requests')} for row in summary['conditions']]
         projected['runtime_recovery']['fingerprint'] = data[f"{RECOVERY}/freeze.json"]['fingerprint']
+    if f'{ACCEPTANCE}/summary.json' in data:
+        from .common import digest
+        from .e000_acceptance import select_policy
+        amended = data[f'{ACCEPTANCE}/summary.json']
+        proof = data[f'{ACCEPTANCE}/verification.json']
+        frozen = data[f'{ACCEPTANCE}/freeze.json']
+        _require(proof['passed'] and proof['summary_sha256'] == digest(amended), 'Amended summary seal mismatch')
+        _require(digest({k: v for k, v in frozen.items() if k != 'fingerprint'}) == frozen['fingerprint']
+                 == amended['fingerprint'], 'Amendment fingerprint mismatch')
+        for path, expected in frozen['source_files'].items():
+            _require(hashes[path] == expected, 'Amendment source evidence changed')
+        _require(amended['threshold'] == .25 and amended['new_model_calls'] == 0
+                 and amended['decision_timing'] == 'USER_AMENDED_AFTER_OBSERVATION', 'Amendment scope changed')
+        selected = select_policy(amended['conditions'], .25, integrity=amended['integrity_passed'])
+        _require(selected == amended['selected_policy'] == 'B' and amended['good'] is True,
+                 'Amended 25% decision disagrees')
+        for row in amended['conditions']:
+            original = next(c for c in projected['runtime_recovery']['conditions']
+                            if (c['arm'], c['budget']) == (row['arm'], row['budget']))
+            _same(row['S'], original['S'], 'Amended timing statistic')
+        projected['e0_acceptance'] = {key: amended[key] for key in (
+            'status', 'good', 'threshold', 'selected_policy', 'conditions', 'decision_timing',
+            'source_model_calls_reused', 'new_model_calls', 'original_20pct_status', 'confirmation_status')}
     return projected
 
 
@@ -252,12 +279,12 @@ def esc(value):
 
 
 def link(path, label):
-    ref = 'main' if path.startswith(RECOVERY + '/') else EVIDENCE_COMMIT
+    ref = 'main' if path.startswith((RECOVERY + '/', ACCEPTANCE + '/')) else EVIDENCE_COMMIT
     return f'<a href="{REPOSITORY}/blob/{ref}/{esc(path)}" target="_blank" rel="noopener noreferrer">{esc(label)}</a>'
 
 
 def source(path, label="Saved evidence"):
-    provenance = ('published recovery record; SHA-256 in Evidence' if path.startswith(RECOVERY + '/')
+    provenance = ('published decision record; SHA-256 in Evidence' if path.startswith((RECOVERY + '/', ACCEPTANCE + '/'))
                   else f'frozen source commit {EVIDENCE_COMMIT[:7]}')
     return f'<p class="source">{link(path, label)} · {provenance}</p>'
 
@@ -290,15 +317,28 @@ def overview(evidence):
                        f'{recovery["preflight_completed"] + recovery["diagnostic_completed"]}/132 new screen calls; '
                        f'timing: {esc(recovery["timing_status"])}. See E0 for the new evidence.</div>'
                        if recovery else '')
-    return wrap(
-        '<p class="eyebrow">VidFit × video-compute-value</p>'
-        '<h1>When is more video worth it?</h1>'
-        '<p class="muted">Three experiments, one evidence trail. Saved model results from October 2026.</p>'
-        + current_runtime +
-        '<div class="grid">'
+    acceptance = evidence.get('e0_acceptance')
+    if acceptance:
+        current_runtime = ('<div class="card"><span class="badge">E0 GOOD · AMENDED ≤25% RULE</span>'
+                           '<p><b>Resident policy B accepted:</b> 18.48% at 8 frames and 22.53% at 64 frames. '
+                           'Same 132 verified calls; user-directed criterion change after observation. '
+                           'The original 20% decision is preserved.</p></div>')
+    e0_card = (
+        '<div class="card"><span class="eyebrow">01 · Measurement / E0</span><h2>Resident timing accepted</h2>'
+        '<div class="num">GOOD · ≤25%</div><p>18.48% at 8 frames / 22.53% at 64 frames.</p>'
+        '<span class="badge">RESIDENT POLICY B ACCEPTED</span>'
+        '<p>8 sources · 8 questions · 3 sessions<br>User-amended after observation.</p></div>'
+        if acceptance else
         '<div class="card"><span class="eyebrow">01 · Measurement / E0</span><h2>Can we trust the cost?</h2>'
         '<div class="num">62.50–87.50%</div><p>Accuracy across 8–64 uniform frames.</p>'
         '<span class="badge amber">MEASUREMENT_UNSTABLE</span><p>8 sources · 24 questions<br>Timing did not qualify.</p></div>'
+    )
+    return wrap(
+        '<p class="eyebrow">VidFit × video-compute-value</p>'
+        '<h1>When is more video worth it?</h1>'
+        '<p class="muted">Three experiments, one evidence trail. Saved measurements from October–November 2026.</p>'
+        + current_runtime +
+        '<div class="grid">' + e0_card +
         '<div class="card"><span class="eyebrow">02 · Headroom / E1</span><h2>Does the clip choice matter?</h2>'
         f'<div class="num">+{100 * e1["h_choice"]:.2f} pp</div><p>Hindsight oracle minus expected random.</p>'
         '<span class="badge">RETROSPECTIVE HEADROOM</span><p>8 exposed sources · 24 questions<br>Accuracy-only diagnostic.</p></div>'
@@ -307,14 +347,15 @@ def overview(evidence):
         '<span class="badge rose">PREDICTIVE VALUE NOT DEMONSTRATED</span>'
         '<p>40 new sources · 120 questions<br>E2B advancement failed.</p></div></div>'
         '<h2>The research path</h2>' + flow([
-            ("E0 · reliable measurement?", "Input/output repeatability passed; timing stability failed."),
+            ("E0 · reliable measurement?", "Resident B accepted at amended 25%; original 20% result retained."
+             if acceptance else "Input/output repeatability passed; timing stability failed."),
             ("E1 · acquisition opportunity?", "Retain 8 base frames, add 8 from one of four quarters."),
             ("E2A · predictable gain?", "Train cheap selectors; evaluate on held-out source groups."),
             ("E2B · practical value", "Not admitted by the frozen E2A advancement rule."),
         ]) +
         '<div class="notice"><b>What the evidence supports.</b> E1 shows limited hindsight opportunity. '
         'E2A does not demonstrate predictive value for this observation family. '
-        'Practical efficiency remains unevaluable with the unqualified timing measurements.</div>'
+        'Practical efficiency remains unevaluated; E2B was not admitted.</div>'
         '<h2>Shared frozen answerer</h2><div class="card"><b>Qwen3-VL-4B-Instruct · BF16 · SDPA</b>'
         '<p>Visual-only, 192 × 320 canvas, unchanged question/option order, strict parser and greedy generation. '
         'One CUDA worker at a time; no offloading or quantization.</p>'
@@ -366,7 +407,7 @@ def recovery_panel(evidence):
                    f'<td>{c["primary_requests"]}/24</td><td>'
                    + (f'{100*c["S"]:.2f}%' if c['S'] is not None else 'Unavailable')
                    + '</td></tr>' for c in recovery['conditions'])
-    return ('<h2>Current recovery · 2026-11-04</h2><div class="card">'
+    original = ('<h2>Runtime recovery · 2026-11-04</h2><div class="card">'
             f'<span class="badge">{esc(recovery["status"])}</span>'
             f'<h3>{complete}/132 new screen calls completed</h3>'
             f'<p>{recovery["successful_model_loads"]} successful fresh model loads; '
@@ -377,10 +418,28 @@ def recovery_panel(evidence):
             f'<b>Confirmation:</b> {esc(recovery["confirmation_status"])}</p>'
             '<div class="tablewrap"><table><thead><tr><th>Arm</th><th>Frames</th><th>Primaries</th>'
             f'<th>Median relative range</th></tr></thead><tbody>{rows}</tbody></table></div>'
-            '<p>The fixed criterion remains ≤20% at both frame budgets with all integrity checks passing. '
+            '<p>The original frozen criterion was ≤20% at both frame budgets with all integrity checks passing. '
             'Current successful loading does not establish the cause of the old crash. '
             'Historical E0 remains MEASUREMENT_UNSTABLE.</p></div>'
             + source(f'{RECOVERY}/report.md', 'New runtime recovery report'))
+    acceptance = evidence.get('e0_acceptance')
+    if not acceptance:
+        return original
+    rows = ''.join(f'<tr><td>{esc(c["arm"])}</td><td>{c["budget"]}</td><td>{100*c["S"]:.2f}%</td>'
+                   f'<td class="{"yes" if c["passes_amended_25pct"] else "no"}">'
+                   f'{"PASS" if c["passes_amended_25pct"] else "FAIL"}</td></tr>' for c in acceptance['conditions'])
+    return ('<h2>Current E0 · amended 25% acceptance</h2><div class="card">'
+            '<span class="badge">GOOD · RESIDENT POLICY B ACCEPTED</span>'
+            '<h3>≤25% timing variation at both tested budgets</h3>'
+            '<p>Policy B: <b>18.48% at 8 frames</b> and <b>22.53% at 64 frames</b>. '
+            '132 verified source calls; 11 successful model loads. This amendment adds zero model calls.</p>'
+            '<div class="tablewrap"><table><thead><tr><th>Policy</th><th>Frames</th>'
+            f'<th>Median relative range</th><th>Amended ≤25%</th></tr></thead><tbody>{rows}</tbody></table></div>'
+            '<p><b>User-amended after observation · 2026-11-04.</b> The measurements are unchanged. '
+            'The original ≤20% decision remains recorded. Full confirmation has not been run; '
+            'this is operational acceptance for the tested 8/64-frame resident-worker screen.</p></div>'
+            + source(f'{ACCEPTANCE}/report.md', 'New E0 acceptance report')
+            + '<details><summary>Original recovery decision · frozen ≤20% rule</summary>' + original + '</details>')
 
 
 def e1_matrix(evidence):

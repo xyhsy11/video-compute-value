@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "source_records_checked": 132,
+  "primary_timings_recomputed": 96,
+  "independent_timing_cells": 32,
+  "source_record_seals_checked": true,
+  "source_fingerprint_checked": true,
+  "saved_aggregates_match": true,
+  "original_20pct_decision_preserved": true,
+  "amended_25pct_selected_policy": "B",
+  "new_model_calls": 0,
+  "summary_sha256": "0e536e86b337fc19999fbe4c8d4802714186595e19f3cc359bb5a96b985fce6c",
+  "fingerprint": "9d67d2ef01ee034d1861da5704cbaacc1de203f0e8d7d568110101c8593fd1c0"
+}

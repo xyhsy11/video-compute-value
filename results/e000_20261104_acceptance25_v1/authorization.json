@@ -1,0 +1,8 @@
+{
+  "date": "2026-11-04",
+  "human_instruction": "make it under25% as good, and push and submit the new E0 to github",
+  "threshold": 0.25,
+  "decision_timing": "USER_AMENDED_AFTER_OBSERVATION",
+  "publication_authorized": true,
+  "additional_resources_granted": false
+}

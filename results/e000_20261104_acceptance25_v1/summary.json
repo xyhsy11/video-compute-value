@@ -1,0 +1,66 @@
+{
+  "version": "e000_acceptance25_v1",
+  "status": "ACCEPTED_UNDER_AMENDED_25_PERCENT_RULE",
+  "good": true,
+  "threshold": 0.25,
+  "inclusive": true,
+  "selected_policy": "B",
+  "conditions": [
+    {
+      "arm": "A",
+      "budget": 8,
+      "complete": true,
+      "primary_requests": 24,
+      "source_questions": 8,
+      "independent_repetitions": 3,
+      "S": 0.6336021783344451,
+      "passes_original_20pct": false,
+      "passes_amended_25pct": false
+    },
+    {
+      "arm": "A",
+      "budget": 64,
+      "complete": true,
+      "primary_requests": 24,
+      "source_questions": 8,
+      "independent_repetitions": 3,
+      "S": 0.4031180910687917,
+      "passes_original_20pct": false,
+      "passes_amended_25pct": false
+    },
+    {
+      "arm": "B",
+      "budget": 8,
+      "complete": true,
+      "primary_requests": 24,
+      "source_questions": 8,
+      "independent_repetitions": 3,
+      "S": 0.18477122273835322,
+      "passes_original_20pct": true,
+      "passes_amended_25pct": true
+    },
+    {
+      "arm": "B",
+      "budget": 64,
+      "complete": true,
+      "primary_requests": 24,
+      "source_questions": 8,
+      "independent_repetitions": 3,
+      "S": 0.22530435495260848,
+      "passes_original_20pct": false,
+      "passes_amended_25pct": true
+    }
+  ],
+  "source_model_calls_reused": 132,
+  "source_primary_calls": 96,
+  "new_model_calls": 0,
+  "integrity_passed": true,
+  "original_20pct_status": "STABILIZATION_NOT_DEMONSTRATED",
+  "original_20pct_selected_policy": null,
+  "decision_timing": "USER_AMENDED_AFTER_OBSERVATION",
+  "confirmation_status": "NOT_RUN",
+  "feasibility_confirmation_claimed": false,
+  "E0_historical_verdict": "MEASUREMENT_UNSTABLE",
+  "E2B_status": "NOT_ADMITTED_E2A_ADVANCEMENT",
+  "fingerprint": "9d67d2ef01ee034d1861da5704cbaacc1de203f0e8d7d568110101c8593fd1c0"
+}

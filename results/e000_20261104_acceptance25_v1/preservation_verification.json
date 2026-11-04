@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "historical_files_unchanged": 3804,
+  "source_records_checked": 132,
+  "primary_timings_recomputed": 96,
+  "selected_policy": "B",
+  "threshold": 0.25,
+  "new_model_calls": 0
+}
