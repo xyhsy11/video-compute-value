@@ -1,0 +1,61 @@
+{
+  "kind": "presentation_only_v1",
+  "validated_on": "2026-11-04",
+  "scientific_source_commit": "791f8120b3fddf34c6d987959b2d0241ee16a493",
+  "source_fingerprint": "f1137c277597ca5fd209589805fdedfdb3860d38eb6efb699543e35be24bc8d0",
+  "historical_files_verified_unchanged": 3493,
+  "runtime": {
+    "vidfit_version": "0.3.0",
+    "vidfit_commit": "dfcf02be73502738ce4c6038bea189da111f9968",
+    "python": "3.12.14",
+    "gradio": "6.0.2"
+  },
+  "checks": {
+    "project_targeted_cpu_suite": {
+      "passed": 32,
+      "skipped_optional_ui": 2
+    },
+    "vidfit_environment_suite": {
+      "passed": 12
+    },
+    "saved_summary_hashes_and_accuracy": true,
+    "static_checks": true,
+    "browser": [
+      "E0 metric control",
+      "E2 fold control",
+      "E1 anonymous matrix expansion",
+      "H264 upload and playback",
+      "real VidFit CPU preview, 8 distinct frames",
+      "preview invalidation on changed budget",
+      "HTML and JSON downloads",
+      "390px layout, no horizontal overflow"
+    ],
+    "new_processor_or_gpu_paths_exercised": false
+  },
+  "limitations": [
+    "Historical evidence displayed; no new scientific collection",
+    "VidFit inspection does not reproduce frozen experiment preprocessing",
+    "E0 MEASUREMENT_UNSTABLE and E2B NOT_ADMITTED_E2A_ADVANCEMENT remain unchanged"
+  ],
+  "accounting": {
+    "kind": "presentation_only_v1",
+    "started_at": "2026-11-04T04:12:16.266320+00:00",
+    "at": "2026-11-04T04:34:19.406431+00:00",
+    "inherited_seconds": 40437.94540300001,
+    "measured_session_seconds": 1323.140111,
+    "pre_start_conservative_charge_seconds": 1200,
+    "precharged_closeout_seconds": 600,
+    "presentation_charged_seconds": 3123.1401109999997,
+    "cumulative_seconds": 43561.08551400001,
+    "authorized_limit_seconds": 172800,
+    "storage_current_bytes": 17614547600,
+    "storage_limit_bytes": 21474836480,
+    "video_transfer_upper_bound_bytes": 478922789,
+    "video_limit_bytes": 1073741824,
+    "new_acquired_video_bytes": 0,
+    "new_model_calls": 0,
+    "failed_checks_included_in_wall_charge": true,
+    "scope": "Implementation, failed checks, CPU tests, browser QA, reporting and publication; idle viewer excluded"
+  },
+  "local_presentation_ledger": ".local/vidfit_presentation_resource_ledger.json"
+}

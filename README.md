@@ -11,6 +11,13 @@ source groups for held-out development and trains small ridge selectors. The
 practical compute result is evaluated separately below.
 This repository is separate from `video-refresh-benchmark`.
 
+For an interactive experiment browser with design diagrams, charts, source hashes
+and local VidFit frame inspection, see [View with VidFit](docs/vidfit-experiments.md).
+On this Windows installation, run `./scripts/open_vidfit_experiments.ps1` and open
+<http://127.0.0.1:7861>. The browser presents saved evidence; it performs no new model collection.
+
+![VidFit browser showing E0 measurement, E1 headroom and E2A predictive results](docs/assets/vidfit-experiments.png)
+
 | Experiment | Question | Sources / questions | Model / input controls | Endpoint | Status | Main result | Limitation |
 |---|---|---|---|---|---|---|---|
 | E0 | Can requests fit, repeat, and be measured? | 8 / 24 exposed | Frozen Qwen3-VL; uniform 8–64 | Operational gates | MEASUREMENT_UNSTABLE | 62.50–87.50% accuracy | Timing failed; small development cohort |
